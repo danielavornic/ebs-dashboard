@@ -1,0 +1,23 @@
+@import 'index';
+
+button {
+  border-radius: $border-radius-small;
+  padding: 18px;
+  color: #fff;
+  width: 100%;
+  outline: none;
+  border: 2px solid;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+
+  &.primary {
+    background-color: $primary-color;
+    border-color: $primary-color;
+
+    &:hover {
+      background-color: transparent;
+      color: $primary-color;
+    }
+  }
+}

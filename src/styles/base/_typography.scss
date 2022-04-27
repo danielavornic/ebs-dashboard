@@ -24,3 +24,11 @@ h2 {
 p {
   margin: 0;
 }
+
+a {
+  color: $primary-color;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
