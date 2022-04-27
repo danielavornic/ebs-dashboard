@@ -3,9 +3,9 @@ import { FC } from 'react';
 import '../styles/Input.scss';
 
 interface Props {
-  type: 'text' | 'email' | 'password';
+  type: 'text' | 'email' | 'checkbox' | 'password';
   id: string;
-  placeholder: string;
+  placeholder?: string;
 }
 
 const Input: FC<Props> = ({ type, id, placeholder }) => {

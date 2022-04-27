@@ -3,8 +3,17 @@
 input {
   border-radius: $border-radius-small;
   padding: 18px 24px;
-  width: 100%;
   border: 2px solid $light-gray;
+
+  &:not([type='checkbox']) {
+    width: 100%;
+  }
+
+  &[type='checkbox'] {
+    width: auto;
+    margin-right: 12px;
+    margin-bottom: 0;
+  }
 
   &:hover,
   &:focus {

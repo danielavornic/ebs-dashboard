@@ -10,6 +10,11 @@ body {
   align-items: center;
   justify-content: center;
 
+  @media screen and (max-width: $grid-md) {
+    padding: 24px 16px;
+    height: auto;
+  }
+
   h1,
   h2,
   p {
