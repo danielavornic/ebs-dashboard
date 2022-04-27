@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-import { UserCredentials } from '../../../types/user.types';
+import { RegisterCredentials } from '../../../types/user.types';
 import { registerUser } from '../../../api/users';
 
 import Button from '../../../components/Button';
@@ -9,7 +9,7 @@ import Input from '../../../components/Input';
 import '../../../styles/AuthCard.scss';
 
 const RegisterCard = () => {
-  const [userCredentials, setUserCredentials] = useState<UserCredentials>({
+  const [userCredentials, setUserCredentials] = useState<RegisterCredentials>({
     name: '',
     lastName: '',
     email: '',
