@@ -9,7 +9,7 @@ interface Props {
 }
 
 const Input: FC<Props> = ({ type, id, placeholder }) => {
-  return <input type={type} id={id} placeholder={placeholder} />;
+  return <input type={type} id={id} placeholder={placeholder} required />;
 };
 
 export default Input;

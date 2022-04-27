@@ -11,7 +11,7 @@ const RegisterCard = () => {
         <Input type='text' placeholder='Name' id='name' />
         <Input type='text' placeholder='Surname' id='surname' />
         <Input type='email' placeholder='E-mail' id='email' />
-        <select name='gender' id='gender'>
+        <select name='gender' id='gender' required>
           <option value='' disabled selected>
             Gender
           </option>
