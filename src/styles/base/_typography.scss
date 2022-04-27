@@ -3,6 +3,7 @@
 body {
   font-family: 'Inter', sans-serif;
   font-size: $font-size-normal;
+  color: $black;
 }
 
 h1,
@@ -15,10 +16,18 @@ h3,
 
 h1 {
   font-size: $main-heading-font-size;
+
+  @media screen and (max-width: $grid-sm) {
+    font-size: $main-heading-font-size-mobile;
+  }
 }
 
 h2 {
   font-size: $secondary-heading-font-size;
+
+  @media screen and (max-width: $grid-sm) {
+    font-size: $secondary-heading-font-size-mobile;
+  }
 }
 
 p {
