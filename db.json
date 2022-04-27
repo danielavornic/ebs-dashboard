@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "name": "daniela",
+      "lastName": "vornic",
+      "email": "daniela.vornic@gmail.com",
+      "gender": "Female",
+      "password": "12345678",
+      "confirmPassword": "12345678",
+      "terms": "on",
+      "id": 1
+    },
+    {
+      "name": "logan",
+      "lastName": "roy",
+      "email": "logan@gmail.com",
+      "gender": "Male",
+      "password": "12345678",
+      "confirmPassword": "12345678",
+      "terms": "on",
+      "id": 2
+    }
+  ],
+  "posts": []
+}
