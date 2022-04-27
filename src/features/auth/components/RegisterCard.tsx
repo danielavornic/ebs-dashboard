@@ -29,7 +29,7 @@ const RegisterCard = () => {
         <label htmlFor='terms'>
           I agree to the processing of personal data
         </label>
-        <Button type='submit' buttonType='primary'>
+        <Button type='submit' state='primary'>
           Register
         </Button>
       </form>

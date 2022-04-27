@@ -10,7 +10,7 @@ const LoginCard = () => {
       <form>
         <Input type='email' placeholder='E-mail' id='email' />
         <Input type='password' placeholder='Password' id='password' />
-        <Button type='submit' buttonType='primary'>
+        <Button type='submit' state='primary'>
           Log in
         </Button>
       </form>

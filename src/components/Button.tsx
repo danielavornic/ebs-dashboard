@@ -3,14 +3,14 @@ import { FC, ReactNode } from 'react';
 import '../styles/Button.scss';
 
 interface Props {
-  buttonType: 'primary' | 'danger';
+  state: 'primary' | 'danger';
   type: 'submit' | 'button';
   children?: ReactNode;
 }
 
-const Button: FC<Props> = ({ buttonType, type, children }) => {
+const Button: FC<Props> = ({ state, type, children }) => {
   return (
-    <button type={type} className={buttonType}>
+    <button type={type} className={state}>
       {children}
     </button>
   );
