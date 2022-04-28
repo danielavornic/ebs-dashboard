@@ -9,3 +9,9 @@ export interface RegisterCredentials extends LoginCredentials {
   gender: string;
   confirmPassword: string;
 }
+
+export interface UserInterface extends RegisterCredentials {
+  userId: number;
+}
+
+export type User = UserInterface | null;
