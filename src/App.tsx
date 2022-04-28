@@ -10,7 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { User } from './types/user.types';
 import { getUserById } from './api/users';
 
-import AppRoutes from './routes';
+import AppRoutes from './routes/routes';
 
 export const UserContext = createContext<
   [User, Dispatch<SetStateAction<User>>]
