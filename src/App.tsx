@@ -23,7 +23,7 @@ const App: React.FC = () => {
   }, [userId]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, isLogged }}>
+    <UserContext.Provider value={{ user, setUser, isLogged, setIsLogged }}>
       <AppRoutes />
     </UserContext.Provider>
   );
