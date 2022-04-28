@@ -1,27 +1,10 @@
-import {
-  createContext,
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { useEffect, useState } from 'react';
 
 import { User } from './types/user.types';
 import { getUserById } from './api/users';
+import { UserContext } from './context';
 
 import AppRoutes from './routes/routes';
-
-interface StateInterface {
-  user: User;
-  setUser: Dispatch<SetStateAction<User>>;
-  isLogged: boolean;
-}
-
-export const UserContext = createContext<StateInterface>({
-  user: null,
-  setUser: () => {},
-  isLogged: false,
-});
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User>(null);
