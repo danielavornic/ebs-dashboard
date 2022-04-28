@@ -3,6 +3,7 @@ import { FC } from 'react';
 import useUserContext from '../../hooks/useUserContext';
 
 import '../../styles/Layout.scss';
+import Menu from './Menu';
 import Topbar from './Topbar';
 
 interface LayoutProps {
@@ -11,10 +12,6 @@ interface LayoutProps {
 
 const Container = () => {
   return <div className='container'></div>;
-};
-
-const Menu = () => {
-  return <div className='menu'></div>;
 };
 
 const Layout: FC<LayoutProps> = ({ page }) => {
@@ -30,7 +27,7 @@ const Layout: FC<LayoutProps> = ({ page }) => {
 
   return (
     <div className='panel'>
-      <Menu />
+      <Menu page={page} />
       <main>
         <Topbar name={name} lastName={lastName} pageTitle={page} />
         <Container />

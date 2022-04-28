@@ -64,8 +64,45 @@
   }
 
   .menu {
-    width: 290px;
+    width: 340px;
     background-color: $secondary-bg-color;
+
+    .title {
+      padding: 58px 0;
+      border-bottom: 1px solid $white-10;
+
+      h2 {
+        text-transform: uppercase;
+        text-align: center;
+        color: $light-grey-blue;
+      }
+    }
+
+    ul {
+      list-style-type: none;
+      padding: 0;
+      margin-top: 36px;
+
+      li {
+        padding: 8px 36px;
+        margin-bottom: 20px;
+
+        &.active {
+          border-right: 4px solid $primary-color;
+
+          a {
+            color: white;
+          }
+        }
+
+        a {
+          text-decoration: none;
+          font-weight: 500;
+          text-transform: capitalize;
+          color: $light-grey-blue;
+        }
+      }
+    }
   }
 
   .container {
