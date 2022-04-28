@@ -8,8 +8,8 @@ export const getUserByEmail = async (email: string) => {
 };
 
 export const getUserById = async (id: number) => {
-  const res = await axios.get(`http://localhost:3000/users?id=${id}`);
-  return res.data[0];
+  const res = await axios.get(`http://localhost:3000/users/${id}`);
+  return res.data;
 };
 
 export const getUserByCredentials = async (
@@ -20,11 +20,6 @@ export const getUserByCredentials = async (
     `http://localhost:3000/users?email=${email}&password=${password}`
   );
 };
-export const registerUser = (userCredentials: RegisterCredentials) => {
-  const id = new Date().getTime();
-  const newUser = {
-    ...userCredentials,
-    id,
-  };
-  return axios.post('http://localhost:3000/users', newUser);
+export const registerUser = (user: RegisterCredentials) => {
+  return axios.post('http://localhost:3000/users', user);
 };
