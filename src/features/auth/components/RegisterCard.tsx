@@ -84,7 +84,7 @@ const RegisterCard = () => {
           required
           defaultValue={''}
         >
-          <option value='' disabled>
+          <option value='' disabled hidden>
             Gender
           </option>
           <option value='Male'>Male</option>
