@@ -1,8 +1,9 @@
-import { ChangeEvent, FormEvent, useContext, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { LoginCredentials } from '../../../types/user.types';
 import { getUserByCredentials } from '../../../api/users';
-import { UserContext } from '../../../App';
+
+import useUserContext from '../../../hooks/useUserContext';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
@@ -10,7 +11,7 @@ import Input from '../../../components/Input';
 import '../../../styles/AuthCard.scss';
 
 const LoginCard = () => {
-  const [, setUser] = useContext(UserContext);
+  const [, setUser] = useUserContext();
 
   const [userLoginCredentials, setUserLoginCredentials] =
     useState<LoginCredentials>({

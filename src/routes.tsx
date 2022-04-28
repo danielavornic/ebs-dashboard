@@ -1,7 +1,7 @@
-import { FC, useContext } from 'react';
+import { FC } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 
-import { UserContext } from './App';
+import useUserContext from './hooks/useUserContext';
 
 import Dashboard from './features/auth/Dashboard';
 import Login from './features/auth/pages/Login';
@@ -29,7 +29,8 @@ const PublicRoute: FC<RoutePropTypes> = ({
 };
 
 const AppRoutes = () => {
-  const [user] = useContext(UserContext);
+  const [user] = useUserContext();
+
   const isUserLogged = !!user;
   return (
     <Routes>

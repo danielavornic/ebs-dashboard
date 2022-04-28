@@ -1,16 +1,16 @@
-import { ChangeEvent, FormEvent, useContext, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 
 import { RegisterCredentials } from '../../../types/user.types';
 import { registerUser, getUserByEmail } from '../../../api/users';
+import useUserContext from '../../../hooks/useUserContext';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 
 import '../../../styles/AuthCard.scss';
-import { UserContext } from '../../../App';
 
 const RegisterCard = () => {
-  const [, setUser] = useContext(UserContext);
+  const [, setUser] = useUserContext();
 
   const [userCredentials, setUserCredentials] = useState<RegisterCredentials>({
     name: '',
