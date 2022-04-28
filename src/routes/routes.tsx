@@ -6,6 +6,7 @@ import PublicRoute from './PublicRoute';
 import Dashboard from '../features/auth/Dashboard';
 import Login from '../features/auth/pages/Login';
 import Register from '../features/auth/pages/Register';
+import Users from '../features/auth/users/pages/Users';
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -17,6 +18,7 @@ const AppRoutes = () => (
         path='/dashboard'
         element={<PrivateRoute component={Dashboard} />}
       />
+      <Route path='/users' element={<PrivateRoute component={Users} />} />
     </Routes>
   </BrowserRouter>
 );
