@@ -5,34 +5,43 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { BrowserRouter } from 'react-router-dom';
 
 import { User } from './types/user.types';
 import { getUserById } from './api/users';
 
 import AppRoutes from './routes/routes';
 
-export const UserContext = createContext<
-  [User, Dispatch<SetStateAction<User>>]
->([null, () => {}]);
+interface StateInterface {
+  user: User;
+  setUser: Dispatch<SetStateAction<User>>;
+  isLogged: boolean;
+}
+
+export const UserContext = createContext<StateInterface>({
+  user: null,
+  setUser: () => {},
+  isLogged: false,
+});
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User>(null);
+  const [isLogged, setIsLogged] = useState<boolean>(true);
+
+  const userId = JSON.parse(localStorage.getItem('userId') || 'null');
 
   useEffect(() => {
-    const userId = JSON.parse(localStorage.getItem('userId') || 'null');
     if (userId) {
       getUserById(userId).then((user) => setUser(user));
+      setIsLogged(true);
     } else {
       setUser(null);
+      setIsLogged(false);
     }
-  }, []);
+  }, [userId]);
 
   return (
-    <UserContext.Provider value={[user, setUser]}>
-      <BrowserRouter>
-        <AppRoutes />
-      </BrowserRouter>
+    <UserContext.Provider value={{ user, setUser, isLogged }}>
+      <AppRoutes />
     </UserContext.Provider>
   );
 };

@@ -11,7 +11,7 @@ import Input from '../../../components/Input';
 import '../../../styles/AuthCard.scss';
 
 const LoginCard = () => {
-  const [, setUser] = useUserContext();
+  const { setUser } = useUserContext();
 
   const [userLoginCredentials, setUserLoginCredentials] =
     useState<LoginCredentials>({
@@ -19,7 +19,7 @@ const LoginCard = () => {
       password: '',
     });
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     getUserByCredentials(userLoginCredentials).then((res) => {

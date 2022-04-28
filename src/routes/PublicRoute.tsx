@@ -4,9 +4,9 @@ import { Navigate } from 'react-router-dom';
 import useUserContext from '../hooks/useUserContext';
 
 const PublicRoute: FC<{ component: FC }> = ({ component: Component }) => {
-  const [user] = useUserContext();
+  const { isLogged } = useUserContext();
 
-  if (!!!user) return <Component />;
+  if (!isLogged) return <Component />;
   return <Navigate to='/dashboard' />;
 };
 

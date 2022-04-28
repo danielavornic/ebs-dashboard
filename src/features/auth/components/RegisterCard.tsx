@@ -10,7 +10,7 @@ import Input from '../../../components/Input';
 import '../../../styles/AuthCard.scss';
 
 const RegisterCard = () => {
-  const [, setUser] = useUserContext();
+  const { setUser } = useUserContext();
 
   const [userCredentials, setUserCredentials] = useState<RegisterCredentials>({
     name: '',
