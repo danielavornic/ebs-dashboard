@@ -1,9 +1,12 @@
 // COLORS
-$primary-color: #1414b8;
+$primary-color: #7551ff;
 $primary-color-light: #ededfd;
-$light-gray: #f2f2f2;
-$gray: #bbbbbb;
-$black: #121212;
+$main-bg-color: #0b1437;
+$secondary-bg-color: #111c44;
+
+$light-grey-blue: #a3aed0;
+$white-10: rgba(255, 255, 255, 0.1);
+$white-40: rgba(255, 255, 255, 0.4);
 
 // TYPOGRAPHY
 $font-size-normal: 18px;
@@ -26,4 +29,6 @@ $grid-xxl: 1400px;
 // OTHER
 $border-radius-normal: 18px;
 $border-radius-large: 24px;
-$border-radius-small: 12px;
+$border-radius-small: 16px;
+
+$button-padding: 18px 24px;

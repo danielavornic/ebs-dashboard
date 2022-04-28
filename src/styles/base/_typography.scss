@@ -3,7 +3,6 @@
 body {
   font-family: 'Inter', sans-serif;
   font-size: $font-size-normal;
-  color: $black;
 }
 
 h1,
@@ -12,6 +11,7 @@ h3,
 .alt-font {
   font-family: 'Poppins', sans-serif;
   margin: 0;
+  color: white;
 }
 
 h1 {
@@ -35,7 +35,7 @@ p {
 }
 
 a {
-  color: $primary-color;
+  color: white;
 
   &:hover {
     text-decoration: underline;
