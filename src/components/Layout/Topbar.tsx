@@ -1,4 +1,7 @@
 import { FC, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
+import useUserContext from '../../hooks/useUserContext';
 
 interface TopbarProps {
   name: string;
@@ -7,16 +10,26 @@ interface TopbarProps {
 }
 
 const Topbar: FC<TopbarProps> = ({ name, lastName, pageTitle }) => {
+  const navigate = useNavigate();
+
+  const { setIsLogged, setUser } = useUserContext();
   const [isLogoutHidden, setIsLogoutHidden] = useState<boolean>(true);
 
-  const handleClick = () => setIsLogoutHidden(!isLogoutHidden);
+  const toggleLogoutButton = () => setIsLogoutHidden(!isLogoutHidden);
+
+  const logOutUser = () => {
+    localStorage.removeItem('userId');
+    setIsLogged(false);
+    setUser(null);
+    navigate('/login');
+  };
 
   return (
     <div className='top-bar'>
       <h1>{pageTitle}</h1>
 
       <div className='logged-user-bubble'>
-        <div className='user-info' onClick={handleClick}>
+        <div className='user-info' onClick={toggleLogoutButton}>
           <div className='avatar alt-font'>
             <b>{name.charAt(0)}</b>
           </div>
@@ -25,7 +38,7 @@ const Topbar: FC<TopbarProps> = ({ name, lastName, pageTitle }) => {
           </div>
         </div>
         <div className='logout' hidden={isLogoutHidden}>
-          <button>Logout</button>
+          <button onClick={logOutUser}>Logout</button>
         </div>
       </div>
     </div>
