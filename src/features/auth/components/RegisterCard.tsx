@@ -1,14 +1,17 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 
 import { RegisterCredentials } from '../../../types/user.types';
-import { registerUser } from '../../../api/users';
+import { registerUser, getUserByEmail } from '../../../api/users';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 
 import '../../../styles/AuthCard.scss';
+import { UserContext } from '../../../App';
 
 const RegisterCard = () => {
+  const [, setUser] = useContext(UserContext);
+
   const [userCredentials, setUserCredentials] = useState<RegisterCredentials>({
     name: '',
     lastName: '',
@@ -17,7 +20,7 @@ const RegisterCard = () => {
     password: '',
     confirmPassword: '',
   });
-  const { password, confirmPassword } = userCredentials;
+  const { email, password, confirmPassword } = userCredentials;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -27,7 +30,17 @@ const RegisterCard = () => {
       return;
     }
 
-    registerUser(userCredentials);
+    const existingUser = await getUserByEmail(email);
+    if (existingUser) {
+      alert('User registered with this email already exists.');
+      return;
+    }
+
+    registerUser(userCredentials).then((res) => {
+      const user = res.data;
+      setUser(user);
+      localStorage.setItem('userId', user.id);
+    });
   };
 
   const handleChange = (

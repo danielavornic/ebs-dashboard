@@ -2,51 +2,29 @@ import axios from 'axios';
 
 import { RegisterCredentials, LoginCredentials } from '../types/user.types';
 
-export const registerUser = async (userCredentials: RegisterCredentials) => {
-  const { email } = userCredentials;
-  const userExists = await axios
-    .get(`http://localhost:3000/users?email=${email}`)
-    .then((res) => res.data.length === 1);
-
-  if (userExists) {
-    alert('User registered with this email already exists.');
-  } else {
-    const userId = new Date().getTime();
-    const newUser = {
-      ...userCredentials,
-      userId,
-    };
-
-    axios
-      .post('http://localhost:3000/users', newUser)
-      .then((response) => {
-        alert('User created successfully.');
-        console.log(response);
-      })
-      .catch((error) => {
-        alert('Error creating user.');
-        console.log(error);
-      });
-  }
+export const getUserByEmail = async (email: string) => {
+  const res = await axios.get(`http://localhost:3000/users?email=${email}`);
+  return res.data[0];
 };
 
-export const logInUser = (userCredentials: LoginCredentials) => {
+export const getUserById = async (id: number) => {
+  const res = await axios.get(`http://localhost:3000/users?id=${id}`);
+  return res.data[0];
+};
+
+export const getUserByCredentials = async (
+  userCredentials: LoginCredentials
+) => {
   const { email, password } = userCredentials;
-  axios
-    .get(`http://localhost:3000/users?email=${email}&password=${password}`)
-    .then((res) => {
-      if (res.data.length === 0) {
-        alert('Wrong email or password.');
-        return;
-      }
-
-      alert('Logged in successfully.');
-
-      const { userId } = res.data[0];
-      localStorage.setItem('userId', JSON.stringify(userId));
-    })
-    .catch((error) => {
-      alert('Error logging user.');
-      console.log(error);
-    });
+  return axios.get(
+    `http://localhost:3000/users?email=${email}&password=${password}`
+  );
+};
+export const registerUser = (userCredentials: RegisterCredentials) => {
+  const id = new Date().getTime();
+  const newUser = {
+    ...userCredentials,
+    id,
+  };
+  return axios.post('http://localhost:3000/users', newUser);
 };

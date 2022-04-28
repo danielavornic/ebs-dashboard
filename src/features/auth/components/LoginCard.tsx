@@ -1,7 +1,8 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useContext, useState } from 'react';
 
 import { LoginCredentials } from '../../../types/user.types';
-import { logInUser } from '../../../api/users';
+import { getUserByCredentials } from '../../../api/users';
+import { UserContext } from '../../../App';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
@@ -9,6 +10,8 @@ import Input from '../../../components/Input';
 import '../../../styles/AuthCard.scss';
 
 const LoginCard = () => {
+  const [, setUser] = useContext(UserContext);
+
   const [userLoginCredentials, setUserLoginCredentials] =
     useState<LoginCredentials>({
       email: '',
@@ -17,7 +20,17 @@ const LoginCard = () => {
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    logInUser(userLoginCredentials);
+
+    getUserByCredentials(userLoginCredentials).then((res) => {
+      if (res.data.length === 0) {
+        alert('Wrong email or password.');
+        return;
+      }
+
+      const user = res.data[0];
+      setUser(user);
+      localStorage.setItem('userId', user.id);
+    });
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
