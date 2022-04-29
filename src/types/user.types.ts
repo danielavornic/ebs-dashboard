@@ -14,6 +14,16 @@ export interface UserInterface extends RegisterCredentials {
   id: string;
 }
 
+export interface UserDetails {
+  name: string;
+  lastName: string;
+  email: string;
+  gender: string;
+  role: Role;
+}
+
+export type Role = 'moderator' | 'admin';
+
 export type User = UserInterface | null;
 
 export type UserProperties = 'name' | 'lastName' | 'email' | 'gender';

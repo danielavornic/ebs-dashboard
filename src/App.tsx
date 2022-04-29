@@ -9,6 +9,7 @@ import AppRoutes from './routes/routes';
 const App: React.FC = () => {
   const [user, setUser] = useState<User>(null);
   const [isLogged, setIsLogged] = useState<boolean>(true);
+  const [isModalHidden, setIsModalHidden] = useState<boolean>(true);
 
   const userId = JSON.parse(localStorage.getItem('userId') || 'null');
 
@@ -23,7 +24,16 @@ const App: React.FC = () => {
   }, [userId]);
 
   return (
-    <UserContext.Provider value={{ user, setUser, isLogged, setIsLogged }}>
+    <UserContext.Provider
+      value={{
+        user,
+        setUser,
+        isLogged,
+        setIsLogged,
+        isModalHidden,
+        setIsModalHidden,
+      }}
+    >
       <AppRoutes />
     </UserContext.Provider>
   );

@@ -6,6 +6,8 @@ interface StateInterface {
   setUser: Dispatch<SetStateAction<User>>;
   isLogged: boolean;
   setIsLogged: Dispatch<SetStateAction<boolean>>;
+  isModalHidden: boolean;
+  setIsModalHidden: Dispatch<SetStateAction<boolean>>;
 }
 
 export const UserContext = createContext<StateInterface>({
@@ -13,4 +15,6 @@ export const UserContext = createContext<StateInterface>({
   setUser: () => {},
   isLogged: false,
   setIsLogged: () => {},
+  isModalHidden: true,
+  setIsModalHidden: () => {},
 });

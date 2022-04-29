@@ -4,6 +4,8 @@ import { User, UserProperties } from '../../../types/user.types';
 import { fetchUsers } from '../../../api/users';
 
 import Layout from '../../../components/Layout/Layout';
+import Modal from '../../../components/Modal';
+import UserModalForm from '../components/UserModalForm';
 
 const Users = () => {
   const headings = ['Name', 'Last Name', 'Email', 'Gender'];
@@ -16,12 +18,17 @@ const Users = () => {
   }, []);
 
   return (
-    <Layout
-      page='users'
-      data={users}
-      headings={headings}
-      properties={properties}
-    />
+    <>
+      <Modal title='Add user'>
+        <UserModalForm />
+      </Modal>
+      <Layout
+        page='users'
+        data={users}
+        headings={headings}
+        properties={properties}
+      />
+    </>
   );
 };
 
