@@ -1,0 +1,6 @@
+@mixin transparent-button() {
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  width: fit-content;
+}
