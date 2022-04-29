@@ -13,6 +13,7 @@
   .top-bar {
     display: flex;
     justify-content: space-between;
+    position: relative;
 
     h1 {
       text-transform: capitalize;
@@ -20,6 +21,8 @@
     }
 
     .logged-user-bubble {
+      position: absolute;
+      right: 0;
       background-color: $secondary-bg-color;
       padding: $button-padding;
       border-radius: $border-radius-large;
@@ -51,7 +54,7 @@
         margin: 18px auto 0;
 
         button {
-          padding: 10px;
+          padding: 4px;
           background-color: transparent;
 
           &:hover {
@@ -64,7 +67,8 @@
   }
 
   .menu {
-    width: 340px;
+    min-width: 300px;
+    width: 18%;
     background-color: $secondary-bg-color;
 
     .title {
@@ -107,5 +111,63 @@
 
   .container {
     flex: 1;
+
+    table {
+      width: 100%;
+      background-color: $secondary-bg-color;
+      margin-top: 50px;
+      border-radius: $border-radius-small;
+      border-collapse: collapse;
+
+      thead tr {
+        border-bottom: 1px solid $white-10;
+
+        th {
+          color: #fff;
+        }
+      }
+
+      tr {
+        transition: $transition;
+
+        td,
+        th {
+          padding: 16px;
+
+          &:not(:last-child) {
+            border-right: 1px solid $white-10;
+          }
+        }
+      }
+
+      tbody tr {
+        &:not(:last-child) {
+          border-bottom: 1px solid $white-10;
+        }
+
+        &:hover {
+          background-color: #142252;
+        }
+        td {
+          &.actions {
+            text-align: center;
+            width: 100px;
+
+            svg {
+              cursor: pointer;
+              transition: $transition;
+
+              &:first-child {
+                margin-right: 8px;
+              }
+
+              &:hover {
+                color: white;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

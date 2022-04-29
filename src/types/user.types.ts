@@ -15,3 +15,5 @@ export interface UserInterface extends RegisterCredentials {
 }
 
 export type User = UserInterface | null;
+
+export type UserProperties = 'name' | 'lastName' | 'email' | 'gender';

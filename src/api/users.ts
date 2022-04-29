@@ -20,6 +20,11 @@ export const getUserByCredentials = async (
     `http://localhost:3000/users?email=${email}&password=${password}`
   );
 };
+
 export const registerUser = (user: RegisterCredentials) => {
   return axios.post('http://localhost:3000/users', user);
+};
+
+export const fetchUsers = () => {
+  return axios.get('http://localhost:3000/users');
 };
