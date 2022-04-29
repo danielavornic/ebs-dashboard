@@ -6,7 +6,7 @@ import PublicRoute from './PublicRoute';
 import Dashboard from '../features/auth/Dashboard';
 import Login from '../features/auth/pages/Login';
 import Register from '../features/auth/pages/Register';
-import Users from '../features/auth/users/pages/Users';
+import Users from '../features/users/pages/Users';
 
 const AppRoutes = () => (
   <BrowserRouter>

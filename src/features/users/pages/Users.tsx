@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 
-import { User, UserProperties } from '../../../../types/user.types';
-import { fetchUsers } from '../../../../api/users';
+import { User, UserProperties } from '../../../types/user.types';
+import { fetchUsers } from '../../../api/users';
 
-import Layout from '../../../../components/Layout/Layout';
+import Layout from '../../../components/Layout/Layout';
 
 const Users = () => {
   const headings = ['Name', 'Last Name', 'Email', 'Gender'];
