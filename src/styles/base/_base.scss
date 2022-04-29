@@ -27,7 +27,7 @@ button,
 input,
 select {
   outline: none;
-  transition: 200ms ease-in;
+  transition: $transition;
 
   &:focus {
     outline: none;
