@@ -155,7 +155,8 @@
       top: 0;
       position: sticky;
       background-color: $secondary-bg-color;
-      border-collapse: collapse;
+      border-collapse: separate;
+      border-spacing: 0;
       border-radius: $border-radius-small;
 
       tr {
@@ -171,42 +172,45 @@
         }
       }
 
-      thead tr {
-        border-bottom: 1px solid $white-10;
+      thead {
+        background-color: $secondary-bg-color;
+        position: sticky;
+        top: 0;
 
         th {
+          border-bottom: 1px solid $white-10;
           color: #fff;
         }
       }
 
       tbody tr {
-        &:not(:last-child) {
-          border-bottom: 1px solid $white-10;
-        }
-
         &:hover {
           background-color: #142252;
         }
 
-        td {
-          &.actions {
-            text-align: center;
-            width: 100px;
+        &:not(:last-child) {
+          td {
+            border-bottom: 1px solid $white-10;
+          }
+        }
 
-            button {
-              @include transparent-button();
+        td.actions {
+          text-align: center;
+          width: 100px;
 
-              svg {
-                cursor: pointer;
-                transition: $transition;
+          button {
+            @include transparent-button();
 
-                &:first-child {
-                  margin-right: 8px;
-                }
+            svg {
+              cursor: pointer;
+              transition: $transition;
 
-                &:hover {
-                  color: white;
-                }
+              &:first-child {
+                margin-right: 8px;
+              }
+
+              &:hover {
+                color: white;
               }
             }
           }
