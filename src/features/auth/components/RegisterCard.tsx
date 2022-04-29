@@ -6,6 +6,7 @@ import useUserContext from '../../../hooks/useUserContext';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
+import SelectGender from '../../users/components/SelectGender';
 
 import '../../../styles/AuthCard.scss';
 
@@ -77,20 +78,7 @@ const RegisterCard = () => {
           id='email'
           onChange={handleChange}
         />
-        <select
-          name='gender'
-          id='gender'
-          onChange={handleChange}
-          required
-          defaultValue={''}
-        >
-          <option value='' disabled hidden>
-            Gender
-          </option>
-          <option value='Male'>Male</option>
-          <option value='Female'>Female</option>
-          <option value='Prefer not to say'>Prefer not to say</option>
-        </select>
+        <SelectGender onChange={handleChange} />
         <Input
           type='password'
           placeholder='Password'
