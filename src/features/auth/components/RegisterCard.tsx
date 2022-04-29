@@ -89,7 +89,7 @@ const RegisterCard = () => {
           </option>
           <option value='Male'>Male</option>
           <option value='Female'>Female</option>
-          <option value='Not specified'>Prefer not to say</option>
+          <option value='Prefer not to say'>Prefer not to say</option>
         </select>
         <Input
           type='password'
