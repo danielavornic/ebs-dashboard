@@ -1,7 +1,5 @@
 import { FC, ReactNode } from 'react';
 
-import '../styles/Button.scss';
-
 interface Props {
   state: 'primary' | 'danger';
   type: 'submit' | 'button';

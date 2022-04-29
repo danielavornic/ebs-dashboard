@@ -3,8 +3,6 @@ import { FiX } from 'react-icons/fi';
 
 import useUserContext from '../hooks/useUserContext';
 
-import '../styles/Modal.scss';
-
 interface ModalProps {
   children?: JSX.Element;
   title: string;

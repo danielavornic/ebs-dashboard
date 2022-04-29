@@ -2,10 +2,8 @@ import { Link } from 'react-router-dom';
 
 import LoginCard from '../components/LoginCard';
 
-import '../../../styles/AuthPage.scss';
-
 const Login = () => (
-  <div className='page-container'>
+  <div className='auth-page-container'>
     <div className='content'>
       <h1>Welcome back to EBS Dashboard</h1>
       <LoginCard />

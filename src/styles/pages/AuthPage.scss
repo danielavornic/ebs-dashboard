@@ -1,0 +1,42 @@
+.auth-page-container {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (max-width: $grid-md) {
+    padding: 24px 16px;
+    height: auto;
+  }
+
+  h1,
+  h2,
+  p {
+    text-align: center;
+  }
+
+  h1 {
+    margin-bottom: 40px;
+  }
+
+  .auth-card {
+    background-color: $secondary-bg-color;
+    border-radius: $border-radius-normal;
+    padding: 54px 40px;
+    max-width: 540px;
+    margin: 0 auto;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 1px 2px 0px;
+
+    h2 {
+      margin-bottom: 18px;
+    }
+
+    form {
+      margin-top: 40px;
+    }
+  }
+
+  .switch-auth {
+    margin-top: 40px;
+  }
+}

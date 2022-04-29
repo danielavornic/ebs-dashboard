@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { FiPlus } from 'react-icons/fi';
 
 import useUserContext from '../../hooks/useUserContext';
 import { User, UserProperties } from '../../types/user.types';
@@ -6,9 +7,6 @@ import { User, UserProperties } from '../../types/user.types';
 import Table from '../Table';
 import Menu from './Menu';
 import Topbar from './Topbar';
-
-import '../../styles/Layout.scss';
-import { FiPlus } from 'react-icons/fi';
 import Button from '../Button';
 
 interface LayoutProps {

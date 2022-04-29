@@ -2,10 +2,8 @@ import { Link } from 'react-router-dom';
 
 import RegisterCard from '../components/RegisterCard';
 
-import '../../../styles/AuthPage.scss';
-
 const Register = () => (
-  <div className='page-container'>
+  <div className='auth-page-container'>
     <div className='content'>
       <h1>Welcome to EBS Dashboard</h1>
       <RegisterCard />

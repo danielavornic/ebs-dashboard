@@ -3,4 +3,7 @@
 @import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
 
 @import 'utils/variables', 'utils/mixins';
-@import 'base/base', 'base/typography', 'base/forms';
+@import 'base/base', 'base/typography';
+@import 'components/forms', 'components/Button', 'components/Layout',
+  'components/Modal', 'components/Input';
+@import 'pages/AuthPage.scss';

@@ -8,8 +8,6 @@ import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 import SelectGender from '../../users/components/SelectGender';
 
-import '../../../styles/AuthCard.scss';
-
 const RegisterCard = () => {
   const { setUser } = useUserContext();
 

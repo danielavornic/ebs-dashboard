@@ -1,7 +1,5 @@
 import { FC } from 'react';
 
-import '../styles/Input.scss';
-
 interface Props {
   type: 'text' | 'email' | 'checkbox' | 'password';
   name: string;
