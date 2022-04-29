@@ -1,48 +1,81 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 
-import { NewUserDetails } from '../../../types/user.types';
-import { getUserByEmail, registerUser } from '../../../api/users';
+import { UserModalData } from '../../../types/user.types';
+import { getUserByEmail, registerUser, updateUser } from '../../../api/users';
 import useUserContext from '../../../hooks/useUserContext';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
-import SelectGender from './SelectGender';
 
 const UserModalForm = () => {
-  const { setIsModalHidden, isModalHidden } = useUserContext();
+  const { setIsModalHidden, isModalHidden, selectedUser, modalType } =
+    useUserContext();
 
-  const [newUser, setNewUser] = useState<NewUserDetails>({
+  const defaultUser = {
     name: '',
     lastName: '',
     email: '',
     gender: '',
-    role: 'moderator',
-  });
+    role: null,
+  };
+
+  const [user, setNewUser] = useState<UserModalData>(defaultUser);
+  const { name, lastName, email, gender, role } = user;
 
   const formRef = useRef() as React.MutableRefObject<HTMLFormElement>;
 
-  useEffect(() => formRef?.current.reset(), [isModalHidden]);
+  useEffect(() => {
+    if (selectedUser && selectedUser.name === '') formRef?.current.reset();
+  }, [isModalHidden, selectedUser]);
+
+  useEffect(() => {
+    if (selectedUser && selectedUser.name !== '') {
+      const newSelectedUser: UserModalData = {
+        name: selectedUser.name,
+        lastName: selectedUser.lastName,
+        email: selectedUser.email,
+        gender: selectedUser.gender,
+        role: selectedUser.role,
+      };
+      setNewUser(newSelectedUser);
+      return;
+    }
+
+    setNewUser(defaultUser);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedUser]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    const existingUser = await getUserByEmail(newUser.email);
-    if (existingUser) {
-      alert('User registered with this email already exists.');
+    if (modalType === 'add') {
+      const existingUser = await getUserByEmail(user.email);
+      if (existingUser) {
+        alert('User registered with this email already exists.');
+        return;
+      }
+      registerUser(user).then(() => {
+        setIsModalHidden(true);
+        alert('User added succesfully!');
+      });
+
       return;
     }
 
-    registerUser(newUser).then(() => {
-      setIsModalHidden(true);
-      alert('User added succesfully!');
-    });
+    if (modalType === 'edit' && selectedUser && selectedUser.id !== '') {
+      const userId = parseInt(selectedUser.id);
+      updateUser(userId, user).then(() => {
+        setIsModalHidden(true);
+        alert('User updated succesfully!');
+      });
+    }
   };
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-    setNewUser({ ...newUser, [name]: value });
+    setNewUser({ ...user, [name]: value });
   };
 
   return (
@@ -51,6 +84,7 @@ const UserModalForm = () => {
         type='text'
         placeholder='Name'
         name='name'
+        value={name}
         id='name'
         onChange={handleChange}
       />
@@ -58,6 +92,7 @@ const UserModalForm = () => {
         type='text'
         placeholder='Last name'
         name='lastName'
+        value={lastName}
         id='last-name'
         onChange={handleChange}
       />
@@ -65,16 +100,29 @@ const UserModalForm = () => {
         type='email'
         placeholder='E-mail'
         name='email'
+        value={email}
         id='email'
         onChange={handleChange}
       />
-      <SelectGender onChange={handleChange} />
+      <select
+        name='gender'
+        id='gender'
+        onChange={handleChange}
+        required
+        value={gender}
+      >
+        <option value='' disabled hidden>
+          Gender
+        </option>
+        <option value='Male'>Male</option>
+        <option value='Female'>Female</option>
+        <option value='Prefer not to say'>Prefer not to say</option>
+      </select>
       <select
         name='role'
         id='role'
         onChange={handleChange}
-        required
-        defaultValue={''}
+        value={role ? role : ''}
       >
         <option value='' disabled hidden>
           Role
@@ -83,7 +131,7 @@ const UserModalForm = () => {
         <option value='administrator'>Administrator</option>
       </select>
       <Button type='submit' state='primary'>
-        Add user
+        {modalType === 'add' ? 'Add' : 'Edit'} user
       </Button>
     </form>
   );

@@ -16,10 +16,6 @@ form {
     border: 1px solid $white-10;
     color: $light-grey-blue;
 
-    &:invalid {
-      opacity: 0.5;
-    }
-
     &:hover,
     &:focus {
       border-color: $white-40;

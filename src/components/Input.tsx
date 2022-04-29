@@ -5,10 +5,11 @@ interface Props {
   name: string;
   id: string;
   placeholder?: string;
+  value?: string;
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: FC<Props> = ({ type, name, id, placeholder, onChange }) => {
+const Input: FC<Props> = ({ type, name, id, placeholder, value, onChange }) => {
   return (
     <input
       type={type}
@@ -16,6 +17,7 @@ const Input: FC<Props> = ({ type, name, id, placeholder, onChange }) => {
       id={id}
       placeholder={placeholder}
       onChange={onChange}
+      value={value}
       required
       minLength={type === 'password' ? 8 : 0}
     />

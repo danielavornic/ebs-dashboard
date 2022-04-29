@@ -6,7 +6,6 @@ import useUserContext from '../../../hooks/useUserContext';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
-import SelectGender from '../../users/components/SelectGender';
 
 const RegisterCard = () => {
   const { setUser } = useUserContext();
@@ -36,7 +35,7 @@ const RegisterCard = () => {
     }
 
     registerUser(userCredentials).then((res) => {
-      const user = res.data;
+      const user = { ...res.data, role: null };
       setUser(user);
       localStorage.setItem('userId', user.id);
     });
@@ -76,7 +75,20 @@ const RegisterCard = () => {
           id='email'
           onChange={handleChange}
         />
-        <SelectGender onChange={handleChange} />
+        <select
+          name='gender'
+          id='gender'
+          onChange={handleChange}
+          required
+          defaultValue={''}
+        >
+          <option value='' disabled hidden>
+            Gender
+          </option>
+          <option value='Male'>Male</option>
+          <option value='Female'>Female</option>
+          <option value='Prefer not to say'>Prefer not to say</option>
+        </select>
         <Input
           type='password'
           placeholder='Password'

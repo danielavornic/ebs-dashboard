@@ -1,8 +1,8 @@
 import { FC } from 'react';
+import { FiEdit2, FiTrash } from 'react-icons/fi';
 
 import { User, UserProperties } from '../types/user.types';
-
-import { FiEdit2, FiTrash } from 'react-icons/fi';
+import useUserContext from '../hooks/useUserContext';
 
 interface Props {
   data: User[];
@@ -11,6 +11,14 @@ interface Props {
 }
 
 const Table: FC<Props> = ({ data, headings, properties }) => {
+  const { setIsModalHidden, setModalType, setSelectedUser } = useUserContext();
+
+  const handleEdit = (user: User) => {
+    setIsModalHidden(false);
+    setModalType('edit');
+    setSelectedUser(user);
+  };
+
   return (
     <div className='table-container'>
       <table>
@@ -33,7 +41,7 @@ const Table: FC<Props> = ({ data, headings, properties }) => {
                     <td key={index}>{obj[property]}</td>
                   ))}
                   <td className='actions'>
-                    <button type='button'>
+                    <button type='button' onClick={() => handleEdit(obj)}>
                       <FiEdit2 title='Edit' />
                     </button>
                     <button type='button'>

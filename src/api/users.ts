@@ -3,7 +3,7 @@ import axios from 'axios';
 import {
   RegisterCredentials,
   LoginCredentials,
-  NewUserDetails,
+  UserModalData,
 } from '../types/user.types';
 
 export const getUserByEmail = async (email: string) => {
@@ -25,10 +25,14 @@ export const getUserByCredentials = async (
   );
 };
 
-export const registerUser = (user: RegisterCredentials | NewUserDetails) => {
+export const registerUser = (user: RegisterCredentials | UserModalData) => {
   return axios.post('http://localhost:3000/users', user);
 };
 
 export const fetchUsers = () => {
   return axios.get('http://localhost:3000/users');
+};
+
+export const updateUser = (id: number, user: UserModalData) => {
+  return axios.put(`http://localhost:3000/users/${id}`, user);
 };

@@ -14,7 +14,7 @@ const Users = () => {
 
   const [users, setUsers] = useState<User[]>([]);
 
-  const { isModalHidden } = useUserContext();
+  const { isModalHidden, modalType } = useUserContext();
 
   useEffect(() => {
     fetchUsers().then((res) => setUsers(res.data));
@@ -22,7 +22,7 @@ const Users = () => {
 
   return (
     <>
-      <Modal title='Add user'>
+      <Modal title={modalType === 'add' ? 'Add user' : 'Edit user'}>
         <UserModalForm />
       </Modal>
       <Layout

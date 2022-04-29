@@ -34,7 +34,13 @@ const Layout: FC<LayoutProps> = ({
   headings = [],
   properties = [],
 }) => {
-  const { user, setIsModalHidden } = useUserContext();
+  const {
+    user,
+    setIsModalHidden,
+    setModalType,
+    setSelectedUser,
+    selectedUser,
+  } = useUserContext();
 
   let name = '';
   let lastName = '';
@@ -44,7 +50,12 @@ const Layout: FC<LayoutProps> = ({
     lastName = user.lastName;
   }
 
-  const showModal = () => setIsModalHidden(false);
+  const handleAddUser = () => {
+    setIsModalHidden(false);
+    setModalType('add');
+    setSelectedUser(null);
+    console.log(selectedUser);
+  };
 
   return (
     <div className='panel'>
@@ -56,7 +67,7 @@ const Layout: FC<LayoutProps> = ({
             <div className='heading'>
               <h2>{page}</h2>
               {showButton && (
-                <Button state='primary' type='button' onClick={showModal}>
+                <Button state='primary' type='button' onClick={handleAddUser}>
                   <FiPlus />
                   Add {page === 'users' ? 'user' : 'post'}
                 </Button>
