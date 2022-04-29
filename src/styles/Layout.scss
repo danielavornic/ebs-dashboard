@@ -107,11 +107,33 @@
 
   .container {
     flex: 1;
+    margin-top: 40px;
+
+    .heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+
+      h2 {
+        text-transform: capitalize;
+      }
+
+      button {
+        width: 180px;
+        padding: 14px 24px;
+        border-radius: $border-radius-small;
+
+        svg {
+          vertical-align: text-top;
+          margin-right: 12px;
+        }
+      }
+    }
 
     .table-container {
-      height: 80vh;
+      height: 75vh;
       overflow: auto;
-      margin-top: 80px;
       border-radius: $border-radius-small;
 
       &::-webkit-scrollbar {
