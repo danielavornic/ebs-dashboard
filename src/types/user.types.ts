@@ -11,7 +11,7 @@ export interface RegisterCredentials extends LoginCredentials {
 }
 
 export interface UserInterface extends RegisterCredentials {
-  userId: number;
+  id: string;
 }
 
 export type User = UserInterface | null;
