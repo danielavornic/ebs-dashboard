@@ -6,6 +6,7 @@ import { fetchUsers } from '../../../api/users';
 import Layout from '../../../components/Layout/Layout';
 import Modal from '../../../components/Modal';
 import UserModalForm from '../components/UserModalForm';
+import useUserContext from '../../../hooks/useUserContext';
 
 const Users = () => {
   const headings = ['Name', 'Last Name', 'Email', 'Gender'];
@@ -13,9 +14,11 @@ const Users = () => {
 
   const [users, setUsers] = useState<User[]>([]);
 
+  const { isModalHidden } = useUserContext();
+
   useEffect(() => {
     fetchUsers().then((res) => setUsers(res.data));
-  }, []);
+  }, [isModalHidden]);
 
   return (
     <>

@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-import { RegisterCredentials, LoginCredentials } from '../types/user.types';
+import {
+  RegisterCredentials,
+  LoginCredentials,
+  NewUserDetails,
+} from '../types/user.types';
 
 export const getUserByEmail = async (email: string) => {
   const res = await axios.get(`http://localhost:3000/users?email=${email}`);
@@ -21,7 +25,7 @@ export const getUserByCredentials = async (
   );
 };
 
-export const registerUser = (user: RegisterCredentials) => {
+export const registerUser = (user: RegisterCredentials | NewUserDetails) => {
   return axios.post('http://localhost:3000/users', user);
 };
 

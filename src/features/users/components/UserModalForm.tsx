@@ -1,12 +1,17 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
-import { UserDetails } from '../../../types/user.types';
+import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+
+import { NewUserDetails } from '../../../types/user.types';
+import { getUserByEmail, registerUser } from '../../../api/users';
+import useUserContext from '../../../hooks/useUserContext';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 import SelectGender from './SelectGender';
 
 const UserModalForm = () => {
-  const [newUser, setNewUser] = useState<UserDetails>({
+  const { setIsModalHidden, isModalHidden } = useUserContext();
+
+  const [newUser, setNewUser] = useState<NewUserDetails>({
     name: '',
     lastName: '',
     email: '',
@@ -14,10 +19,23 @@ const UserModalForm = () => {
     role: 'moderator',
   });
 
+  const formRef = useRef() as React.MutableRefObject<HTMLFormElement>;
+
+  useEffect(() => formRef?.current.reset(), [isModalHidden]);
+
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    console.log(newUser);
+    const existingUser = await getUserByEmail(newUser.email);
+    if (existingUser) {
+      alert('User registered with this email already exists.');
+      return;
+    }
+
+    registerUser(newUser).then(() => {
+      setIsModalHidden(true);
+      alert('User added succesfully!');
+    });
   };
 
   const handleChange = (
@@ -28,7 +46,7 @@ const UserModalForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form ref={formRef} onSubmit={handleSubmit}>
       <Input
         type='text'
         placeholder='Name'

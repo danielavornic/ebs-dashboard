@@ -12,9 +12,10 @@ export interface RegisterCredentials extends LoginCredentials {
 
 export interface UserInterface extends RegisterCredentials {
   id: string;
+  role?: Role;
 }
 
-export interface UserDetails {
+export interface NewUserDetails {
   name: string;
   lastName: string;
   email: string;
