@@ -160,14 +160,6 @@
       border-collapse: collapse;
       border-radius: $border-radius-small;
 
-      thead tr {
-        border-bottom: 1px solid $white-10;
-
-        th {
-          color: #fff;
-        }
-      }
-
       tr {
         transition: $transition;
 
@@ -181,6 +173,14 @@
         }
       }
 
+      thead tr {
+        border-bottom: 1px solid $white-10;
+
+        th {
+          color: #fff;
+        }
+      }
+
       tbody tr {
         &:not(:last-child) {
           border-bottom: 1px solid $white-10;
@@ -189,21 +189,26 @@
         &:hover {
           background-color: #142252;
         }
+
         td {
           &.actions {
             text-align: center;
             width: 100px;
 
-            svg {
-              cursor: pointer;
-              transition: $transition;
+            button {
+              @include transparent-button();
 
-              &:first-child {
-                margin-right: 8px;
-              }
+              svg {
+                cursor: pointer;
+                transition: $transition;
 
-              &:hover {
-                color: white;
+                &:first-child {
+                  margin-right: 8px;
+                }
+
+                &:hover {
+                  color: white;
+                }
               }
             }
           }

@@ -33,8 +33,12 @@ const Table: FC<Props> = ({ data, headings, properties }) => {
                     <td key={index}>{obj[property]}</td>
                   ))}
                   <td className='actions'>
-                    <FiEdit2 title='Edit' />
-                    <FiTrash title='Delete' />
+                    <button type='button'>
+                      <FiEdit2 title='Edit' />
+                    </button>
+                    <button type='button'>
+                      <FiTrash title='Delete' />
+                    </button>
                   </td>
                 </tr>
               )
