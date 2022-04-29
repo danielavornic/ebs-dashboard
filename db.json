@@ -49,6 +49,46 @@
       "confirmPassword": "DDDDDDDD",
       "terms": "on",
       "id": 5
+    },
+    {
+      "name": "Joe",
+      "lastName": "Doe",
+      "email": "jk@gmail.com",
+      "gender": "Male",
+      "password": "DDDDDDDD",
+      "confirmPassword": "DDDDDDDD",
+      "terms": "on",
+      "id": 6
+    },
+    {
+      "name": "Oscra",
+      "lastName": "Isaac",
+      "email": "dd@mail.com",
+      "gender": "Prefer not to say",
+      "password": "DDDDDDDD",
+      "confirmPassword": "DDDDDDDD",
+      "terms": "on",
+      "id": 7
+    },
+    {
+      "name": "Joe",
+      "lastName": "Doe",
+      "email": "do@gmail.com",
+      "gender": "Male",
+      "password": "DDDDDDDD",
+      "confirmPassword": "DDDDDDDD",
+      "terms": "on",
+      "id": 8
+    },
+    {
+      "name": "Pablo",
+      "lastName": "Isaac",
+      "email": "dds@mail.com",
+      "gender": "Prefer not to say",
+      "password": "DDDDDDDD",
+      "confirmPassword": "DDDDDDDD",
+      "terms": "on",
+      "id": 9
     }
   ],
   "posts": []

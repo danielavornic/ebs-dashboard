@@ -46,7 +46,7 @@ const Layout: FC<LayoutProps> = ({
     <div className='panel'>
       <Menu page={page} />
       <main>
-        <Topbar name={name} lastName={lastName} pageTitle={page} />
+        <Topbar name={name} lastName={lastName} />
         <Container>
           {showTable && (
             <Table data={data} headings={headings} properties={properties} />

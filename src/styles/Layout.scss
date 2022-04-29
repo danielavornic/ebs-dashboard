@@ -7,7 +7,7 @@
 
   main {
     width: 100%;
-    padding: 20px;
+    padding: 20px 20px 20px 40px;
   }
 
   .top-bar {
@@ -17,15 +17,15 @@
 
     h1 {
       text-transform: capitalize;
-      margin-top: 36px;
+      margin-top: 12px;
     }
 
-    .logged-user-bubble {
+    .user-bubble {
       position: absolute;
       right: 0;
       background-color: $secondary-bg-color;
-      padding: $button-padding;
-      border-radius: $border-radius-large;
+      padding: 16px 24px;
+      border-radius: $border-radius-normal;
       cursor: pointer;
 
       .user-info {
@@ -71,17 +71,6 @@
     width: 18%;
     background-color: $secondary-bg-color;
 
-    .title {
-      padding: 58px 0;
-      border-bottom: 1px solid $white-10;
-
-      h2 {
-        text-transform: uppercase;
-        text-align: center;
-        color: $light-grey-blue;
-      }
-    }
-
     ul {
       list-style-type: none;
       padding: 0;
@@ -91,12 +80,10 @@
         padding: 8px 36px;
         margin-bottom: 20px;
 
-        &.active {
-          border-right: 4px solid $primary-color;
-
-          a {
-            color: white;
-          }
+        svg {
+          vertical-align: text-top;
+          font-size: 20px;
+          margin-right: 12px;
         }
 
         a {
@@ -105,6 +92,15 @@
           text-transform: capitalize;
           color: $light-grey-blue;
         }
+
+        &.active {
+          border-right: 4px solid $primary-color;
+
+          a,
+          svg {
+            color: white;
+          }
+        }
       }
     }
   }
@@ -112,12 +108,35 @@
   .container {
     flex: 1;
 
+    .table-container {
+      height: 80vh;
+      overflow: auto;
+      margin-top: 80px;
+      border-radius: $border-radius-small;
+
+      &::-webkit-scrollbar {
+        width: 5px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: $secondary-bg-color;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: $light-grey-blue;
+        border: 1px solid transparent;
+        border-radius: 8px;
+        background-clip: padding-box;
+      }
+    }
+
     table {
       width: 100%;
+      top: 0;
+      position: sticky;
       background-color: $secondary-bg-color;
-      margin-top: 50px;
-      border-radius: $border-radius-small;
       border-collapse: collapse;
+      border-radius: $border-radius-small;
 
       thead tr {
         border-bottom: 1px solid $white-10;

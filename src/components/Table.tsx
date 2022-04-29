@@ -12,34 +12,36 @@ interface Props {
 
 const Table: FC<Props> = ({ data, headings, properties }) => {
   return (
-    <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          {headings.map((heading, index) => (
-            <th key={index}>{heading}</th>
-          ))}
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        {data.map(
-          (obj: User) =>
-            obj && (
-              <tr key={obj.id}>
-                <td>{obj.id}</td>
-                {properties.map((property, index) => (
-                  <td key={index}>{obj[property]}</td>
-                ))}
-                <td className='actions'>
-                  <FiEdit2 title='Edit' />
-                  <FiTrash title='Delete' />
-                </td>
-              </tr>
-            )
-        )}
-      </tbody>
-    </table>
+    <div className='table-container'>
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            {headings.map((heading, index) => (
+              <th key={index}>{heading}</th>
+            ))}
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {data.map(
+            (obj: User) =>
+              obj && (
+                <tr key={obj.id}>
+                  <td>{obj.id}</td>
+                  {properties.map((property, index) => (
+                    <td key={index}>{obj[property]}</td>
+                  ))}
+                  <td className='actions'>
+                    <FiEdit2 title='Edit' />
+                    <FiTrash title='Delete' />
+                  </td>
+                </tr>
+              )
+          )}
+        </tbody>
+      </table>
+    </div>
   );
 };
 

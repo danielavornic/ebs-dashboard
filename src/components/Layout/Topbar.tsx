@@ -6,10 +6,9 @@ import useUserContext from '../../hooks/useUserContext';
 interface TopbarProps {
   name: string;
   lastName: string;
-  pageTitle: string;
 }
 
-const Topbar: FC<TopbarProps> = ({ name, lastName, pageTitle }) => {
+const Topbar: FC<TopbarProps> = ({ name, lastName }) => {
   const navigate = useNavigate();
 
   const { setIsLogged, setUser } = useUserContext();
@@ -26,9 +25,8 @@ const Topbar: FC<TopbarProps> = ({ name, lastName, pageTitle }) => {
 
   return (
     <div className='top-bar'>
-      <h1>{pageTitle}</h1>
-
-      <div className='logged-user-bubble'>
+      <h1>Admin Panel</h1>
+      <div className='user-bubble'>
         <div className='user-info' onClick={toggleLogoutButton}>
           <div className='avatar alt-font'>
             <b>{name.charAt(0)}</b>

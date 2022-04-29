@@ -1,37 +1,37 @@
 import { FC } from 'react';
+import { FiBarChart2, FiFileText, FiUsers } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
-interface Props {
-  page: string;
-}
-
-const Menu: FC<Props> = ({ page }) => {
-  const links = [
+const Menu: FC<{ page: string }> = ({ page }) => {
+  const menuItems = [
     {
+      icon: <FiBarChart2 />,
       name: 'Dashboard',
       path: '/dashboard',
     },
     {
+      icon: <FiUsers />,
       name: 'Users',
       path: '/users',
     },
     {
+      icon: <FiFileText />,
       name: 'Posts',
       path: '/posts',
     },
   ];
+
   return (
     <div className='menu'>
-      <div className='title'>
-        <h2>Admin panel</h2>
-      </div>
       <ul>
-        {links.map(({ name, path }) => (
+        {menuItems.map(({ icon, name, path }) => (
           <li
             key={name}
             className={page === name.toLocaleLowerCase() ? 'active' : ''}
           >
-            <Link to={path}>{name}</Link>
+            <Link to={path}>
+              {icon} {name}
+            </Link>
           </li>
         ))}
       </ul>
