@@ -4,13 +4,13 @@ import LoginCard from '../components/LoginCard';
 
 const Login = () => (
   <div className='auth-page-container'>
-    <div className='content'>
+    <main>
       <h1>Welcome back to EBS Dashboard</h1>
       <LoginCard />
       <p className='switch-auth'>
         Don't have an account yet? <Link to={'/register'}>Register</Link>
       </p>
-    </div>
+    </main>
   </div>
 );
 
