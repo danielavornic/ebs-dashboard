@@ -5,3 +5,8 @@
   width: fit-content;
   color: inherit;
 }
+
+@mixin medium-button {
+  width: 180px;
+  padding: 16px 24px;
+}

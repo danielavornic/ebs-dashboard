@@ -1,9 +1,7 @@
 import Layout from '../../components/Layout/Layout';
 
 const Dashboard = () => {
-  return (
-    <Layout page='dashboard' data={[]} showTable={false} showButton={false} />
-  );
+  return <Layout page='dashboard' />;
 };
 
 export default Dashboard;

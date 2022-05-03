@@ -3,6 +3,7 @@ import { FiEdit2, FiTrash } from 'react-icons/fi';
 
 import { User, UserProperties } from '../types/user.types';
 import useUserContext from '../hooks/useUserContext';
+import { ModalType } from '../context';
 
 interface Props {
   data: User[];
@@ -13,9 +14,9 @@ interface Props {
 const Table: FC<Props> = ({ data, headings, properties }) => {
   const { setIsModalHidden, setModalType, setSelectedUser } = useUserContext();
 
-  const handleEdit = (user: User) => {
+  const handleActionClick = (user: User, action: ModalType) => {
     setIsModalHidden(false);
-    setModalType('edit');
+    setModalType(action);
     setSelectedUser(user);
   };
 
@@ -41,10 +42,16 @@ const Table: FC<Props> = ({ data, headings, properties }) => {
                     <td key={index}>{obj[property]}</td>
                   ))}
                   <td className='actions'>
-                    <button type='button' onClick={() => handleEdit(obj)}>
+                    <button
+                      type='button'
+                      onClick={() => handleActionClick(obj, 'edit')}
+                    >
                       <FiEdit2 title='Edit' />
                     </button>
-                    <button type='button'>
+                    <button
+                      type='button'
+                      onClick={() => handleActionClick(obj, 'delete')}
+                    >
                       <FiTrash title='Delete' />
                     </button>
                   </td>

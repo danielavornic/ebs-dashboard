@@ -1,70 +1,39 @@
 {
   "users": [
     {
-      "name": "daniela",
-      "lastName": "vornic",
-      "email": "daniela.vornic@gmail.com",
-      "gender": "Female",
-      "password": "dddddddd",
-      "confirmPassword": "dddddddd",
-      "terms": "on",
-      "role": "administrator",
-      "id": 1
-    },
-    {
       "name": "jessica",
-      "lastName": "last name",
+      "lastName": "parker",
       "email": "dd@m.com",
       "gender": "Female",
-      "role": "administrator",
+      "role": "moderator",
       "id": 2
     },
     {
-      "name": "mark",
-      "lastName": "gg",
-      "email": "fgfg@dfmm.com",
-      "gender": "Male",
-      "role": "moderator",
-      "id": 3
-    },
-    {
-      "name": "old",
-      "lastName": "ddd",
-      "email": "sds@ksd.com",
+      "name": "admin",
+      "lastName": "admin",
+      "email": "admin@mail.com",
       "gender": "Female",
-      "role": null,
-      "id": 4
-    },
-    {
-      "name": "kendall",
-      "lastName": "royy",
-      "email": "ken@dnf.com",
-      "gender": "Male",
+      "password": "dddddddd",
+      "confirmPassword": "dddddddd",
+      "terms": "",
+      "role": "admin",
       "id": 5
     },
     {
-      "name": "mark",
-      "lastName": "jacobs",
-      "email": "ff@m.com",
-      "gender": "Male",
+      "name": "new",
+      "lastName": "new",
+      "email": "df@mdf.com",
+      "gender": "Female",
       "role": "moderator",
       "id": 6
     },
     {
-      "name": "jane",
-      "lastName": "park",
-      "email": "fdf@mail.com",
-      "gender": "Female",
-      "role": null,
+      "name": "new",
+      "lastName": "new",
+      "email": "dd@gm.com",
+      "gender": "Male",
+      "role": "moderator",
       "id": 7
-    },
-    {
-      "name": "jane",
-      "lastName": "dffdfd",
-      "email": "daniela.vornic@mail.ebs-integrator.com",
-      "gender": "Female",
-      "role": null,
-      "id": 8
     }
   ],
   "posts": []

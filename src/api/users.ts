@@ -36,3 +36,7 @@ export const fetchUsers = () => {
 export const updateUser = (id: number, user: UserModalData) => {
   return axios.put(`http://localhost:3000/users/${id}`, user);
 };
+
+export const deleteUser = (id: number) => {
+  return axios.delete(`http://localhost:3000/users/${id}`);
+};

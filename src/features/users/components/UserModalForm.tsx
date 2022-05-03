@@ -54,20 +54,14 @@ const UserModalForm = () => {
         alert('User registered with this email already exists.');
         return;
       }
-      registerUser(user).then(() => {
-        setIsModalHidden(true);
-        alert('User added succesfully!');
-      });
 
+      registerUser(user).then(() => setIsModalHidden(true));
       return;
     }
 
     if (modalType === 'edit' && selectedUser && selectedUser.id !== '') {
       const userId = parseInt(selectedUser.id);
-      updateUser(userId, user).then(() => {
-        setIsModalHidden(true);
-        alert('User updated succesfully!');
-      });
+      updateUser(userId, user).then(() => setIsModalHidden(true));
     }
   };
 
@@ -131,7 +125,7 @@ const UserModalForm = () => {
         <option value='administrator'>Administrator</option>
       </select>
       <Button type='submit' state='primary'>
-        {modalType === 'add' ? 'Add' : 'Edit'} user
+        {modalType === 'add' ? 'Add user' : 'Save changes'}
       </Button>
     </form>
   );

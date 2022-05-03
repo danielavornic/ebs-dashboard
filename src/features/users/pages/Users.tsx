@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 
 import { User, UserProperties } from '../../../types/user.types';
 import { fetchUsers } from '../../../api/users';
+import useUserContext from '../../../hooks/useUserContext';
 
 import Layout from '../../../components/Layout/Layout';
 import Modal from '../../../components/Modal';
 import UserModalForm from '../components/UserModalForm';
-import useUserContext from '../../../hooks/useUserContext';
+import UserDeleteConfirmation from '../components/UserDeleteConfirmation';
+import Table from '../../../components/Table';
 
 const Users = () => {
   const headings = ['Name', 'Last Name', 'Email', 'Gender'];
@@ -22,15 +24,16 @@ const Users = () => {
 
   return (
     <>
-      <Modal title={modalType === 'add' ? 'Add user' : 'Edit user'}>
-        <UserModalForm />
+      <Modal title={`${modalType} user`}>
+        {modalType === 'delete' ? (
+          <UserDeleteConfirmation />
+        ) : (
+          <UserModalForm />
+        )}
       </Modal>
-      <Layout
-        page='users'
-        data={users}
-        headings={headings}
-        properties={properties}
-      />
+      <Layout page='users'>
+        <Table data={users} headings={headings} properties={properties} />
+      </Layout>
     </>
   );
 };

@@ -118,9 +118,7 @@
       }
 
       button {
-        width: 180px;
-        padding: 14px 24px;
-        border-radius: $border-radius-small;
+        @include medium-button();
 
         svg {
           vertical-align: text-top;

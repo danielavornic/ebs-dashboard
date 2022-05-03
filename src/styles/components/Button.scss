@@ -17,4 +17,14 @@ button {
       color: $primary-color;
     }
   }
+
+  &.danger {
+    background-color: $danger-color;
+    border-color: $danger-color;
+
+    &:hover {
+      background-color: transparent;
+      color: $danger-color;
+    }
+  }
 }
