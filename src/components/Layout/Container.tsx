@@ -6,25 +6,19 @@ import Button from '../Button';
 
 interface ContainerProps {
   page: string;
+  onButtonClick?: () => void;
   children?: JSX.Element | false;
 }
 
-const Container: FC<ContainerProps> = ({ page, children }) => {
-  const { user, setIsModalHidden, setModalType, setSelectedUser } =
-    useUserContext();
-
-  const handleAddUser = () => {
-    setIsModalHidden(false);
-    setModalType('add');
-    setSelectedUser(null);
-  };
+const Container: FC<ContainerProps> = ({ page, children, onButtonClick }) => {
+  const { user } = useUserContext();
 
   return (
     <div className='container'>
       <div className='heading'>
         <h2>{page}</h2>
-        {user && user.role === 'admin' && (
-          <Button state='primary' type='button' onClick={handleAddUser}>
+        {user && user.role === 'admin' && page !== 'dashboard' && (
+          <Button state='primary' type='button' onClick={onButtonClick}>
             <FiPlus />
             Add {page === 'users' ? 'user' : 'post'}
           </Button>

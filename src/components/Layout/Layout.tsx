@@ -8,10 +8,11 @@ import Container from './Container';
 
 interface LayoutProps {
   page: string;
+  onButtonClick?: () => void;
   children?: JSX.Element;
 }
 
-const Layout: FC<LayoutProps> = ({ page, children }) => {
+const Layout: FC<LayoutProps> = ({ page, children, onButtonClick }) => {
   const { user } = useUserContext();
   const name = user ? user.name : '';
   const lastName = user ? user.lastName : '';
@@ -21,7 +22,9 @@ const Layout: FC<LayoutProps> = ({ page, children }) => {
       <Menu page={page} />
       <main>
         <Topbar name={name} lastName={lastName} />
-        <Container page={page}>{children}</Container>
+        <Container page={page} onButtonClick={onButtonClick}>
+          {children}
+        </Container>
       </main>
     </div>
   );

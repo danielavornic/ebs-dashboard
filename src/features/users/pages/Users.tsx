@@ -20,8 +20,14 @@ const Users = () => {
     'role',
   ];
 
-  const { isModalHidden, modalType, selectedUser, setIsModalHidden } =
-    useUserContext();
+  const {
+    isModalHidden,
+    modalType,
+    selectedUser,
+    setIsModalHidden,
+    setModalType,
+    setSelectedUser,
+  } = useUserContext();
   const [users, setUsers] = useState<User[]>([]);
 
   const handleUserDelete = async () => {
@@ -29,6 +35,12 @@ const Users = () => {
       await deleteUser(parseInt(selectedUser.id));
       setIsModalHidden(true);
     }
+  };
+
+  const handleAddUser = () => {
+    setIsModalHidden(false);
+    setModalType('add');
+    setSelectedUser(null);
   };
 
   useEffect(() => {
@@ -49,7 +61,7 @@ const Users = () => {
           <UserModalForm />
         )}
       </Modal>
-      <Layout page='users'>
+      <Layout page='users' onButtonClick={handleAddUser}>
         <Table data={users} headings={headings} properties={properties} />
       </Layout>
     </>
