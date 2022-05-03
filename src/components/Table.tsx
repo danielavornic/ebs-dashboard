@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { FiEdit2, FiTrash } from 'react-icons/fi';
 
-import { User, UserProperties } from '../types/user.types';
 import useUserContext from '../hooks/useUserContext';
 import { ModalType } from '../context';
+import { User, UserProperties } from '../types/user.types';
 
 interface Props {
   data: User[];
@@ -39,7 +39,9 @@ const Table: FC<Props> = ({ data, headings, properties }) => {
                 <tr key={obj.id}>
                   <td>{obj.id}</td>
                   {properties.map((property, index) => (
-                    <td key={index}>{obj[property]}</td>
+                    <td key={index}>
+                      {property === 'role' && !obj.role ? '-' : obj[property]}
+                    </td>
                   ))}
                   <td className='actions'>
                     <button

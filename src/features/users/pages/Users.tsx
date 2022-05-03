@@ -11,8 +11,14 @@ import UserDeleteConfirmation from '../components/UserDeleteConfirmation';
 import Table from '../../../components/Table';
 
 const Users = () => {
-  const headings = ['Name', 'Last Name', 'Email', 'Gender'];
-  const properties: UserProperties[] = ['name', 'lastName', 'email', 'gender'];
+  const headings = ['Name', 'Last Name', 'Email', 'Gender', 'Role'];
+  const properties: UserProperties[] = [
+    'name',
+    'lastName',
+    'email',
+    'gender',
+    'role',
+  ];
 
   const [users, setUsers] = useState<User[]>([]);
 

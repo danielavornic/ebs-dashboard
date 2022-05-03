@@ -27,4 +27,4 @@ export type Role = 'moderator' | 'admin' | null;
 
 export type User = UserInterface | null;
 
-export type UserProperties = 'name' | 'lastName' | 'email' | 'gender';
+export type UserProperties = 'name' | 'lastName' | 'email' | 'gender' | 'role';
