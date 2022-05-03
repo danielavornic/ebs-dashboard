@@ -3,7 +3,7 @@ import { FiEdit2, FiTrash } from 'react-icons/fi';
 
 import useUserContext from '../hooks/useUserContext';
 import { ModalType } from '../context';
-import { User, UserProperties } from '../types/user.types';
+import { User, UserProperties } from '../types/user';
 
 interface Props {
   data: User[];

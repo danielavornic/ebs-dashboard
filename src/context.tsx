@@ -1,5 +1,5 @@
 import { createContext, Dispatch, SetStateAction } from 'react';
-import { User } from './types/user.types';
+import { User } from './types/user';
 
 export type ModalType = 'add' | 'edit' | 'delete';
 

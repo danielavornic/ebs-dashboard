@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-import { RegisterCredentials } from '../../../types/user.types';
+import { RegisterCredentials } from '../../../types/user';
 import { registerUser, getUserByEmail } from '../../../api/users';
 import useUserContext from '../../../hooks/useUserContext';
 

@@ -1,23 +1,23 @@
 import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
 
-import { UserModalData } from '../../../types/user.types';
+import { UserModalData } from '../../../types/user';
 import { getUserByEmail, registerUser, updateUser } from '../../../api/users';
 import useUserContext from '../../../hooks/useUserContext';
 
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 
+const defaultUser: UserModalData = {
+  name: '',
+  lastName: '',
+  email: '',
+  gender: '',
+  role: 'moderator',
+};
+
 const UserModalForm = () => {
   const { setIsModalHidden, isModalHidden, selectedUser, modalType } =
     useUserContext();
-
-  const defaultUser = {
-    name: '',
-    lastName: '',
-    email: '',
-    gender: '',
-    role: null,
-  };
 
   const [user, setNewUser] = useState<UserModalData>(defaultUser);
   const { name, lastName, email, gender, role } = user;
@@ -31,11 +31,7 @@ const UserModalForm = () => {
   useEffect(() => {
     if (selectedUser && selectedUser.name !== '') {
       const newSelectedUser: UserModalData = {
-        name: selectedUser.name,
-        lastName: selectedUser.lastName,
-        email: selectedUser.email,
-        gender: selectedUser.gender,
-        role: selectedUser.role,
+        ...selectedUser,
       };
       setNewUser(newSelectedUser);
       return;
@@ -112,12 +108,7 @@ const UserModalForm = () => {
         <option value='Female'>Female</option>
         <option value='Prefer not to say'>Prefer not to say</option>
       </select>
-      <select
-        name='role'
-        id='role'
-        onChange={handleChange}
-        value={role ? role : ''}
-      >
+      <select name='role' id='role' onChange={handleChange} value={role || ''}>
         <option value='' disabled hidden>
           Role
         </option>

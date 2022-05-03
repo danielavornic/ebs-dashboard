@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { User, UserProperties } from '../../../types/user.types';
+import { User, UserProperties } from '../../../types/user';
 import { deleteUser, fetchUsers } from '../../../api/users';
 import useUserContext from '../../../hooks/useUserContext';
 

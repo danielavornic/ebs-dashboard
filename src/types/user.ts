@@ -23,8 +23,8 @@ export interface UserModalData {
   role: Role;
 }
 
-export type Role = 'moderator' | 'admin' | null;
+export type Role = 'moderator' | 'admin';
 
 export type User = UserInterface | null;
 
-export type UserProperties = 'name' | 'lastName' | 'email' | 'gender' | 'role';
+export type UserProperties = keyof UserModalData;

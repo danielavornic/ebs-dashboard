@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { User } from './types/user.types';
+import { User } from './types/user';
 import { getUserById } from './api/users';
 import { ModalType, UserContext } from './context';
 
