@@ -12,7 +12,8 @@ interface Props {
 }
 
 const Table: FC<Props> = ({ data, headings, properties }) => {
-  const { setIsModalHidden, setModalType, setSelectedUser } = useUserContext();
+  const { user, setIsModalHidden, setModalType, setSelectedUser } =
+    useUserContext();
 
   const handleActionClick = (user: User, action: ModalType) => {
     setIsModalHidden(false);
@@ -29,7 +30,7 @@ const Table: FC<Props> = ({ data, headings, properties }) => {
             {headings.map((heading, index) => (
               <th key={index}>{heading}</th>
             ))}
-            <th>Actions</th>
+            {user && user.role === 'admin' && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -43,20 +44,22 @@ const Table: FC<Props> = ({ data, headings, properties }) => {
                       {property === 'role' && !obj.role ? '-' : obj[property]}
                     </td>
                   ))}
-                  <td className='actions'>
-                    <button
-                      type='button'
-                      onClick={() => handleActionClick(obj, 'edit')}
-                    >
-                      <FiEdit2 title='Edit' />
-                    </button>
-                    <button
-                      type='button'
-                      onClick={() => handleActionClick(obj, 'delete')}
-                    >
-                      <FiTrash title='Delete' />
-                    </button>
-                  </td>
+                  {user && user.role === 'admin' && (
+                    <td className='actions'>
+                      <button
+                        type='button'
+                        onClick={() => handleActionClick(obj, 'edit')}
+                      >
+                        <FiEdit2 title='Edit' />
+                      </button>
+                      <button
+                        type='button'
+                        onClick={() => handleActionClick(obj, 'delete')}
+                      >
+                        <FiTrash title='Delete' />
+                      </button>
+                    </td>
+                  )}
                 </tr>
               )
           )}
