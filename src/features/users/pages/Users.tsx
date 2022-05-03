@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
 import { User, UserProperties } from '../../../types/user.types';
-import { fetchUsers } from '../../../api/users';
+import { deleteUser, fetchUsers } from '../../../api/users';
 import useUserContext from '../../../hooks/useUserContext';
 
 import Layout from '../../../components/Layout/Layout';
 import Modal from '../../../components/Modal';
 import UserModalForm from '../components/UserModalForm';
-import UserDeleteConfirmation from '../components/UserDeleteConfirmation';
 import Table from '../../../components/Table';
+import ConfirmationModalContent from '../../../components/ConfirmationModalContent';
 
 const Users = () => {
   const headings = ['Name', 'Last Name', 'Email', 'Gender', 'Role'];
@@ -20,19 +20,31 @@ const Users = () => {
     'role',
   ];
 
+  const { isModalHidden, modalType, selectedUser, setIsModalHidden } =
+    useUserContext();
   const [users, setUsers] = useState<User[]>([]);
 
-  const { isModalHidden, modalType } = useUserContext();
+  const handleUserDelete = async () => {
+    if (selectedUser && selectedUser.id !== '') {
+      await deleteUser(parseInt(selectedUser.id));
+      setIsModalHidden(true);
+    }
+  };
 
   useEffect(() => {
-    fetchUsers().then((res) => setUsers(res.data));
+    if (isModalHidden) {
+      fetchUsers().then((res) => setUsers(res.data));
+    }
   }, [isModalHidden]);
 
   return (
     <>
       <Modal title={`${modalType} user`}>
         {modalType === 'delete' ? (
-          <UserDeleteConfirmation />
+          <ConfirmationModalContent
+            title='Are you sure you want to delete this user?'
+            onConfirm={handleUserDelete}
+          />
         ) : (
           <UserModalForm />
         )}
