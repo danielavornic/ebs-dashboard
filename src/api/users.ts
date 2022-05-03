@@ -6,13 +6,21 @@ import {
   UserModalData,
 } from '../types/user.types';
 
+const UsersClient = axios.create({
+  baseURL: 'http://localhost:3000/users/',
+});
+
+export const fetchUsers = () => {
+  return UsersClient.get('');
+};
+
 export const getUserByEmail = async (email: string) => {
-  const res = await axios.get(`http://localhost:3000/users?email=${email}`);
+  const res = await UsersClient.get(`?email=${email}`);
   return res.data[0];
 };
 
 export const getUserById = async (id: number) => {
-  const res = await axios.get(`http://localhost:3000/users/${id}`);
+  const res = await UsersClient.get(`/${id}`);
   return res.data;
 };
 
@@ -20,23 +28,17 @@ export const getUserByCredentials = async (
   userCredentials: LoginCredentials
 ) => {
   const { email, password } = userCredentials;
-  return axios.get(
-    `http://localhost:3000/users?email=${email}&password=${password}`
-  );
+  return UsersClient.get(`?email=${email}&password=${password}`);
 };
 
 export const registerUser = (user: RegisterCredentials | UserModalData) => {
-  return axios.post('http://localhost:3000/users', user);
-};
-
-export const fetchUsers = () => {
-  return axios.get('http://localhost:3000/users');
+  return UsersClient.post('', user);
 };
 
 export const updateUser = (id: number, user: UserModalData) => {
-  return axios.put(`http://localhost:3000/users/${id}`, user);
+  return UsersClient.put(`/${id}`, user);
 };
 
 export const deleteUser = (id: number) => {
-  return axios.delete(`http://localhost:3000/users/${id}`);
+  return UsersClient.delete(`/${id}`);
 };
