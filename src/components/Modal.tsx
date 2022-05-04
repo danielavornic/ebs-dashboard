@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { FiX } from 'react-icons/fi';
 
-import useUserContext from '../hooks/useUserContext';
+import useUserContext from 'hooks/useUserContext';
 
 interface ModalProps {
   children?: JSX.Element;

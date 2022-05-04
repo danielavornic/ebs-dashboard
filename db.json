@@ -59,15 +59,6 @@
       "password": "dddddddd",
       "role": "moderator",
       "id": 11
-    },
-    {
-      "name": "new user",
-      "lastName": "dddddddd",
-      "email": "em@m.com",
-      "gender": "Female",
-      "password": "11111111",
-      "role": "moderator",
-      "id": 12
     }
   ],
   "posts": []

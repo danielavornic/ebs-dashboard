@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import useUserContext from '../../hooks/useUserContext';
+import useUserContext from 'hooks/useUserContext';
 
 import Menu from './Menu';
 import Topbar from './Topbar';

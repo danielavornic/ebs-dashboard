@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { User } from './types/user';
-import { getUserById } from './api/users';
-import { ModalType, UserContext } from './context';
+import { User } from 'types/user';
+import { getUserById } from 'api/users';
+import { ModalType, UserContext } from 'context';
 
-import AppRoutes from './routes/routes';
+import AppRoutes from 'routes/routes';
 
 const App: React.FC = () => {
   const [user, setUser] = useState<User>(null);

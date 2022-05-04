@@ -4,7 +4,7 @@ import {
   RegisterCredentials,
   LoginCredentials,
   UserModalData,
-} from '../types/user';
+} from 'types/user';
 
 const UsersClient = axios.create({
   baseURL: 'http://localhost:3000/users/',

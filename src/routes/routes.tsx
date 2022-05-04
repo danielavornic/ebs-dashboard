@@ -3,10 +3,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
-import Dashboard from '../features/auth/Dashboard';
-import Login from '../features/auth/pages/Login';
-import Register from '../features/auth/pages/Register';
-import Users from '../features/users/pages/Users';
+import Dashboard from 'features/auth/Dashboard';
+import Login from 'features/auth/pages/Login';
+import Register from 'features/auth/pages/Register';
+import Users from 'features/users/pages/Users';
 
 const AppRoutes = () => (
   <BrowserRouter>

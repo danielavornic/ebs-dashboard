@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
-import useUserContext from '../../hooks/useUserContext';
-import Button from '../Button';
+import useUserContext from 'hooks/useUserContext';
+import Button from 'components/Button';
 
 interface ContainerProps {
   page: string;

@@ -1,11 +1,11 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-import { RegisterCredentials } from '../../../types/user';
-import { registerUser, getUserByEmail } from '../../../api/users';
-import useUserContext from '../../../hooks/useUserContext';
+import { RegisterCredentials } from 'types/user';
+import { registerUser, getUserByEmail } from 'api/users';
+import useUserContext from 'hooks/useUserContext';
 
-import Button from '../../../components/Button';
-import Input from '../../../components/Input';
+import Button from 'components/Button';
+import Input from 'components/Input';
 
 const initialUser = {
   name: '',

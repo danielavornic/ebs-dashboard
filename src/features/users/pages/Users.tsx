@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import { User, UserProperties } from '../../../types/user';
-import { deleteUser, fetchUsers } from '../../../api/users';
-import useUserContext from '../../../hooks/useUserContext';
+import { User, UserProperties } from 'types/user';
+import { deleteUser, fetchUsers } from 'api/users';
+import useUserContext from 'hooks/useUserContext';
 
-import Layout from '../../../components/Layout/Layout';
-import Modal from '../../../components/Modal';
+import Layout from 'components/Layout/Layout';
+import Modal from 'components/Modal';
+import Table from 'components/Table';
 import UserModalForm from '../components/UserModalForm';
-import Table from '../../../components/Table';
-import ConfirmationModalContent from '../../../components/ConfirmationModalContent';
+import ConfirmationModalContent from 'components/ConfirmationModalContent';
 
 const Users = () => {
   const headings = ['Name', 'Last Name', 'Email', 'Gender', 'Role'];
