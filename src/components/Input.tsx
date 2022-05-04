@@ -1,13 +1,13 @@
-interface Props {
-  type: 'text' | 'email' | 'checkbox' | 'password';
-  name: string;
-  id: string;
-  placeholder?: string;
-  value?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { InputHTMLAttributes } from 'react';
 
-const Input = ({ type, name, id, placeholder, value, onChange }: Props) => {
+const Input = ({
+  type,
+  name,
+  id,
+  placeholder,
+  value,
+  onChange,
+}: InputHTMLAttributes<HTMLInputElement>) => {
   return (
     <input
       type={type}

@@ -1,9 +1,9 @@
+import { ButtonHTMLAttributes } from 'react';
 import { PropsWithChildren } from 'react';
 
-interface Props {
+interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   state: 'primary' | 'danger';
   type: 'submit' | 'button';
-  onClick?: () => void;
 }
 
 const Button = ({
