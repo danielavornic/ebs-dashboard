@@ -50,15 +50,6 @@
       "password": "dddddddd",
       "role": "moderator",
       "id": 10
-    },
-    {
-      "name": "dd",
-      "lastName": "dsds",
-      "email": "fdd@mdm.com",
-      "gender": "Female",
-      "password": "dddddddd",
-      "role": "moderator",
-      "id": 11
     }
   ],
   "posts": []

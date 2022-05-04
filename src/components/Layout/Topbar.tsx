@@ -1,14 +1,14 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useUserContext from 'hooks/useUserContext';
 
-interface TopbarProps {
+interface Props {
   name: string;
   lastName: string;
 }
 
-const Topbar: FC<TopbarProps> = ({ name, lastName }) => {
+const Topbar = ({ name, lastName }: Props) => {
   const navigate = useNavigate();
 
   const { setIsLogged, setUser } = useUserContext();

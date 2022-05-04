@@ -1,13 +1,17 @@
-import { FC, ReactNode } from 'react';
+import { PropsWithChildren } from 'react';
 
 interface Props {
   state: 'primary' | 'danger';
   type: 'submit' | 'button';
-  children?: ReactNode;
   onClick?: () => void;
 }
 
-const Button: FC<Props> = ({ state, type, children, onClick }) => {
+const Button = ({
+  state,
+  type,
+  children,
+  onClick,
+}: PropsWithChildren<Props>) => {
   return (
     <button type={type} className={state} onClick={onClick}>
       {children}

@@ -6,7 +6,7 @@ import { ModalType, UserContext } from 'context';
 
 import AppRoutes from 'routes/routes';
 
-const App: React.FC = () => {
+const App = () => {
   const [user, setUser] = useState<User>(null);
   const [isLogged, setIsLogged] = useState<boolean>(true);
   const [isModalHidden, setIsModalHidden] = useState<boolean>(true);

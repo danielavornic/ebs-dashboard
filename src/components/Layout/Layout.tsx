@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { PropsWithChildren } from 'react';
 
 import useUserContext from 'hooks/useUserContext';
 
@@ -6,13 +6,16 @@ import Menu from './Menu';
 import Topbar from './Topbar';
 import Container from './Container';
 
-interface LayoutProps {
+interface Props {
   page: string;
   onButtonClick?: () => void;
-  children?: JSX.Element;
 }
 
-const Layout: FC<LayoutProps> = ({ page, children, onButtonClick }) => {
+const Layout = ({
+  page,
+  children,
+  onButtonClick,
+}: PropsWithChildren<Props>) => {
   const { user } = useUserContext();
   const name = user ? user.name : '';
   const lastName = user ? user.lastName : '';

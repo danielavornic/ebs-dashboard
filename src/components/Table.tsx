@@ -1,9 +1,8 @@
-import { FC } from 'react';
 import { FiEdit2, FiTrash } from 'react-icons/fi';
 
-import useUserContext from 'hooks/useUserContext';
-import { ModalType } from 'context';
 import { User, UserProperties } from 'types/user';
+import { ModalType } from 'context';
+import useUserContext from 'hooks/useUserContext';
 
 interface Props {
   data: User[];
@@ -11,7 +10,7 @@ interface Props {
   properties: UserProperties[];
 }
 
-const Table: FC<Props> = ({ data, headings, properties }) => {
+const Table = ({ data, headings, properties }: Props) => {
   const { user, setIsModalHidden, setModalType, setSelectedUser } =
     useUserContext();
 

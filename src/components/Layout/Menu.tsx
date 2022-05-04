@@ -1,8 +1,7 @@
-import { FC } from 'react';
-import { FiBarChart2, FiFileText, FiUsers } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
+import { FiBarChart2, FiFileText, FiUsers } from 'react-icons/fi';
 
-const Menu: FC<{ page: string }> = ({ page }) => {
+const Menu = ({ page }: { page: string }) => {
   const menuItems = [
     {
       icon: <FiBarChart2 />,

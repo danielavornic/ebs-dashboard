@@ -1,16 +1,20 @@
-import { FC } from 'react';
+import { PropsWithChildren } from 'react';
 import { FiPlus } from 'react-icons/fi';
 
 import useUserContext from 'hooks/useUserContext';
+
 import Button from 'components/Button';
 
-interface ContainerProps {
+interface Props {
   page: string;
   onButtonClick?: () => void;
-  children?: JSX.Element | false;
 }
 
-const Container: FC<ContainerProps> = ({ page, children, onButtonClick }) => {
+const Container = ({
+  page,
+  children,
+  onButtonClick,
+}: PropsWithChildren<Props>) => {
   const { user } = useUserContext();
 
   return (

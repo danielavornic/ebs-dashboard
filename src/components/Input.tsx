@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
 interface Props {
   type: 'text' | 'email' | 'checkbox' | 'password';
   name: string;
@@ -9,7 +7,7 @@ interface Props {
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
-const Input: FC<Props> = ({ type, name, id, placeholder, value, onChange }) => {
+const Input = ({ type, name, id, placeholder, value, onChange }: Props) => {
   return (
     <input
       type={type}

@@ -1,9 +1,13 @@
-import { FC } from 'react';
+import { ComponentType } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import useUserContext from 'hooks/useUserContext';
 
-const PublicRoute: FC<{ component: FC }> = ({ component: Component }) => {
+const PublicRoute = ({
+  component: Component,
+}: {
+  component: ComponentType;
+}) => {
   const { isLogged } = useUserContext();
 
   if (!isLogged) return <Component />;

@@ -1,5 +1,3 @@
-import { FC } from 'react';
-
 import Button from './Button';
 
 interface Props {
@@ -7,7 +5,7 @@ interface Props {
   onConfirm: () => Promise<void>;
 }
 
-const ConfirmationModalContent: FC<Props> = ({ title, onConfirm }) => {
+const ConfirmationModalContent = ({ title, onConfirm }: Props) => {
   return (
     <div className='confirm-modal-content'>
       <p>{title}</p>

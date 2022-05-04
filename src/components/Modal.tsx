@@ -1,14 +1,13 @@
-import { FC } from 'react';
+import { PropsWithChildren } from 'react';
 import { FiX } from 'react-icons/fi';
 
 import useUserContext from 'hooks/useUserContext';
 
-interface ModalProps {
-  children?: JSX.Element;
+interface Props {
   title: string;
 }
 
-const Modal: FC<ModalProps> = ({ children, title }) => {
+const Modal = ({ children, title }: PropsWithChildren<Props>) => {
   const { isModalHidden, setIsModalHidden } = useUserContext();
 
   const handleCloseModal = () => setIsModalHidden(true);
