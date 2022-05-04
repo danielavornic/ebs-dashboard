@@ -10,25 +10,27 @@ const UsersClient = axios.create({
   baseURL: 'http://localhost:3000/users/',
 });
 
-export const fetchUsers = () => {
-  return UsersClient.get('');
+export const fetchUsers = async () => {
+  const users = await UsersClient.get('');
+  return users.data;
 };
 
 export const getUserByEmail = async (email: string) => {
-  const res = await UsersClient.get(`?email=${email}`);
-  return res.data[0];
+  const users = await UsersClient.get(`?email=${email}`);
+  return users.data[0];
 };
 
 export const getUserById = async (id: number) => {
-  const res = await UsersClient.get(`/${id}`);
-  return res.data;
+  const user = await UsersClient.get(`/${id}`);
+  return user.data;
 };
 
 export const getUserByCredentials = async (
   userCredentials: LoginCredentials
 ) => {
   const { email, password } = userCredentials;
-  return UsersClient.get(`?email=${email}&password=${password}`);
+  const user = await UsersClient.get(`?email=${email}&password=${password}`);
+  return user.data;
 };
 
 export const registerUser = (user: RegisterCredentials | UserModalData) => {

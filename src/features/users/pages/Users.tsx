@@ -43,10 +43,13 @@ const Users = () => {
     setSelectedUser(null);
   };
 
+  const getUsers = async () => {
+    const users = await fetchUsers();
+    setUsers(users);
+  };
+
   useEffect(() => {
-    if (isModalHidden) {
-      fetchUsers().then((res) => setUsers(res.data));
-    }
+    if (isModalHidden) getUsers();
   }, [isModalHidden]);
 
   return (

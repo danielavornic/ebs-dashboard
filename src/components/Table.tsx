@@ -30,7 +30,7 @@ const Table: FC<Props> = ({ data, headings, properties }) => {
             {headings.map((heading, index) => (
               <th key={index}>{heading}</th>
             ))}
-            {user && user.role === 'admin' && <th>Actions</th>}
+            {user && user.role === 'administrator' && <th>Actions</th>}
           </tr>
         </thead>
         <tbody>
@@ -40,11 +40,9 @@ const Table: FC<Props> = ({ data, headings, properties }) => {
                 <tr key={obj.id}>
                   <td>{obj.id}</td>
                   {properties.map((property, index) => (
-                    <td key={index}>
-                      {property === 'role' && !obj.role ? '-' : obj[property]}
-                    </td>
+                    <td key={index}>{obj[property]}</td>
                   ))}
-                  {user && user.role === 'admin' && (
+                  {user && user.role === 'administrator' && (
                     <td className='actions'>
                       <button
                         type='button'

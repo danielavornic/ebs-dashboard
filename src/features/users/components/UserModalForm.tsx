@@ -51,13 +51,14 @@ const UserModalForm = () => {
         return;
       }
 
-      registerUser(user).then(() => setIsModalHidden(true));
-      return;
+      await registerUser(user);
+      setIsModalHidden(true);
     }
 
     if (modalType === 'edit' && selectedUser && selectedUser.id !== '') {
       const userId = parseInt(selectedUser.id);
-      updateUser(userId, user).then(() => setIsModalHidden(true));
+      await updateUser(userId, user);
+      setIsModalHidden(true);
     }
   };
 
@@ -108,7 +109,7 @@ const UserModalForm = () => {
         <option value='Female'>Female</option>
         <option value='Prefer not to say'>Prefer not to say</option>
       </select>
-      <select name='role' id='role' onChange={handleChange} value={role || ''}>
+      <select name='role' id='role' onChange={handleChange} value={role}>
         <option value='' disabled hidden>
           Role
         </option>

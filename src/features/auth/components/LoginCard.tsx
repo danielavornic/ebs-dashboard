@@ -17,19 +17,18 @@ const LoginCard = () => {
       password: '',
     });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    getUserByCredentials(userLoginCredentials).then((res) => {
-      if (res.data.length === 0) {
-        alert('Wrong email or password.');
-        return;
-      }
+    const userData = await getUserByCredentials(userLoginCredentials);
 
-      const user = res.data[0];
-      setUser(user);
-      localStorage.setItem('userId', user.id);
-    });
+    if (userData.length === 0) {
+      alert('Wrong email or password.');
+      return;
+    }
+
+    setUser(userData[0]);
+    localStorage.setItem('userId', userData[0].id);
   };
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {

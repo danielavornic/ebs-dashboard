@@ -7,17 +7,21 @@ import useUserContext from '../../../hooks/useUserContext';
 import Button from '../../../components/Button';
 import Input from '../../../components/Input';
 
+const initialUser = {
+  name: '',
+  lastName: '',
+  email: '',
+  gender: '',
+  password: '',
+  confirmPassword: '',
+  role: 'moderator',
+};
+
 const RegisterCard = () => {
   const { setUser } = useUserContext();
 
-  const [userCredentials, setUserCredentials] = useState<RegisterCredentials>({
-    name: '',
-    lastName: '',
-    email: '',
-    gender: '',
-    password: '',
-    confirmPassword: '',
-  });
+  const [userCredentials, setUserCredentials] =
+    useState<RegisterCredentials>(initialUser);
   const { email, password, confirmPassword } = userCredentials;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
@@ -34,11 +38,11 @@ const RegisterCard = () => {
       return;
     }
 
-    registerUser(userCredentials).then((res) => {
-      const user = { ...res.data, role: null };
-      setUser(user);
-      localStorage.setItem('userId', user.id);
-    });
+    delete userCredentials.confirmPassword;
+    const userPromise = await registerUser(userCredentials);
+    const user = { ...userPromise.data, role: 'moderator' };
+    setUser(user);
+    localStorage.setItem('userId', user.id);
   };
 
   const handleChange = (
@@ -103,12 +107,7 @@ const RegisterCard = () => {
           id='confirm-password'
           onChange={handleChange}
         />
-        <Input
-          type='checkbox'
-          id='terms'
-          name='terms'
-          onChange={handleChange}
-        />
+        <Input type='checkbox' id='terms' name='terms' />
         <label htmlFor='terms'>
           I agree to the processing of personal data
         </label>

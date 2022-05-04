@@ -29,8 +29,13 @@ const App: React.FC = () => {
   const userId = JSON.parse(localStorage.getItem('userId') || 'null');
 
   useEffect(() => {
+    const getUser = async () => {
+      const user = await getUserById(userId);
+      setUser(user);
+    };
+
     if (userId) {
-      getUserById(userId).then((user) => setUser(user));
+      getUser();
       setIsLogged(true);
     } else {
       setUser(null);

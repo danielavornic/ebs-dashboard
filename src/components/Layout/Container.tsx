@@ -17,7 +17,7 @@ const Container: FC<ContainerProps> = ({ page, children, onButtonClick }) => {
     <div className='container'>
       <div className='heading'>
         <h2>{page}</h2>
-        {user && user.role === 'admin' && page !== 'dashboard' && (
+        {user && user.role === 'administrator' && page !== 'dashboard' && (
           <Button state='primary' type='button' onClick={onButtonClick}>
             <FiPlus />
             Add {page === 'users' ? 'user' : 'post'}

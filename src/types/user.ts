@@ -7,7 +7,7 @@ export interface RegisterCredentials extends LoginCredentials {
   name: string;
   lastName: string;
   gender: string;
-  confirmPassword: string;
+  confirmPassword?: string;
 }
 
 export interface UserInterface extends RegisterCredentials {
@@ -23,7 +23,7 @@ export interface UserModalData {
   role: Role;
 }
 
-export type Role = 'moderator' | 'admin';
+export type Role = 'moderator' | 'administrator';
 
 export type User = UserInterface | null;
 

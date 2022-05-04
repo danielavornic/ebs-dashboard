@@ -1,22 +1,12 @@
 {
   "users": [
     {
-      "name": "jessica",
-      "lastName": "parker",
-      "email": "dd@m.com",
-      "gender": "Female",
-      "role": "moderator",
-      "id": 2
-    },
-    {
       "name": "admin",
       "lastName": "admin",
       "email": "admin@mail.com",
       "gender": "Female",
       "password": "dddddddd",
-      "confirmPassword": "dddddddd",
-      "terms": "",
-      "role": "admin",
+      "role": "administrator",
       "id": 5
     },
     {
@@ -28,12 +18,56 @@
       "id": 6
     },
     {
-      "name": "new",
-      "lastName": "new",
-      "email": "dd@gm.com",
-      "gender": "Male",
-      "role": "moderator",
+      "name": "name",
+      "lastName": "user",
+      "email": "d@m.com",
+      "gender": "Female",
+      "role": "administrator",
       "id": 7
+    },
+    {
+      "name": "ff",
+      "lastName": "ff",
+      "email": "dde@mf.com",
+      "gender": "Prefer not to say",
+      "role": "moderator",
+      "id": 8
+    },
+    {
+      "name": "jessica",
+      "lastName": "lively",
+      "email": "jess@mail.com",
+      "gender": "Female",
+      "password": "dddddddd",
+      "role": "moderator",
+      "id": 9
+    },
+    {
+      "name": "ryan",
+      "lastName": "fdfd",
+      "email": "r@m.com",
+      "gender": "Male",
+      "password": "dddddddd",
+      "role": "moderator",
+      "id": 10
+    },
+    {
+      "name": "dd",
+      "lastName": "dsds",
+      "email": "fdd@mdm.com",
+      "gender": "Female",
+      "password": "dddddddd",
+      "role": "moderator",
+      "id": 11
+    },
+    {
+      "name": "new user",
+      "lastName": "dddddddd",
+      "email": "em@m.com",
+      "gender": "Female",
+      "password": "11111111",
+      "role": "moderator",
+      "id": 12
     }
   ],
   "posts": []
