@@ -13,6 +13,7 @@ export interface RegisterCredentials extends LoginCredentials {
 export interface UserInterface extends RegisterCredentials {
   id: string;
   role: Role;
+  actions?: string;
 }
 
 export interface UserModalData {
@@ -26,5 +27,3 @@ export interface UserModalData {
 export type Role = 'moderator' | 'administrator';
 
 export type User = UserInterface | null;
-
-export type UserProperties = keyof UserModalData;
