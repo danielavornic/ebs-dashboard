@@ -66,7 +66,10 @@ const UserModalForm = () => {
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-    setNewUser({ ...user, [name]: value });
+    setNewUser((prevUserData) => ({
+      ...prevUserData,
+      [name]: value,
+    }));
   };
 
   return (

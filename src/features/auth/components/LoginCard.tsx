@@ -33,7 +33,10 @@ const LoginCard = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-    setUserLoginCredentials({ ...userLoginCredentials, [name]: value });
+    setUserLoginCredentials((prevUserData) => ({
+      ...prevUserData,
+      [name]: value,
+    }));
   };
 
   return (

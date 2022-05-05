@@ -49,7 +49,10 @@ const RegisterCard = () => {
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-    setUserCredentials({ ...userCredentials, [name]: value });
+    setUserCredentials((prevUserData) => ({
+      ...prevUserData,
+      [name]: value,
+    }));
   };
 
   return (
