@@ -1,38 +1,43 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { FiBarChart2, FiFileText, FiUsers } from 'react-icons/fi';
 
-const Menu = ({ page }: { page: string }) => {
+const Menu = () => {
+  const page = useLocation().pathname;
+
   const menuItems = [
     {
-      icon: <FiBarChart2 />,
+      icon: <FiBarChart2 className='sidemenu__item__icon' />,
       name: 'Dashboard',
       path: '/dashboard',
     },
     {
-      icon: <FiUsers />,
+      icon: <FiUsers className='sidemenu__item__icon' />,
       name: 'Users',
       path: '/users',
     },
     {
-      icon: <FiFileText />,
+      icon: <FiFileText className='sidemenu__item__icon' />,
       name: 'Posts',
       path: '/posts',
     },
   ];
 
   return (
-    <div className='menu'>
-      <ul>
-        {menuItems.map(({ icon, name, path }) => (
-          <li
-            key={name}
-            className={page === name.toLocaleLowerCase() ? 'active' : ''}
-          >
-            <Link to={path}>
-              {icon} {name}
-            </Link>
-          </li>
-        ))}
+    <div className='sidemenu'>
+      <ul className='sidemenu__list'>
+        {menuItems.map(({ icon, name, path }) => {
+          const statusClass = path === page ? 'active' : '';
+          return (
+            <li
+              key={name}
+              className={`sidemenu__item sidemenu__item--${statusClass}`}
+            >
+              <Link to={path} className='sidemenu__item__link'>
+                {icon} {name}
+              </Link>
+            </li>
+          );
+        })}
       </ul>
     </div>
   );

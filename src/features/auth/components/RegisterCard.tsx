@@ -53,67 +53,109 @@ const RegisterCard = () => {
   };
 
   return (
-    <div className='auth-card'>
-      <h2>Register</h2>
-      <p>Enter your details to create your account.</p>
+    <div className='form-card'>
+      <form className='form' onSubmit={handleSubmit}>
+        <div className='form__header'>
+          <h2 className='form__title'>Register</h2>
+          <p>Enter your details to create your account.</p>
+        </div>
 
-      <form onSubmit={handleSubmit}>
-        <Input
-          type='text'
-          placeholder='Name'
-          name='name'
-          id='name'
-          onChange={handleChange}
-        />
-        <Input
-          type='text'
-          placeholder='Last name'
-          name='lastName'
-          id='last-name'
-          onChange={handleChange}
-        />
-        <Input
-          type='email'
-          placeholder='E-mail'
-          name='email'
-          id='email'
-          onChange={handleChange}
-        />
-        <select
-          name='gender'
-          id='gender'
-          onChange={handleChange}
-          required
-          defaultValue={''}
-        >
-          <option value='' disabled hidden>
+        <div className='form__group'>
+          <label htmlFor='name' hidden>
+            Name
+          </label>
+          <Input
+            type='text'
+            placeholder='Name'
+            name='name'
+            id='name'
+            width='full'
+            onChange={handleChange}
+          />
+        </div>
+        <div className='form__group'>
+          <label htmlFor='lastName' hidden>
+            Last name
+          </label>
+          <Input
+            type='text'
+            placeholder='Last name'
+            name='lastName'
+            id='last-name'
+            width='full'
+            onChange={handleChange}
+          />
+        </div>
+        <div className='form__group'>
+          <label htmlFor='email' hidden>
+            E-mail
+          </label>
+          <Input
+            type='email'
+            placeholder='E-mail'
+            name='email'
+            id='email'
+            width='full'
+            onChange={handleChange}
+          />
+        </div>
+        <div className='form__group'>
+          <label htmlFor='gender' hidden>
             Gender
-          </option>
-          <option value='Male'>Male</option>
-          <option value='Female'>Female</option>
-          <option value='Prefer not to say'>Prefer not to say</option>
-        </select>
-        <Input
-          type='password'
-          placeholder='Password'
-          name='password'
-          id='password'
-          onChange={handleChange}
-        />
-        <Input
-          type='password'
-          placeholder='Confirm password'
-          name='confirmPassword'
-          id='confirm-password'
-          onChange={handleChange}
-        />
-        <Input type='checkbox' id='terms' name='terms' />
-        <label htmlFor='terms'>
-          I agree to the processing of personal data
-        </label>
-        <Button type='submit' state='primary'>
-          Register
-        </Button>
+          </label>
+          <select
+            name='gender'
+            id='gender'
+            onChange={handleChange}
+            required
+            defaultValue={''}
+          >
+            <option value='' disabled hidden>
+              Gender
+            </option>
+            <option value='Male'>Male</option>
+            <option value='Female'>Female</option>
+            <option value='Prefer not to say'>Prefer not to say</option>
+          </select>
+        </div>
+        <div className='form__group'>
+          <label htmlFor='password' hidden>
+            Password
+          </label>
+          <Input
+            type='password'
+            placeholder='Password'
+            name='password'
+            id='password'
+            width='full'
+            onChange={handleChange}
+          />
+        </div>
+        <div className='form__group'>
+          <label htmlFor='confirmPassword' hidden>
+            Confirm password
+          </label>
+          <Input
+            type='password'
+            placeholder='Confirm password'
+            name='confirmPassword'
+            id='confirm-password'
+            width='full'
+            onChange={handleChange}
+          />
+        </div>
+        <div className='form__group'>
+          <Input type='checkbox' id='terms' name='terms' />
+          <label htmlFor='terms'>
+            I agree to the processing of personal data
+          </label>
+        </div>
+
+        <div className='form__btn'>
+          <Button type='submit' state='primary' size='block'>
+            Register
+          </Button>
+        </div>
       </form>
     </div>
   );

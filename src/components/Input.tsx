@@ -1,15 +1,21 @@
 import { InputHTMLAttributes } from 'react';
 
+interface Props extends InputHTMLAttributes<HTMLInputElement> {
+  width?: string;
+}
+
 const Input = ({
-  type,
+  type = 'text',
   name,
   id,
   placeholder,
   value,
   onChange,
-}: InputHTMLAttributes<HTMLInputElement>) => {
+  width = 'width-auto',
+}: Props) => {
   return (
     <input
+      className={`input input--${width} input--${type}`}
       type={type}
       name={name}
       id={id}

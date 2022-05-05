@@ -1,11 +1,13 @@
 import { useEffect, useState } from 'react';
+import { FiPlus } from 'react-icons/fi';
 
 import { User, UserProperties } from 'types/user';
 import { deleteUser, fetchUsers } from 'api/users';
 import useUserContext from 'hooks/useUserContext';
 
-import Layout from 'components/Layout/Layout';
 import Modal from 'components/Modal';
+import PageTitleBar from 'components/Layout/PageTitleBar';
+import Button from 'components/Button';
 import Table from 'components/Table';
 import UserModalForm from '../components/UserModalForm';
 import ConfirmationModalContent from 'components/ConfirmationModalContent';
@@ -64,9 +66,18 @@ const Users = () => {
           <UserModalForm />
         )}
       </Modal>
-      <Layout page='users' onButtonClick={handleAddUser}>
-        <Table data={users} headings={headings} properties={properties} />
-      </Layout>
+      <PageTitleBar title='Users'>
+        <Button
+          state='primary'
+          type='button'
+          size='medium'
+          icon={<FiPlus />}
+          onClick={handleAddUser}
+        >
+          Add user
+        </Button>
+      </PageTitleBar>
+      <Table data={users} headings={headings} properties={properties} />
     </>
   );
 };

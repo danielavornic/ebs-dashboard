@@ -37,28 +37,44 @@ const LoginCard = () => {
   };
 
   return (
-    <div className='auth-card'>
-      <h2>Login</h2>
-      <p>Enter your details to sign in into your account.</p>
+    <div className='form-card'>
+      <form className='form' onSubmit={handleSubmit}>
+        <div className='form__header'>
+          <h2 className='form__title'>Login</h2>
+          <p>Enter your details to sign into your account.</p>
+        </div>
 
-      <form onSubmit={handleSubmit}>
-        <Input
-          type='email'
-          name='email'
-          placeholder='E-mail'
-          id='email'
-          onChange={handleChange}
-        />
-        <Input
-          type='password'
-          name='password'
-          placeholder='Password'
-          id='password'
-          onChange={handleChange}
-        />
-        <Button type='submit' state='primary'>
-          Log in
-        </Button>
+        <div className='form__group'>
+          <label htmlFor='email' hidden>
+            E-mail
+          </label>
+          <Input
+            type='email'
+            placeholder='E-mail'
+            name='email'
+            id='email'
+            width='full'
+            onChange={handleChange}
+          />
+        </div>
+        <div className='form__group'>
+          <label htmlFor='password' hidden>
+            Password
+          </label>
+          <Input
+            type='password'
+            placeholder='Password'
+            name='password'
+            id='password'
+            width='full'
+            onChange={handleChange}
+          />
+        </div>
+        <div className='form__btn'>
+          <Button type='submit' state='primary' size='block'>
+            Login
+          </Button>
+        </div>
       </form>
     </div>
   );

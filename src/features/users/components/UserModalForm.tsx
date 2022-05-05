@@ -70,55 +70,86 @@ const UserModalForm = () => {
   };
 
   return (
-    <form ref={formRef} onSubmit={handleSubmit}>
-      <Input
-        type='text'
-        placeholder='Name'
-        name='name'
-        value={name}
-        id='name'
-        onChange={handleChange}
-      />
-      <Input
-        type='text'
-        placeholder='Last name'
-        name='lastName'
-        value={lastName}
-        id='last-name'
-        onChange={handleChange}
-      />
-      <Input
-        type='email'
-        placeholder='E-mail'
-        name='email'
-        value={email}
-        id='email'
-        onChange={handleChange}
-      />
-      <select
-        name='gender'
-        id='gender'
-        onChange={handleChange}
-        required
-        value={gender}
-      >
-        <option value='' disabled hidden>
+    <form className='form' onSubmit={handleSubmit}>
+      <div className='form__group'>
+        <label htmlFor='name' hidden>
+          Name
+        </label>
+        <Input
+          type='text'
+          placeholder='Name'
+          name='name'
+          id='name'
+          width='full'
+          value={name}
+          onChange={handleChange}
+        />
+      </div>
+      <div className='form__group'>
+        <label htmlFor='lastName' hidden>
+          Last name
+        </label>
+        <Input
+          type='text'
+          placeholder='Last name'
+          name='lastName'
+          id='last-name'
+          width='full'
+          value={lastName}
+          onChange={handleChange}
+        />
+      </div>
+      <div className='form__group'>
+        <label htmlFor='email' hidden>
+          E-mail
+        </label>
+        <Input
+          type='email'
+          placeholder='E-mail'
+          name='email'
+          id='email'
+          width='full'
+          value={email}
+          onChange={handleChange}
+        />
+      </div>
+      <div className='form__group'>
+        <label htmlFor='gender' hidden>
           Gender
-        </option>
-        <option value='Male'>Male</option>
-        <option value='Female'>Female</option>
-        <option value='Prefer not to say'>Prefer not to say</option>
-      </select>
-      <select name='role' id='role' onChange={handleChange} value={role}>
-        <option value='' disabled hidden>
+        </label>
+        <select
+          name='gender'
+          id='gender'
+          onChange={handleChange}
+          required
+          value={gender}
+        >
+          <option value='' disabled hidden>
+            Gender
+          </option>
+          <option value='Male'>Male</option>
+          <option value='Female'>Female</option>
+          <option value='Prefer not to say'>Prefer not to say</option>
+        </select>
+      </div>
+      <div className='form__group'>
+        <label htmlFor='role' hidden>
           Role
-        </option>
-        <option value='moderator'>Moderator</option>
-        <option value='administrator'>Administrator</option>
-      </select>
-      <Button type='submit' state='primary'>
-        {modalType === 'add' ? 'Add user' : 'Save changes'}
-      </Button>
+        </label>
+        <select name='role' id='role' onChange={handleChange} value={role}>
+          <option value='' disabled hidden>
+            Role
+          </option>
+          <option value='moderator'>Moderator</option>
+          <option value='administrator'>Administrator</option>
+        </select>
+      </div>
+
+      <div className='form__btn'>
+        <Button type='submit' state='primary' size='block'>
+          {modalType === 'add' ? 'Add user' : 'Save changes'}
+        </Button>
+      </div>
     </form>
   );
 };

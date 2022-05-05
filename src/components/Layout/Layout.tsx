@@ -1,33 +1,15 @@
-import { PropsWithChildren } from 'react';
-
-import useUserContext from 'hooks/useUserContext';
+import { ReactNode } from 'react';
 
 import Menu from './Menu';
-import Topbar from './Topbar';
-import Container from './Container';
+import TopBar from './TopBar';
 
-interface Props {
-  page: string;
-  onButtonClick?: () => void;
-}
-
-const Layout = ({
-  page,
-  children,
-  onButtonClick,
-}: PropsWithChildren<Props>) => {
-  const { user } = useUserContext();
-  const name = user ? user.name : '';
-  const lastName = user ? user.lastName : '';
-
+const Layout = ({ children }: { children: ReactNode }) => {
   return (
-    <div className='panel'>
-      <Menu page={page} />
+    <div className='layout'>
+      <Menu />
       <main>
-        <Topbar name={name} lastName={lastName} />
-        <Container page={page} onButtonClick={onButtonClick}>
-          {children}
-        </Container>
+        <TopBar />
+        {children}
       </main>
     </div>
   );

@@ -4,6 +4,8 @@ import { User, UserProperties } from 'types/user';
 import { ModalType } from 'context';
 import useUserContext from 'hooks/useUserContext';
 
+import Button from './Button';
+
 interface Props {
   data: User[];
   headings: string[];
@@ -22,14 +24,18 @@ const Table = ({ data, headings, properties }: Props) => {
 
   return (
     <div className='table-container'>
-      <table>
-        <thead>
+      <table className='table'>
+        <thead className='table__header'>
           <tr>
-            <th>ID</th>
+            <th className='table__cell table__cell--header'>ID</th>
             {headings.map((heading, index) => (
-              <th key={index}>{heading}</th>
+              <th className='table__cell table__cell--header' key={index}>
+                {heading}
+              </th>
             ))}
-            {user && user.role === 'administrator' && <th>Actions</th>}
+            {user && user.role === 'administrator' && (
+              <th className='table__cell table__cell--header'>Actions</th>
+            )}
           </tr>
         </thead>
         <tbody>
@@ -37,24 +43,28 @@ const Table = ({ data, headings, properties }: Props) => {
             (obj: User) =>
               obj && (
                 <tr key={obj.id}>
-                  <td>{obj.id}</td>
+                  <td className='table__cell'>{obj.id}</td>
                   {properties.map((property, index) => (
-                    <td key={index}>{obj[property]}</td>
+                    <td className='table__cell' key={index}>
+                      {obj[property]}
+                    </td>
                   ))}
                   {user && user.role === 'administrator' && (
-                    <td className='actions'>
-                      <button
+                    <td className='table__cell table__cell--actions'>
+                      <Button
+                        state='transparent'
                         type='button'
+                        icon={<FiEdit2 />}
+                        title='Edit'
                         onClick={() => handleActionClick(obj, 'edit')}
-                      >
-                        <FiEdit2 title='Edit' />
-                      </button>
-                      <button
+                      />
+                      <Button
+                        state='transparent'
                         type='button'
+                        icon={<FiTrash />}
+                        title='Delete'
                         onClick={() => handleActionClick(obj, 'delete')}
-                      >
-                        <FiTrash title='Delete' />
-                      </button>
+                      />
                     </td>
                   )}
                 </tr>

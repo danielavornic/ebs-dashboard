@@ -33,3 +33,10 @@ select {
     outline: none;
   }
 }
+
+hr {
+  margin: 0;
+  background-color: $main-bg-color;
+  border: none;
+  height: 1px;
+}

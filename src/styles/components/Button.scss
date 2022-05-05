@@ -1,14 +1,21 @@
-button {
+.btn {
   border-radius: $border-radius-small;
   padding: $button-padding;
   color: #fff;
-  width: 100%;
-  border: solid 1px rgba(255, 255, 255, 0.1);
-  cursor: pointer;
-  font-size: 20px;
+  border: solid 1px $white-10;
+  font-size: $input-font-size;
   font-weight: 500;
+  cursor: pointer;
 
-  &.primary {
+  &__icon {
+    margin-right: 12px;
+
+    svg {
+      vertical-align: text-top;
+    }
+  }
+
+  &--primary {
     background-color: $primary-color;
     border-color: $primary-color;
 
@@ -18,7 +25,7 @@ button {
     }
   }
 
-  &.danger {
+  &--danger {
     background-color: $danger-color;
     border-color: $danger-color;
 
@@ -26,5 +33,25 @@ button {
       background-color: transparent;
       color: $danger-color;
     }
+  }
+
+  &--transparent {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    width: fit-content;
+    color: inherit;
+
+    &:hover {
+      color: white;
+    }
+  }
+
+  &--block {
+    width: 100%;
+  }
+
+  &--medium {
+    padding: 16px 24px;
   }
 }

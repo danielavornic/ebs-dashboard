@@ -3,14 +3,14 @@ import { Link } from 'react-router-dom';
 import RegisterCard from '../components/RegisterCard';
 
 const Register = () => (
-  <div className='auth-page-container'>
-    <main>
+  <div className='fullscreen-page'>
+    <div>
       <h1>Welcome to EBS Dashboard</h1>
       <RegisterCard />
-      <p className='switch-auth'>
+      <p>
         Already a member? <Link to={'/login'}>Login</Link>
       </p>
-    </main>
+    </div>
   </div>
 );
 

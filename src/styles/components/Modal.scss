@@ -1,4 +1,4 @@
-.modal {
+.modal-container {
   position: fixed;
   z-index: 1;
   left: 0;
@@ -7,37 +7,24 @@
   height: 100%;
   overflow: auto;
   background-color: rgba(0, 0, 0, 0.4);
+}
 
-  .confirm-modal-content button {
-    @include medium-button();
-    margin-top: 24px;
+.modal {
+  background-color: $main-bg-color;
+  max-width: 540px;
+  margin: 10vh auto auto;
+  border-radius: $border-radius-normal;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid $white-10;
+    padding: 28px 40px;
   }
 
-  .modal-content {
-    background-color: $main-bg-color;
-    max-width: 540px;
-    margin: 10vh auto auto;
-    border-radius: $border-radius-normal;
-    box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2);
-
-    .modal-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid $white-10;
-      padding: 28px 40px;
-
-      h3 {
-        text-transform: capitalize;
-      }
-
-      button {
-        @include transparent-button();
-      }
-    }
-
-    .modal-body {
-      padding: 40px;
-    }
+  &__body {
+    padding: 40px;
   }
 }

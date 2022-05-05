@@ -1,3 +1,4 @@
+import Layout from 'components/Layout/Layout';
 import { ComponentType } from 'react';
 import { Navigate } from 'react-router-dom';
 
@@ -10,7 +11,12 @@ const PrivateRoute = ({
 }) => {
   const { isLogged } = useUserContext();
 
-  if (isLogged) return <Component />;
+  if (isLogged)
+    return (
+      <Layout>
+        <Component />
+      </Layout>
+    );
   return <Navigate to='/login' />;
 };
 

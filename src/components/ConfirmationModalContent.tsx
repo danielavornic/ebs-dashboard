@@ -7,12 +7,12 @@ interface Props {
 
 const ConfirmationModalContent = ({ title, onConfirm }: Props) => {
   return (
-    <div className='confirm-modal-content'>
-      <p>{title}</p>
-      <Button state='danger' type='button' onClick={onConfirm}>
+    <>
+      <p className='mb-20'>{title}</p>
+      <Button state='danger' type='button' size='medium' onClick={onConfirm}>
         Delete
       </Button>
-    </div>
+    </>
   );
 };
 
