@@ -1,25 +1,26 @@
 import { PropsWithChildren } from 'react';
 import { FiX } from 'react-icons/fi';
 
-import useUserContext from 'hooks/useUserContext';
-
 import Button from './Button';
 
 interface Props {
   title: string;
+  hidden: boolean;
+  toggleModal: () => void;
 }
 
-const Modal = ({ children, title }: PropsWithChildren<Props>) => {
-  const { isModalHidden, setIsModalHidden } = useUserContext();
-
-  const handleCloseModal = () => setIsModalHidden(true);
-
+const Modal = ({
+  children,
+  title,
+  hidden,
+  toggleModal,
+}: PropsWithChildren<Props>) => {
   return (
-    <div role='dialog' className='modal-container' hidden={isModalHidden}>
+    <div role='dialog' className='modal-container' hidden={hidden}>
       <div className='modal'>
         <div className='modal__header'>
           <h3 className='capitalized'>{title}</h3>
-          <Button state='transparent' type='button' onClick={handleCloseModal}>
+          <Button state='transparent' type='button' onClick={toggleModal}>
             <FiX />
           </Button>
         </div>

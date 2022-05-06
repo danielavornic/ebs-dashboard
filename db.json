@@ -10,46 +10,28 @@
       "id": 5
     },
     {
-      "name": "new",
-      "lastName": "new",
-      "email": "df@mdf.com",
+      "name": "shiv",
+      "lastName": "roy",
+      "email": "shiv@m.com",
       "gender": "Female",
-      "role": "moderator",
+      "role": "administrator",
       "id": 6
     },
     {
-      "name": "name",
-      "lastName": "user",
-      "email": "d@m.com",
+      "name": "jessica",
+      "lastName": "ddd",
+      "email": "kendallroy@gmail.com",
       "gender": "Female",
-      "role": "administrator",
+      "role": "moderator",
       "id": 7
     },
     {
-      "name": "ff",
-      "lastName": "ff",
-      "email": "dde@mf.com",
-      "gender": "Prefer not to say",
+      "name": "fff",
+      "lastName": "roy",
+      "email": "logan@waystar.com",
+      "gender": "Female",
       "role": "moderator",
       "id": 8
-    },
-    {
-      "name": "jessica",
-      "lastName": "lively",
-      "email": "jess@mail.com",
-      "gender": "Female",
-      "password": "dddddddd",
-      "role": "moderator",
-      "id": 9
-    },
-    {
-      "name": "ryan",
-      "lastName": "fdfd",
-      "email": "r@m.com",
-      "gender": "Male",
-      "password": "dddddddd",
-      "role": "moderator",
-      "id": 10
     }
   ],
   "posts": []

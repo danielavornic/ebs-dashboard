@@ -1,8 +1,6 @@
-import { ChangeEvent, FormEvent, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
-import { UserModalData } from 'types/user';
-import { getUserByEmail, registerUser, updateUser } from 'api/users';
-import useUserContext from 'hooks/useUserContext';
+import { User, UserInterface, UserModalData } from 'types/user';
 
 import Button from 'components/Button';
 import Input from 'components/Input';
@@ -15,52 +13,17 @@ const defaultUser: UserModalData = {
   role: 'moderator',
 };
 
-const UserModalForm = () => {
-  const { setIsModalHidden, isModalHidden, selectedUser, modalType } =
-    useUserContext();
+interface Props {
+  data: UserInterface;
+  buttonText: string;
+  userAction: (user: User) => Promise<void>;
+}
 
+const UserModalForm = ({ data, userAction, buttonText }: Props) => {
   const [user, setNewUser] = useState<UserModalData>(defaultUser);
   const { name, lastName, email, gender, role } = user;
 
-  const formRef = useRef() as React.MutableRefObject<HTMLFormElement>;
-
-  useEffect(() => {
-    if (selectedUser && selectedUser.name === '') formRef?.current.reset();
-  }, [isModalHidden, selectedUser]);
-
-  useEffect(() => {
-    if (selectedUser && selectedUser.name !== '') {
-      const newSelectedUser: UserModalData = {
-        ...selectedUser,
-      };
-      setNewUser(newSelectedUser);
-      return;
-    }
-
-    setNewUser(defaultUser);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedUser]);
-
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (modalType === 'add') {
-      const existingUser = await getUserByEmail(user.email);
-      if (existingUser) {
-        alert('User registered with this email already exists.');
-        return;
-      }
-
-      await registerUser(user);
-      setIsModalHidden(true);
-    }
-
-    if (modalType === 'edit' && selectedUser && selectedUser.id !== '') {
-      const userId = parseInt(selectedUser.id);
-      await updateUser(userId, user);
-      setIsModalHidden(true);
-    }
-  };
+  useEffect(() => setNewUser(data ? { ...data } : defaultUser), [data]);
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
@@ -70,6 +33,11 @@ const UserModalForm = () => {
       ...prevUserData,
       [name]: value,
     }));
+  };
+
+  const handleSubmit = async (event: FormEvent) => {
+    event.preventDefault();
+    await userAction(user as User);
   };
 
   return (
@@ -150,7 +118,7 @@ const UserModalForm = () => {
 
       <div className='form__btn'>
         <Button type='submit' state='primary' size='block'>
-          {modalType === 'add' ? 'Add user' : 'Save changes'}
+          {buttonText}
         </Button>
       </div>
     </form>

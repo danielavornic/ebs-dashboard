@@ -2,15 +2,16 @@ import Button from './Button';
 
 interface Props {
   title: string;
+  buttonText: string;
   onConfirm: () => Promise<void>;
 }
 
-const ConfirmationModalContent = ({ title, onConfirm }: Props) => {
+const ConfirmationModalContent = ({ title, onConfirm, buttonText }: Props) => {
   return (
     <>
       <p className='mb-20'>{title}</p>
       <Button state='danger' type='button' size='medium' onClick={onConfirm}>
-        Delete
+        {buttonText}
       </Button>
     </>
   );

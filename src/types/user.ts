@@ -11,7 +11,7 @@ export interface RegisterCredentials extends LoginCredentials {
 }
 
 export interface UserInterface extends RegisterCredentials {
-  id: string;
+  id: number;
   role: Role;
   actions?: string;
 }

@@ -2,9 +2,14 @@ import { useEffect, useState } from 'react';
 import { FiEdit2, FiPlus, FiTrash } from 'react-icons/fi';
 
 import { User, UserInterface } from 'types/user';
-import { deleteUser, fetchUsers } from 'api/users';
 import useUserContext from 'hooks/useUserContext';
-import { ModalType } from 'context';
+import {
+  deleteUser,
+  fetchUsers,
+  getUserByEmail,
+  registerUser,
+  updateUser,
+} from 'api/users';
 
 import Modal from 'components/Modal';
 import PageTitleBar from 'components/Layout/PageTitleBar';
@@ -19,23 +24,70 @@ interface Columns {
   render?: (obj: User) => JSX.Element;
 }
 
-const Users = () => {
-  const {
-    isModalHidden,
-    modalType,
-    selectedUser,
-    user,
-    setIsModalHidden,
-    setModalType,
-    setSelectedUser,
-  } = useUserContext();
-  const [users, setUsers] = useState<User[]>([]);
+interface ModalInterface {
+  title: string;
+  isHidden: boolean;
+  type: 'add' | 'edit' | 'delete';
+  user: User;
+}
 
-  const handleActionClick = (user: User, action: ModalType) => {
-    setIsModalHidden(false);
-    setModalType(action);
-    setSelectedUser(user);
+const Users = () => {
+  const { user } = useUserContext();
+
+  const [users, setUsers] = useState<User[]>([]);
+  const [modal, setModal] = useState<ModalInterface>({
+    title: '',
+    isHidden: true,
+    type: 'add',
+    user: null,
+  });
+
+  const toggleModal = () => setModal({ ...modal, isHidden: !modal.isHidden });
+
+  const handleUserDelete = async () => {
+    if (modal.user) {
+      await deleteUser(modal.user.id);
+      await getUsers();
+      setModal({
+        ...modal,
+        isHidden: true,
+        user: null,
+      });
+    }
   };
+
+  const handleSubmitUserForm = async (formUser: User) => {
+    if (modal.type === 'add' && formUser) {
+      const existingUser = await getUserByEmail(formUser.email);
+      if (existingUser) {
+        alert('User registered with this email already exists.');
+        return;
+      }
+
+      await registerUser(formUser);
+    }
+
+    if (modal.type === 'edit' && formUser) {
+      await updateUser(formUser.id, formUser);
+    }
+
+    await getUsers();
+
+    setModal({
+      ...modal,
+      isHidden: true,
+      user: null,
+    });
+  };
+
+  const getUsers = async () => {
+    const users = await fetchUsers();
+    setUsers(users);
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   let columns: Columns[] = [
     {
@@ -65,21 +117,35 @@ const Users = () => {
     {
       title: 'Actions',
       dataIndex: 'actions',
-      render: (user: User) => (
+      render: (userRow: User) => (
         <>
           <Button
             state='transparent'
             type='button'
             icon={<FiEdit2 />}
             title='Edit'
-            onClick={() => handleActionClick(user, 'edit')}
+            onClick={() =>
+              setModal({
+                title: 'Edit User',
+                isHidden: false,
+                type: 'edit',
+                user: userRow,
+              })
+            }
           />
           <Button
             state='transparent'
             type='button'
             icon={<FiTrash />}
             title='Delete'
-            onClick={() => handleActionClick(user, 'delete')}
+            onClick={() =>
+              setModal({
+                title: 'Delete User',
+                isHidden: false,
+                type: 'delete',
+                user: userRow,
+              })
+            }
           />
         </>
       ),
@@ -90,38 +156,25 @@ const Users = () => {
     columns.pop();
   }
 
-  const handleUserDelete = async () => {
-    if (selectedUser && selectedUser.id !== '') {
-      await deleteUser(parseInt(selectedUser.id));
-      setIsModalHidden(true);
-    }
-  };
-
-  const handleAddUser = () => {
-    setIsModalHidden(false);
-    setModalType('add');
-    setSelectedUser(null);
-  };
-
-  const getUsers = async () => {
-    const users = await fetchUsers();
-    setUsers(users);
-  };
-
-  useEffect(() => {
-    if (isModalHidden) getUsers();
-  }, [isModalHidden]);
-
   return (
     <>
-      <Modal title={`${modalType} user`}>
-        {modalType === 'delete' ? (
+      <Modal
+        title={modal.title}
+        hidden={modal.isHidden}
+        toggleModal={toggleModal}
+      >
+        {modal.type === 'delete' ? (
           <ConfirmationModalContent
             title='Are you sure you want to delete this user?'
+            buttonText='Delete'
             onConfirm={handleUserDelete}
           />
         ) : (
-          <UserModalForm />
+          <UserModalForm
+            data={modal.user as UserInterface}
+            buttonText={modal.type === 'add' ? 'Add user' : 'Save changes'}
+            userAction={handleSubmitUserForm}
+          />
         )}
       </Modal>
       <PageTitleBar title='Users'>
@@ -131,7 +184,14 @@ const Users = () => {
             type='button'
             size='medium'
             icon={<FiPlus />}
-            onClick={handleAddUser}
+            onClick={() =>
+              setModal({
+                title: 'Add User',
+                isHidden: false,
+                type: 'add',
+                user: null,
+              })
+            }
           >
             Add user
           </Button>
