@@ -8,7 +8,7 @@ interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   icon?: ReactNode;
 }
 
-const Button = ({
+export const Button = ({
   state,
   type,
   size,
@@ -27,5 +27,3 @@ const Button = ({
     </button>
   );
 };
-
-export default Button;

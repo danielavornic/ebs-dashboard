@@ -4,7 +4,7 @@ interface Props extends InputHTMLAttributes<HTMLInputElement> {
   width?: string;
 }
 
-const Input = ({
+export const Input = ({
   type = 'text',
   name,
   id,
@@ -27,5 +27,3 @@ const Input = ({
     />
   );
 };
-
-export default Input;

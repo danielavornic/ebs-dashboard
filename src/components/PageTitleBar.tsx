@@ -4,7 +4,7 @@ interface Props {
   title: string;
 }
 
-const PageTitleBar = ({
+export const PageTitleBar = ({
   title,
   children: button,
 }: PropsWithChildren<Props>) => {
@@ -15,5 +15,3 @@ const PageTitleBar = ({
     </div>
   );
 };
-
-export default PageTitleBar;

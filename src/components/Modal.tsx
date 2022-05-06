@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { FiX } from 'react-icons/fi';
 
-import Button from './Button';
+import { Button } from 'components';
 
 interface Props {
   title: string;
@@ -9,7 +9,7 @@ interface Props {
   toggleModal: () => void;
 }
 
-const Modal = ({
+export const Modal = ({
   children,
   title,
   hidden,
@@ -29,5 +29,3 @@ const Modal = ({
     </div>
   );
 };
-
-export default Modal;

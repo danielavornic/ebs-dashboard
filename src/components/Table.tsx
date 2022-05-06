@@ -9,7 +9,7 @@ interface Props {
   }[];
 }
 
-const Table = ({ columns, data }: Props) => {
+export const Table = ({ columns, data }: Props) => {
   return (
     <div className='table-container'>
       <table className='table'>
@@ -43,5 +43,3 @@ const Table = ({ columns, data }: Props) => {
     </div>
   );
 };
-
-export default Table;

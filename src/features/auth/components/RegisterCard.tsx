@@ -4,8 +4,7 @@ import { RegisterCredentials } from 'types/user';
 import { registerUser, getUserByEmail } from 'api/users';
 import useUserContext from 'hooks/useUserContext';
 
-import Button from 'components/Button';
-import Input from 'components/Input';
+import { Button, Input } from 'components';
 
 const initialUser = {
   name: '',

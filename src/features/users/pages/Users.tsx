@@ -11,12 +11,14 @@ import {
   updateUser,
 } from 'api/users';
 
-import Modal from 'components/Modal';
-import PageTitleBar from 'components/Layout/PageTitleBar';
-import Button from 'components/Button';
-import Table from 'components/Table';
+import {
+  Button,
+  ConfirmationModalContent,
+  Modal,
+  PageTitleBar,
+  Table,
+} from 'components/index';
 import UserModalForm from '../components/UserModalForm';
-import ConfirmationModalContent from 'components/ConfirmationModalContent';
 
 interface Columns {
   title: string;

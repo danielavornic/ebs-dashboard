@@ -1,4 +1,4 @@
-import PageTitleBar from 'components/Layout/PageTitleBar';
+import { PageTitleBar } from 'components';
 
 const Dashboard = () => {
   return <PageTitleBar title='Dashboard' />;

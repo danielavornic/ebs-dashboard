@@ -3,9 +3,9 @@ import { useNavigate } from 'react-router-dom';
 
 import useUserContext from 'hooks/useUserContext';
 
-import Button from 'components/Button';
+import { Button } from 'components';
 
-const TopBar = () => {
+export const TopBar = () => {
   const navigate = useNavigate();
 
   const { setIsLogged, setUser, user } = useUserContext();
@@ -51,5 +51,3 @@ const TopBar = () => {
     </div>
   );
 };
-
-export default TopBar;

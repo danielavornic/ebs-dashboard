@@ -1,4 +1,4 @@
-import Button from './Button';
+import { Button } from 'components';
 
 interface Props {
   title: string;
@@ -6,7 +6,11 @@ interface Props {
   onConfirm: () => Promise<void>;
 }
 
-const ConfirmationModalContent = ({ title, onConfirm, buttonText }: Props) => {
+export const ConfirmationModalContent = ({
+  title,
+  onConfirm,
+  buttonText,
+}: Props) => {
   return (
     <>
       <p className='mb-20'>{title}</p>
@@ -16,5 +20,3 @@ const ConfirmationModalContent = ({ title, onConfirm, buttonText }: Props) => {
     </>
   );
 };
-
-export default ConfirmationModalContent;

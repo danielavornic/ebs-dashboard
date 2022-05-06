@@ -1,8 +1,9 @@
-import Layout from 'components/Layout/Layout';
 import { ComponentType } from 'react';
 import { Navigate } from 'react-router-dom';
 
 import useUserContext from '../hooks/useUserContext';
+
+import { Layout } from 'components';
 
 const PrivateRoute = ({
   component: Component,

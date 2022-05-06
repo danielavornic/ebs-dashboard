@@ -1,7 +1,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { FiBarChart2, FiFileText, FiUsers } from 'react-icons/fi';
 
-const Menu = () => {
+export const Menu = () => {
   const page = useLocation().pathname;
 
   const menuItems = [
@@ -42,5 +42,3 @@ const Menu = () => {
     </div>
   );
 };
-
-export default Menu;

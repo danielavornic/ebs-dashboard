@@ -1,9 +1,8 @@
 import { ReactNode } from 'react';
 
-import Menu from './Menu';
-import TopBar from './TopBar';
+import { Menu, TopBar } from 'components';
 
-const Layout = ({ children }: { children: ReactNode }) => {
+export const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className='layout'>
       <Menu />
@@ -14,5 +13,3 @@ const Layout = ({ children }: { children: ReactNode }) => {
     </div>
   );
 };
-
-export default Layout;
