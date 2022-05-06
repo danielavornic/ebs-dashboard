@@ -11,8 +11,12 @@ export const fetchPosts = async () => {
 };
 
 export const getPostById = async (id: number) => {
-  const post = await PostsClient.get(`/${id}`);
-  return post.data;
+  try {
+    const post = await PostsClient.get(`/${id}`);
+    return post.data;
+  } catch (error) {
+    return null;
+  }
 };
 
 export const addPost = (post: PostInterface) => {

@@ -23,6 +23,11 @@ const AppRoutes = () => (
       <Route path='/users' element={<PrivateRoute component={Users} />} />
       <Route path='/posts' element={<PrivateRoute component={Posts} />} />
       <Route path='/posts/create' element={<PrivateRoute component={Post} />} />
+      <Route path='/posts/:id' element={<PrivateRoute component={Post} />} />
+      <Route
+        path='/posts/:id/edit'
+        element={<PrivateRoute component={Post} />}
+      />
     </Routes>
   </BrowserRouter>
 );
