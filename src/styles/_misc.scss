@@ -1,0 +1,16 @@
+.custom-scrollbar {
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: $secondary-bg-color;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $light-grey-blue;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    background-clip: padding-box;
+  }
+}

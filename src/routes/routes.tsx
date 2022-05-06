@@ -7,6 +7,8 @@ import Login from 'features/auth/pages/Login';
 import Register from 'features/auth/pages/Register';
 import Dashboard from 'features/dashboard/pages/Dashboard';
 import Users from 'features/users/pages/Users';
+import Posts from 'features/posts/pages/Posts';
+import Post from 'features/posts/pages/Post';
 
 const AppRoutes = () => (
   <BrowserRouter>
@@ -19,6 +21,8 @@ const AppRoutes = () => (
         element={<PrivateRoute component={Dashboard} />}
       />
       <Route path='/users' element={<PrivateRoute component={Users} />} />
+      <Route path='/posts' element={<PrivateRoute component={Posts} />} />
+      <Route path='/posts/create' element={<PrivateRoute component={Post} />} />
     </Routes>
   </BrowserRouter>
 );

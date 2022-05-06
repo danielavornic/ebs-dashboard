@@ -11,7 +11,7 @@ interface Props {
 
 export const Table = ({ columns, data }: Props) => {
   return (
-    <div className='table-container'>
+    <div className='table-container custom-scrollbar'>
       <table className='table'>
         <thead className='table__header'>
           <tr>
