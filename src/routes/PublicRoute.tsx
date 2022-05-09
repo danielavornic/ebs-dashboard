@@ -1,16 +1,11 @@
-import { ComponentType } from 'react';
-import { Navigate } from 'react-router-dom';
+import { Navigate, RouteProps } from 'react-router-dom';
 
 import useUserContext from 'hooks/useUserContext';
 
-const PublicRoute = ({
-  component: Component,
-}: {
-  component: ComponentType;
-}) => {
+const PublicRoute = ({ element }: RouteProps) => {
   const { isLogged } = useUserContext();
 
-  if (!isLogged) return <Component />;
+  if (!isLogged) return <>{element}</>;
   return <Navigate to='/dashboard' />;
 };
 

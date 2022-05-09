@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { PostInterface } from 'types/post';
 import { addPost, getPostById, updatePost } from 'api/posts';
@@ -7,23 +7,24 @@ import useUserContext from 'hooks/useUserContext';
 
 import { PageTitleBar } from 'components';
 import PostForm from '../components/PostForm';
+import PostArticle from '../components/PostArticle';
 
-const Post = () => {
+interface Props {
+  action: 'create' | 'edit' | 'view';
+  title?: string;
+}
+
+const Post = ({ action, title }: Props) => {
   const { user } = useUserContext();
 
   const navigate = useNavigate();
   const id = useParams().id;
-  const action = useLocation().pathname.split('/').pop();
-
-  const title = action === 'create' ? 'Create post' : 'Edit post';
 
   const [post, setPost] = useState<PostInterface>();
 
   const getPost = async (id: number) => {
     const post = await getPostById(id);
-    if (post) {
-      setPost(post);
-    }
+    if (post) setPost(post);
 
     if (
       !post ||
@@ -35,7 +36,7 @@ const Post = () => {
   };
 
   useEffect(() => {
-    if (action === 'edit') {
+    if (action !== 'create') {
       getPost(Number(id));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,8 +56,13 @@ const Post = () => {
 
   return (
     <>
-      <PageTitleBar title={title} />
-      <PostForm postAction={handleSubmitPost} post={post ? post : undefined} />
+      {post && action === 'view' && <PostArticle post={post} />}
+      {action !== 'view' && (
+        <>
+          <PageTitleBar title={title || ''} />
+          <PostForm postAction={handleSubmitPost} post={post} />
+        </>
+      )}
     </>
   );
 };

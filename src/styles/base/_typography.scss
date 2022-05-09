@@ -42,10 +42,18 @@ a {
   }
 }
 
+svg {
+  vertical-align: text-top;
+}
+
 .capitalized {
   text-transform: capitalize;
 }
 
-svg {
-  vertical-align: text-top;
+.pre-line {
+  white-space: pre-line;
+}
+
+.text-lg {
+  font-size: $font-size-lg;
 }

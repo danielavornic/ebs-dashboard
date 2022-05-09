@@ -13,20 +13,35 @@ import Post from 'features/posts/pages/Post';
 const AppRoutes = () => (
   <BrowserRouter>
     <Routes>
-      <Route path='/' element={<PublicRoute component={Login} />} />
-      <Route path='/register' element={<PublicRoute component={Register} />} />
-      <Route path='/login' element={<PublicRoute component={Login} />} />
+      <Route path='/' element={<PublicRoute element={<Login />} />} />
+      <Route
+        path='/register'
+        element={<PublicRoute element={<Register />} />}
+      />
+      <Route path='/login' element={<PublicRoute element={<Login />} />} />
       <Route
         path='/dashboard'
-        element={<PrivateRoute component={Dashboard} />}
+        element={<PrivateRoute element={<Dashboard />} />}
       />
-      <Route path='/users' element={<PrivateRoute component={Users} />} />
-      <Route path='/posts' element={<PrivateRoute component={Posts} />} />
-      <Route path='/posts/create' element={<PrivateRoute component={Post} />} />
-      <Route path='/posts/:id' element={<PrivateRoute component={Post} />} />
+      <Route path='/users' element={<PrivateRoute element={<Users />} />} />
+      <Route path='/posts' element={<PrivateRoute element={<Posts />} />} />
+      <Route
+        path='/posts/create'
+        element={
+          <PrivateRoute
+            element={<Post action='create' title='Create Post' />}
+          />
+        }
+      />
+      <Route
+        path='/posts/:id'
+        element={<PrivateRoute element={<Post action='view' />} />}
+      />
       <Route
         path='/posts/:id/edit'
-        element={<PrivateRoute component={Post} />}
+        element={
+          <PrivateRoute element={<Post action='edit' title='Edit Post' />} />
+        }
       />
     </Routes>
   </BrowserRouter>

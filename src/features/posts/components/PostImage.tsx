@@ -1,28 +1,34 @@
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import { FiImage } from 'react-icons/fi';
 
 interface Props {
   imageUrl: string;
-  isImageValid: boolean;
-  setIsImageValid: React.Dispatch<React.SetStateAction<boolean>>;
+  isImageValid?: boolean;
+  setIsImageValid?: Dispatch<SetStateAction<boolean>>;
 }
 
-const PostImage = ({ imageUrl, isImageValid, setIsImageValid }: Props) => {
+const PostImage = ({
+  imageUrl,
+  isImageValid = true,
+  setIsImageValid,
+}: Props) => {
   useEffect(() => {
-    const checkImg = async () => {
-      const res = await fetch(imageUrl).catch(() => {
+    if (setIsImageValid) {
+      const checkImg = async () => {
+        const res = await fetch(imageUrl).catch(() => {
+          setIsImageValid(false);
+          return;
+        });
+
+        if (res?.status === 200)
+          setIsImageValid((await res.blob()).type.startsWith('image/'));
+      };
+
+      if (imageUrl.includes('https://images.unsplash.com/photo')) {
+        checkImg();
+      } else {
         setIsImageValid(false);
-        return;
-      });
-
-      if (res?.status === 200)
-        setIsImageValid((await res.blob()).type.startsWith('image/'));
-    };
-
-    if (imageUrl.includes('https://images.unsplash.com/photo')) {
-      checkImg();
-    } else {
-      setIsImageValid(false);
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [imageUrl]);
@@ -34,7 +40,7 @@ const PostImage = ({ imageUrl, isImageValid, setIsImageValid }: Props) => {
       ) : (
         <div className='post-image-placeholder'>
           <div className='post-image-placeholder__icon'>
-            <FiImage fontSize={64} />
+            <FiImage fontSize={100} />
           </div>
         </div>
       )}

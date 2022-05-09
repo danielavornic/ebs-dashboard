@@ -4,11 +4,12 @@ import { FiCalendar, FiUser } from 'react-icons/fi';
 
 import { PostInterface } from 'types/post';
 
-interface Props {
-  post: PostInterface;
-}
+import PostDetail from './PostDetail';
 
-const PostCard = ({ post, children: buttons }: PropsWithChildren<Props>) => {
+const PostCard = ({
+  post,
+  children: buttons,
+}: PropsWithChildren<{ post: PostInterface }>) => {
   const { id, title, content, date, image, author } = post;
 
   return (
@@ -18,19 +19,9 @@ const PostCard = ({ post, children: buttons }: PropsWithChildren<Props>) => {
         style={{ backgroundImage: `url(${image})` }}
       ></div>
       <h3 className='post-card__title mb-24'>{title}</h3>
-      <p className='post-card__author mb-8'>
-        <span className='post-card__icon'>
-          <FiUser />
-        </span>
-        {author}
-      </p>
-      <p className='post-card__date mb-24'>
-        <span className='post-card__icon'>
-          <FiCalendar />
-        </span>
-        {date}
-      </p>
-      <p className='post-card__content'>
+      <PostDetail icon={<FiCalendar />} value={date} />
+      <PostDetail icon={<FiUser />} value={author} />
+      <p className='pre-line mt-24'>
         {content.length > 200 ? content.substring(0, 199) + '…' : content}
       </p>
       <p className='post-card__more mt-12'>

@@ -1,15 +1,11 @@
 import { PropsWithChildren } from 'react';
 
-interface Props {
-  title: string;
-}
-
 export const PageTitleBar = ({
   title,
   children: button,
-}: PropsWithChildren<Props>) => {
+}: PropsWithChildren<{ title: string }>) => {
   return (
-    <div className='page-title-bar'>
+    <div className='page-title-bar mt-40 mb-36'>
       <h2 className='capitalized'>{title}</h2>
       {button}
     </div>
