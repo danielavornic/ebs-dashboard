@@ -20,8 +20,11 @@ const PostImage = ({
           return;
         });
 
-        if (res?.status === 200)
+        if (res?.status === 200) {
           setIsImageValid((await res.blob()).type.startsWith('image/'));
+        } else {
+          setIsImageValid(false);
+        }
       };
 
       if (imageUrl.includes('https://images.unsplash.com/photo')) {
