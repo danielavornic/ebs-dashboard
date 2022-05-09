@@ -2,11 +2,17 @@ import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 
-import { fetchPosts } from 'api/posts';
-import useUserContext from 'hooks/useUserContext';
 import { PostInterface } from 'types/post';
+import { deletePost, fetchPosts } from 'api/posts';
+import useUserContext from 'hooks/useUserContext';
 
-import { Button, Grid, PageTitleBar } from 'components';
+import {
+  Button,
+  ConfirmationModalContent,
+  Grid,
+  Modal,
+  PageTitleBar,
+} from 'components';
 import PostCard from '../components/PostCard';
 
 const Posts = () => {
@@ -14,18 +20,44 @@ const Posts = () => {
   const { user } = useUserContext();
 
   const [posts, setPosts] = useState([]);
+  const [modal, setModal] = useState({
+    isHidden: true,
+    postId: 0,
+  });
+
+  const toggleModal = () => setModal({ ...modal, isHidden: !modal.isHidden });
+
+  const getPosts = async () => {
+    const posts = await fetchPosts();
+    setPosts(posts.reverse());
+  };
+
+  const handlePostDelete = async () => {
+    await deletePost(modal.postId);
+    await getPosts();
+    setModal({
+      isHidden: true,
+      postId: 0,
+    });
+  };
 
   useEffect(() => {
-    const getPosts = async () => {
-      const posts = await fetchPosts();
-      setPosts(posts.reverse());
-    };
-
     getPosts();
   }, []);
 
   return (
     <>
+      <Modal
+        title='Delete post'
+        hidden={modal.isHidden}
+        toggleModal={toggleModal}
+      >
+        <ConfirmationModalContent
+          title='Are you sure you want to delete this post?'
+          buttonText='Delete'
+          onConfirm={handlePostDelete}
+        />
+      </Modal>
       <PageTitleBar title='Posts'>
         <Button
           state='primary'
@@ -49,7 +81,14 @@ const Posts = () => {
                       Edit
                     </Button>
                   </Link>
-                  <Button state='danger' type='button' size='small'>
+                  <Button
+                    state='danger'
+                    type='button'
+                    size='small'
+                    onClick={() =>
+                      setModal({ isHidden: false, postId: post.id })
+                    }
+                  >
                     Delete
                   </Button>
                 </div>

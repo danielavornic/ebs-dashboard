@@ -54,24 +54,6 @@
       "id": 1
     },
     {
-      "title": "sds",
-      "content": "i should add image previzualization when editing/creating a post",
-      "author": "admin admin",
-      "authorId": 5,
-      "date": "2022-05-20",
-      "image": "https://images.unsplash.com/photo-1649801974063-a3456c7790db?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8fHx8fHx8MTY1MjA5MzMxMw&ixlib=rb-1.2.1&q=80&w=1080",
-      "id": 3
-    },
-    {
-      "title": "random title",
-      "content": "this is text for post etc etc",
-      "author": "admin admin",
-      "authorId": 5,
-      "date": "2022-06-07",
-      "image": "https://images.unsplash.com/photo-1492293356863-25beabc4267b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Ymx1ZXx8fHx8fDE2NTIxMDEwODY&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
-      "id": 4
-    },
-    {
       "title": "post 5",
       "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
       "author": "admin admin",
@@ -106,15 +88,6 @@
       "date": "2022-05-11",
       "image": "https://images.unsplash.com/photo-1541702467897-41915a07d3a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Z3JpbWVzfHx8fHx8MTY1MjA5NjQ2Ng&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
       "id": 8
-    },
-    {
-      "title": "david lyrics",
-      "content": "Where does my heart go when you die?\nHow did that moment pass me by?",
-      "author": "jessica gd",
-      "authorId": 9,
-      "date": "2022-05-09",
-      "image": "https://images.unsplash.com/photo-1514162005038-8332a12a5c9c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8Ymx1ZXx8fHx8fDE2NTIwOTcxMzc&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
-      "id": 9
     },
     {
       "title": "ddfs",
