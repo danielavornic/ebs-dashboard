@@ -4,5 +4,6 @@ export interface PostInterface {
   content: string;
   date: string;
   author: string;
+  authorId: number;
   image: string;
 }

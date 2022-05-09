@@ -1,11 +1,12 @@
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 
-import { PageTitleBar } from 'components';
-import PostForm from '../components/PostForm';
 import { PostInterface } from 'types/post';
 import { addPost, getPostById, updatePost } from 'api/posts';
 import useUserContext from 'hooks/useUserContext';
-import { useEffect, useState } from 'react';
+
+import { PageTitleBar } from 'components';
+import PostForm from '../components/PostForm';
 
 const Post = () => {
   const { user } = useUserContext();
@@ -22,19 +23,18 @@ const Post = () => {
     const post = await getPostById(id);
     if (post) {
       setPost(post);
-    } else {
-      navigate('/posts');
     }
+
+    if (
+      !post ||
+      (action === 'edit' &&
+        user?.role !== 'administrator' &&
+        user?.id !== post.authorId)
+    )
+      navigate('/posts');
   };
 
   useEffect(() => {
-    if (
-      user &&
-      user.role !== 'administrator' &&
-      (action === 'create' || action === 'edit')
-    )
-      navigate('/');
-
     if (action === 'edit') {
       getPost(Number(id));
     }
@@ -44,13 +44,13 @@ const Post = () => {
   const handleSubmitPost = async (post: PostInterface) => {
     if (action === 'create') {
       await addPost(post);
-      navigate('/posts');
     }
 
     if (action === 'edit') {
       await updatePost(post.id, post);
-      navigate('/posts');
     }
+
+    navigate('/posts');
   };
 
   return (

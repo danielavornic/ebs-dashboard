@@ -37,13 +37,17 @@ const PostForm = ({ post: data, postAction }: Props) => {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
 
-    if (!post.image.includes('unsplash')) {
+    if (!image.includes('unsplash')) {
       alert('Please select an image from Unsplash');
       return;
     }
 
     const { name, lastName } = user || { name: '', lastName: '' };
-    await postAction({ ...post, author: `${name} ${lastName}` });
+    await postAction({
+      ...post,
+      author: `${name} ${lastName}`,
+      authorId: user ? user.id : 0,
+    });
   };
 
   useEffect(() => {

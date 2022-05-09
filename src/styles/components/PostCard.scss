@@ -1,0 +1,34 @@
+.post-card {
+  width: 100%;
+  background-color: $secondary-bg-color;
+  color: $light-grey-blue;
+  border-radius: $border-radius-normal;
+  padding: 24px;
+
+  &__image {
+    width: 100%;
+    height: 400px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: $light-grey-blue;
+    border-radius: $border-radius-small;
+  }
+
+  &__title {
+    font-size: 24px;
+  }
+
+  &__content {
+    white-space: pre-line;
+  }
+
+  &__icon {
+    margin-right: 8px;
+  }
+
+  &__buttons {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
