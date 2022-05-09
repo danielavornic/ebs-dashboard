@@ -1,0 +1,19 @@
+.post-image {
+  border-radius: $border-radius-small;
+  height: 400px;
+  width: auto;
+  display: block;
+}
+
+.post-image-placeholder {
+  border-radius: $border-radius-small;
+  height: 400px;
+  background-color: $light-grey-blue;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &__icon {
+    color: $main-bg-color;
+  }
+}
