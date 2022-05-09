@@ -107,7 +107,7 @@ const PostForm = ({ post: data, postAction }: Props) => {
           placeholder='Date'
           name='date'
           id='date'
-          width='full'
+          width='auto'
           value={date}
           onChange={handleChange}
         />

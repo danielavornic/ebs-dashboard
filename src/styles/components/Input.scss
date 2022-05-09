@@ -40,6 +40,10 @@
     }
   }
 
+  &--date {
+    color-scheme: dark;
+  }
+
   &::placeholder {
     color: $light-grey-blue;
     opacity: 0.5;
