@@ -6,7 +6,7 @@ export const Layout = ({ children }: { children: ReactNode }) => {
   return (
     <div className='layout'>
       <Menu />
-      <main>
+      <main className='custom-scrollbar'>
         <TopBar />
         {children}
       </main>
