@@ -6,7 +6,7 @@ import { fetchPosts } from 'api/posts';
 import useUserContext from 'hooks/useUserContext';
 import { PostInterface } from 'types/post';
 
-import { Button, PageTitleBar } from 'components';
+import { Button, Grid, PageTitleBar } from 'components';
 import PostCard from '../components/PostCard';
 
 const Posts = () => {
@@ -37,24 +37,32 @@ const Posts = () => {
           Create post
         </Button>
       </PageTitleBar>
-      <div>
-        {posts.map((post: PostInterface) => (
-          <PostCard key={post.id} post={post}>
-            {(user?.id === post.authorId || user?.role === 'administrator') && (
-              <div className='post-card__buttons mt-24'>
-                <Link to={`/posts/${post.id}/edit`} className='mr-12'>
-                  <Button state='primary' type='button' size='small'>
-                    Edit
+      {posts.length > 0 ? (
+        <Grid spacing={1} cols={4}>
+          {posts.map((post: PostInterface) => (
+            <PostCard key={post.id} post={post}>
+              {(user?.id === post.authorId ||
+                user?.role === 'administrator') && (
+                <div className='post-card__buttons mt-24'>
+                  <Link to={`/posts/${post.id}/edit`} className='mr-12'>
+                    <Button state='primary' type='button' size='small'>
+                      Edit
+                    </Button>
+                  </Link>
+                  <Button state='danger' type='button' size='small'>
+                    Delete
                   </Button>
-                </Link>
-                <Button state='danger' type='button' size='small'>
-                  Delete
-                </Button>
-              </div>
-            )}
-          </PostCard>
-        ))}
-      </div>
+                </div>
+              )}
+            </PostCard>
+          ))}
+        </Grid>
+      ) : (
+        <>
+          <h2 className='mb-24'>No posts yet</h2>
+          <p>You can create a post by clicking the button above.</p>
+        </>
+      )}
     </>
   );
 };
