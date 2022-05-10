@@ -22,14 +22,18 @@ const Posts = () => {
   const [posts, setPosts] = useState([]);
   const [modal, setModal] = useState({
     isHidden: true,
-    postId: 0,
+    postId: -1,
   });
 
   const toggleModal = () => setModal({ ...modal, isHidden: !modal.isHidden });
 
   const getPosts = async () => {
     const posts = await fetchPosts();
-    setPosts(posts.reverse());
+    const sortedPosts = posts.sort(
+      (a: PostInterface, b: PostInterface) =>
+        new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+    setPosts(sortedPosts);
   };
 
   const handlePostDelete = async () => {
@@ -37,7 +41,7 @@ const Posts = () => {
     await getPosts();
     setModal({
       isHidden: true,
-      postId: 0,
+      postId: -1,
     });
   };
 
