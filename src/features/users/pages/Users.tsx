@@ -154,7 +154,7 @@ const Users = () => {
     },
   ];
 
-  if (user && user.role !== 'administrator') {
+  if (user?.role !== 'administrator') {
     columns.pop();
   }
 
@@ -180,7 +180,7 @@ const Users = () => {
         )}
       </Modal>
       <PageTitleBar title='Users'>
-        {user && user.role === 'administrator' && (
+        {user?.role === 'administrator' && (
           <Button
             state='primary'
             type='button'
