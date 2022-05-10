@@ -63,7 +63,7 @@ const PostForm = ({ post: data, postAction }: Props) => {
         isImageValid={isImageValid}
         setIsImageValid={setIsImageValid}
       />
-      <form className='form' onSubmit={handleSubmit}>
+      <form className='form mb-400' onSubmit={handleSubmit}>
         <div className='form__group'>
           <label htmlFor='title' hidden>
             Title
