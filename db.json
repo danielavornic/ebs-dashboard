@@ -102,7 +102,7 @@
     },
     {
       "title": "walls are made for climbing",
-      "content": "i dont like ala's jumper. the color is disgusting.\ni will go with octavian to bucharest.",
+      "content": "i dont like ala's jumper. the color is disgusting.\ni will go with octavian to bucharest...",
       "author": "daria gh",
       "date": "2022-05-10",
       "image": "https://images.unsplash.com/photo-1558481795-7f0a7c906f5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2096&q=80",
@@ -143,6 +143,15 @@
       "date": "2022-05-08",
       "image": "https://images.unsplash.com/photo-1508311603478-ce574376c3cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
       "id": 18,
+      "authorId": 6
+    },
+    {
+      "title": "post by shiv",
+      "content": "fdcfscfscsdc",
+      "author": "shiv roy",
+      "date": "2022-05-09",
+      "image": "https://images.unsplash.com/photo-1543747579-795b9c2c3ada?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwxfDB8MXxyYW5kb218MHx8cHVycGxlfHx8fHx8MTY1MjE4OTg3NQ&ixlib=rb-1.2.1&q=80&utm_campaign=api-credit&utm_medium=referral&utm_source=unsplash_source&w=1080",
+      "id": 19,
       "authorId": 6
     }
   ]

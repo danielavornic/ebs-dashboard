@@ -44,11 +44,15 @@ const PostForm = ({ post: data, postAction }: Props) => {
       return;
     }
 
-    const { name, lastName } = user || { name: '', lastName: '' };
+    const { author, authorId } = data || {
+      author: `${user?.name} ${user?.lastName}`,
+      authorId: user?.id || -1,
+    };
+
     await postAction({
       ...post,
-      author: `${name} ${lastName}`,
-      authorId: user ? user.id : 0,
+      author,
+      authorId,
     });
   };
 
