@@ -1,12 +1,11 @@
-import { Navigate, RouteProps } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 
 import useUserContext from 'hooks/useUserContext';
 
-const PublicRoute = ({ element }: RouteProps) => {
+const PublicRoute = () => {
   const { isLogged } = useUserContext();
 
-  if (!isLogged) return <>{element}</>;
-  return <Navigate to='/dashboard' />;
+  return isLogged ? <Navigate to='/dashboard' /> : <Outlet />;
 };
 
 export default PublicRoute;
