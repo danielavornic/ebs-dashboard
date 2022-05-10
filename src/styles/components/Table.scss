@@ -43,6 +43,10 @@
       width: 100px;
     }
 
+    &--role {
+      text-transform: capitalize;
+    }
+
     &:not(:last-child) {
       border-right: 1px solid $white-10;
     }
