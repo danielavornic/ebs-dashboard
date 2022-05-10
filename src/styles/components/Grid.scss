@@ -10,6 +10,10 @@
     grid-gap: 2rem;
   }
 
+  &--cols-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+
   &--cols-4 {
     grid-template-columns: repeat(4, 1fr);
 
