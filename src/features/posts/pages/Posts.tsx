@@ -12,6 +12,7 @@ import {
   Grid,
   Modal,
   PageTitleBar,
+  Spinner,
 } from 'components';
 import PostCard from '../components/PostCard';
 
@@ -19,6 +20,7 @@ const Posts = () => {
   const navigate = useNavigate();
   const { user } = useUserContext();
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [posts, setPosts] = useState([]);
   const [modal, setModal] = useState({
     isHidden: true,
@@ -34,6 +36,7 @@ const Posts = () => {
         new Date(b.date).getTime() - new Date(a.date).getTime()
     );
     setPosts(sortedPosts);
+    setIsLoading(false);
   };
 
   const handlePostDelete = async () => {
@@ -73,37 +76,42 @@ const Posts = () => {
           Create post
         </Button>
       </PageTitleBar>
-      {posts.length > 0 ? (
-        <Grid spacing={1} cols={4}>
-          {posts.map((post: PostInterface) => (
-            <PostCard key={post.id} post={post}>
-              {(user?.id === post.authorId ||
-                user?.role === 'administrator') && (
-                <div className='post-card__buttons mt-24'>
-                  <Link to={`/posts/${post.id}/edit`} className='mr-12'>
-                    <Button state='primary' type='button' size='small'>
-                      Edit
-                    </Button>
-                  </Link>
-                  <Button
-                    state='danger'
-                    type='button'
-                    size='small'
-                    onClick={() =>
-                      setModal({ isHidden: false, postId: post.id })
-                    }
-                  >
-                    Delete
-                  </Button>
-                </div>
-              )}
-            </PostCard>
-          ))}
-        </Grid>
-      ) : (
+      {isLoading && <Spinner />}
+      {!isLoading && (
         <>
-          <h2 className='mb-24'>No posts yet</h2>
-          <p>You can create a post by clicking the button above.</p>
+          {posts.length > 0 ? (
+            <Grid spacing={1} cols={4}>
+              {posts.map((post: PostInterface) => (
+                <PostCard key={post.id} post={post}>
+                  {(user?.id === post.authorId ||
+                    user?.role === 'administrator') && (
+                    <div className='post-card__buttons mt-24'>
+                      <Link to={`/posts/${post.id}/edit`} className='mr-12'>
+                        <Button state='primary' type='button' size='small'>
+                          Edit
+                        </Button>
+                      </Link>
+                      <Button
+                        state='danger'
+                        type='button'
+                        size='small'
+                        onClick={() =>
+                          setModal({ isHidden: false, postId: post.id })
+                        }
+                      >
+                        Delete
+                      </Button>
+                    </div>
+                  )}
+                </PostCard>
+              ))}
+            </Grid>
+          ) : (
+            <>
+              <h2 className='mb-24'>No posts yet</h2>
+              <p>You can create a post by clicking the button above.</p>
+            </>
+          )}
         </>
       )}
     </>

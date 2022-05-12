@@ -16,6 +16,7 @@ import {
   ConfirmationModalContent,
   Modal,
   PageTitleBar,
+  Spinner,
   Table,
 } from 'components/index';
 import UserModalForm from '../components/UserModalForm';
@@ -36,6 +37,7 @@ interface ModalInterface {
 const Users = () => {
   const { user } = useUserContext();
 
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [users, setUsers] = useState<User[]>([]);
   const [modal, setModal] = useState<ModalInterface>({
     title: '',
@@ -85,6 +87,7 @@ const Users = () => {
   const getUsers = async () => {
     const users = await fetchUsers();
     setUsers(users);
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -199,7 +202,7 @@ const Users = () => {
           </Button>
         )}
       </PageTitleBar>
-      <Table columns={columns} data={users} />
+      {isLoading ? <Spinner /> : <Table columns={columns} data={users} />}
     </>
   );
 };

@@ -8,3 +8,4 @@ export * from './PageTitleBar';
 export * from './TopBar';
 export * from './Menu';
 export * from './Grid';
+export * from './Spinner';
