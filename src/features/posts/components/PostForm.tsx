@@ -16,6 +16,7 @@ const blankPost = {
   title: '',
   content: '',
   author: '',
+  authorId: -1,
   date: '',
   image: '',
   id: 0,
@@ -26,7 +27,7 @@ const PostForm = ({ post: data, postAction }: Props) => {
 
   const [post, setPost] = useState(blankPost);
   const [isImageValid, setIsImageValid] = useState(false);
-  const { title, content, date, image } = post;
+  const { title, content, date, image, author } = post;
 
   const handleChange = (
     event:
@@ -45,21 +46,22 @@ const PostForm = ({ post: data, postAction }: Props) => {
       return;
     }
 
-    const { author, authorId } = data || {
-      author: `${user?.name} ${user?.lastName}`,
-      authorId: user?.id || -1,
-    };
-
-    await postAction({
-      ...post,
-      author,
-      authorId,
-    });
+    await postAction(post);
   };
 
   useEffect(() => {
     if (data) setPost({ ...data });
   }, [data]);
+
+  useEffect(() => {
+    if (author === '')
+      setPost((prevPost) => ({
+        ...prevPost,
+        author: `${user?.name} ${user?.lastName}`,
+        authorId: user?.id || -1,
+      }));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   return (
     <>
@@ -119,21 +121,20 @@ const PostForm = ({ post: data, postAction }: Props) => {
             Content
           </label>
           <Editor
+            id='content'
+            textareaName='content'
             apiKey='iuj2370hpse6jvn0xbymysrr8hp5hugw568xv649g8745fyo'
             plugins={[
               'autoresize',
               'lists',
               'link',
               'wordcount',
-              'fontsize',
               'searchreplace',
               'fullscreen',
             ]}
             toolbar={
               'undo redo | fontsize | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | searchreplace | fullscreen'
             }
-            id='content'
-            textareaName='content'
             value={content}
             onEditorChange={(newValue) =>
               setPost((prevPost) => ({
@@ -146,6 +147,17 @@ const PostForm = ({ post: data, postAction }: Props) => {
               menubar: false,
               content_style: 'body { color: #a3aed0; }',
             }}
+          />
+        </div>
+        <div className='form__group' hidden>
+          <label htmlFor='author'>Author</label>
+          <Input
+            type='text'
+            name='author'
+            id='author'
+            value={author}
+            onChange={handleChange}
+            required={false}
           />
         </div>
       </form>

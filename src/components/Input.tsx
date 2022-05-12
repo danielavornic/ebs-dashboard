@@ -13,17 +13,20 @@ export const Input = ({
   onChange,
   className,
   width = 'width-auto',
+  required = true,
 }: Props) => {
   return (
     <input
-      className={`${className} input input--${width} input--${type}`}
+      className={`${
+        className ? className : ''
+      } input input--${width} input--${type}`}
       type={type}
       name={name}
       id={id}
       placeholder={placeholder}
       onChange={onChange}
       value={value}
-      required
+      required={required}
       minLength={type === 'password' ? 8 : 0}
     />
   );
