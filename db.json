@@ -146,17 +146,8 @@
       "authorId": 9
     },
     {
-      "title": "post title",
-      "content": "<p>test</p>\n<p>&nbsp;</p>\n<p><em>edited by admin</em></p>",
-      "author": "jessica gd",
-      "authorId": 9,
-      "date": "2022-05-17",
-      "image": "https://images.unsplash.com/photo-1517315003714-a071486bd9ea?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      "id": 23
-    },
-    {
       "title": "sfsd",
-      "content": "<p>some text</p>",
+      "content": "<p>xdx</p>",
       "author": "admin admin",
       "authorId": 5,
       "date": "2022-05-18",

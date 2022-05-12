@@ -1,11 +1,11 @@
 import { FormEvent, useEffect, useState } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
 
 import { PostInterface } from 'types/post';
 import useUserContext from 'hooks/useUserContext';
 
 import { Button, Input } from 'components';
 import PostImage from './PostImage';
+import PostEditor from './PostEditor';
 
 interface Props {
   post?: PostInterface;
@@ -25,8 +25,8 @@ const blankPost = {
 const PostForm = ({ post: data, postAction }: Props) => {
   const { user } = useUserContext();
 
-  const [post, setPost] = useState(blankPost);
-  const [isImageValid, setIsImageValid] = useState(false);
+  const [post, setPost] = useState<PostInterface>(blankPost);
+  const [isImageValid, setIsImageValid] = useState<boolean>(false);
   const { title, content, date, image, author } = post;
 
   const handleChange = (
@@ -54,9 +54,7 @@ const PostForm = ({ post: data, postAction }: Props) => {
     await postAction(post);
   };
 
-  useEffect(() => {
-    if (data) setPost({ ...data });
-  }, [data]);
+  useEffect(() => data && setPost({ ...data }), [data]);
 
   useEffect(() => {
     if (author === '')
@@ -125,34 +123,7 @@ const PostForm = ({ post: data, postAction }: Props) => {
           <label htmlFor='content' hidden>
             Content
           </label>
-          <Editor
-            id='content'
-            textareaName='content'
-            apiKey='iuj2370hpse6jvn0xbymysrr8hp5hugw568xv649g8745fyo'
-            plugins={[
-              'autoresize',
-              'lists',
-              'link',
-              'wordcount',
-              'searchreplace',
-              'fullscreen',
-            ]}
-            toolbar={
-              'undo redo | fontsize | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | searchreplace | fullscreen'
-            }
-            value={content}
-            onEditorChange={(newValue) =>
-              setPost((prevPost) => ({
-                ...prevPost,
-                content: newValue,
-              }))
-            }
-            init={{
-              minHeight: 400,
-              menubar: false,
-              content_style: 'body { color: #a3aed0; }',
-            }}
-          />
+          <PostEditor content={content} setPost={setPost} />
         </div>
         <div className='form__group' hidden>
           <label htmlFor='author'>Author</label>
