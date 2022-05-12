@@ -31,6 +31,8 @@
 
 .tox .tox-tbtn--bespoke .tox-tbtn__select-label,
 .tox .tox-collection__item,
-.tox-statusbar__wordcount {
+.tox-statusbar__wordcount,
+.tox-statusbar__path-item,
+.tox-statusbar__path-divider {
   color: $light-grey-blue !important;
 }
