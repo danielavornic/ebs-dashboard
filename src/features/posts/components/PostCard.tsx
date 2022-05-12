@@ -6,6 +6,11 @@ import { PostInterface } from 'types/post';
 
 import PostDetail from './PostDetail';
 
+const formatContent = (content: string) => {
+  const stripped = content.replace(/<[^>]+>/g, '');
+  return stripped.length > 200 ? stripped.substring(0, 199) + '…' : stripped;
+};
+
 const PostCard = ({
   post,
   children: buttons,
@@ -21,9 +26,12 @@ const PostCard = ({
       <h3 className='post-card__title mb-24'>{title}</h3>
       <PostDetail icon={<FiCalendar />} value={date} />
       <PostDetail icon={<FiUser />} value={author} />
-      <p className='pre-line mt-24'>
-        {content.length > 200 ? content.substring(0, 199) + '…' : content}
-      </p>
+      <div
+        className='mt-24 '
+        dangerouslySetInnerHTML={{
+          __html: formatContent(content),
+        }}
+      ></div>
       <p className='post-card__more mt-12'>
         <Link to={`/posts/${id}`}>Read more</Link>
       </p>

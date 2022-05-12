@@ -11,11 +11,12 @@ export const Input = ({
   placeholder,
   value,
   onChange,
+  className,
   width = 'width-auto',
 }: Props) => {
   return (
     <input
-      className={`input input--${width} input--${type}`}
+      className={`${className} input input--${width} input--${type}`}
       type={type}
       name={name}
       id={id}

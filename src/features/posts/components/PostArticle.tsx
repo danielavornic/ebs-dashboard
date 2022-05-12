@@ -14,7 +14,12 @@ const PostArticle = ({ post }: { post: PostInterface }) => {
       <PostImage imageUrl={image} />
       <PostDetail icon={<FiCalendar />} value={date} />
       <PostDetail icon={<FiUser />} value={author} />
-      <p className='mt-36 pre-line text-lg'>{content}</p>
+      <div
+        className='mt-36'
+        dangerouslySetInnerHTML={{
+          __html: content,
+        }}
+      ></div>
     </article>
   );
 };

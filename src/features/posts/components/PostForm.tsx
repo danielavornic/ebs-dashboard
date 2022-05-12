@@ -1,9 +1,10 @@
 import { FormEvent, useEffect, useState } from 'react';
+import { Editor } from '@tinymce/tinymce-react';
 
 import { PostInterface } from 'types/post';
 import useUserContext from 'hooks/useUserContext';
 
-import { Button, Input, Textarea } from 'components';
+import { Button, Input } from 'components';
 import PostImage from './PostImage';
 
 interface Props {
@@ -68,7 +69,7 @@ const PostForm = ({ post: data, postAction }: Props) => {
         setIsImageValid={setIsImageValid}
       />
       <form className='form mb-400' onSubmit={handleSubmit}>
-        <div className='form__group'>
+        <div className='form__group form__group--flex'>
           <label htmlFor='title' hidden>
             Title
           </label>
@@ -78,25 +79,15 @@ const PostForm = ({ post: data, postAction }: Props) => {
             name='title'
             id='title'
             width='full'
+            className='mr-12'
             value={title}
             onChange={handleChange}
           />
+          <Button type='submit' state='primary' size='medium'>
+            Save
+          </Button>
         </div>
-        <div className='form__group'>
-          <label htmlFor='content' hidden>
-            Content
-          </label>
-          <Textarea
-            placeholder='Content'
-            name='content'
-            id='content'
-            width='full'
-            height='300'
-            value={content}
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form__group'>
+        <div className='form__group form__group--flex'>
           <label htmlFor='image' hidden>
             Image from Unsplash
           </label>
@@ -106,11 +97,10 @@ const PostForm = ({ post: data, postAction }: Props) => {
             name='image'
             id='image'
             width='full'
+            className='mr-12'
             value={image}
             onChange={handleChange}
           />
-        </div>
-        <div className='form__group'>
           <label htmlFor='date' hidden>
             Date
           </label>
@@ -124,10 +114,39 @@ const PostForm = ({ post: data, postAction }: Props) => {
             onChange={handleChange}
           />
         </div>
-        <div className='form__btn'>
-          <Button type='submit' state='primary' size='medium'>
-            Save
-          </Button>
+        <div className='form__group'>
+          <label htmlFor='content' hidden>
+            Content
+          </label>
+          <Editor
+            apiKey='iuj2370hpse6jvn0xbymysrr8hp5hugw568xv649g8745fyo'
+            plugins={[
+              'autoresize',
+              'lists',
+              'link',
+              'wordcount',
+              'fontsize',
+              'searchreplace',
+              'fullscreen',
+            ]}
+            toolbar={
+              'undo redo | fontsize | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | searchreplace | fullscreen'
+            }
+            id='content'
+            textareaName='content'
+            value={content}
+            onEditorChange={(newValue) =>
+              setPost((prevPost) => ({
+                ...prevPost,
+                content: newValue,
+              }))
+            }
+            init={{
+              minHeight: 400,
+              menubar: false,
+              content_style: 'body { color: #a3aed0; }',
+            }}
+          />
         </div>
       </form>
     </>
