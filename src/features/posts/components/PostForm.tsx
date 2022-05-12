@@ -46,6 +46,11 @@ const PostForm = ({ post: data, postAction }: Props) => {
       return;
     }
 
+    if (content === '') {
+      alert('Please write the post description');
+      return;
+    }
+
     await postAction(post);
   };
 
