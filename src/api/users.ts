@@ -1,4 +1,4 @@
-import axios from 'axios';
+import $axios from './axios';
 
 import {
   RegisterCredentials,
@@ -7,22 +7,18 @@ import {
   UserInterface,
 } from 'types/user';
 
-const UsersClient = axios.create({
-  baseURL: 'http://localhost:3000/users/',
-});
-
 export const fetchUsers = async () => {
-  const users = await UsersClient.get('');
+  const users = await $axios.get('/users/');
   return users.data;
 };
 
 export const getUserByEmail = async (email: string) => {
-  const users = await UsersClient.get(`?email=${email}`);
+  const users = await $axios.get(`/users?email=${email}`);
   return users.data[0];
 };
 
 export const getUserById = async (id: number) => {
-  const user = await UsersClient.get(`/${id}`);
+  const user = await $axios.get(`/users/${id}`);
   return user.data;
 };
 
@@ -30,18 +26,18 @@ export const getUserByCredentials = async (
   userCredentials: LoginCredentials
 ) => {
   const { email, password } = userCredentials;
-  const user = await UsersClient.get(`?email=${email}&password=${password}`);
+  const user = await $axios.get(`/users?email=${email}&password=${password}`);
   return user.data;
 };
 
 export const registerUser = (user: RegisterCredentials | UserModalData) => {
-  return UsersClient.post('', user);
+  return $axios.post('/users/', user);
 };
 
 export const updateUser = (id: number, user: UserInterface) => {
-  return UsersClient.put(`/${id}`, user);
+  return $axios.put(`/users/${id}`, user);
 };
 
 export const deleteUser = (id: number) => {
-  return UsersClient.delete(`/${id}`);
+  return $axios.delete(`/users/${id}`);
 };

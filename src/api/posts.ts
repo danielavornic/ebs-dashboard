@@ -1,18 +1,15 @@
-import axios from 'axios';
+import $axios from './axios';
+
 import { PostInterface } from 'types/post';
 
-const PostsClient = axios.create({
-  baseURL: 'http://localhost:3000/posts/',
-});
-
 export const fetchPosts = async () => {
-  const posts = await PostsClient.get('');
+  const posts = await $axios.get('/posts/');
   return posts.data;
 };
 
 export const getPostById = async (id: number) => {
   try {
-    const post = await PostsClient.get(`/${id}`);
+    const post = await $axios.get(`/posts/${id}`);
     return post.data;
   } catch (error) {
     return null;
@@ -20,13 +17,13 @@ export const getPostById = async (id: number) => {
 };
 
 export const addPost = (post: PostInterface) => {
-  return PostsClient.post('', post);
+  return $axios.post('/posts/', post);
 };
 
 export const updatePost = (id: number, post: PostInterface) => {
-  return PostsClient.put(`/${id}`, post);
+  return $axios.put(`/posts/${id}`, post);
 };
 
 export const deletePost = (id: number) => {
-  return PostsClient.delete(`/${id}`);
+  return $axios.delete(`/posts/${id}`);
 };
