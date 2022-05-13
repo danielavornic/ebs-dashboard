@@ -19,7 +19,7 @@ const PostArticle = ({ post }: { post: PostInterface }) => {
         dangerouslySetInnerHTML={{
           __html: content,
         }}
-      ></div>
+      />
     </article>
   );
 };

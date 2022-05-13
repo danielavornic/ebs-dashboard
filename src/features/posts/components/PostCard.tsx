@@ -22,7 +22,7 @@ const PostCard = ({
       <div
         className='post-card__image mb-24'
         style={{ backgroundImage: `url(${image})` }}
-      ></div>
+      />
       <h3 className='post-card__title mb-24'>{title}</h3>
       <PostDetail icon={<FiCalendar />} value={date} />
       <PostDetail icon={<FiUser />} value={author} />
@@ -31,7 +31,7 @@ const PostCard = ({
         dangerouslySetInnerHTML={{
           __html: formatContent(content),
         }}
-      ></div>
+      />
       <p className='post-card__more mt-12'>
         <Link to={`/posts/${id}`}>Read more</Link>
       </p>
