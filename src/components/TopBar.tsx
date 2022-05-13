@@ -9,12 +9,12 @@ export const TopBar = () => {
   const navigate = useNavigate();
 
   const { setIsLogged, setUser, user } = useUserContext();
-  const [isUserMenuHidden, setisUserMenuHidden] = useState(true);
+  const [isUserMenuHidden, setIsUserMenuHidden] = useState(true);
 
   const { name, lastName } = user || { name: '', lastName: '' };
   const fullName = `${name} ${lastName}`;
 
-  const toggleLogoutButton = () => setisUserMenuHidden(!isUserMenuHidden);
+  const toggleLogoutButton = () => setIsUserMenuHidden(!isUserMenuHidden);
 
   const logOutUser = () => {
     localStorage.removeItem('userId');
