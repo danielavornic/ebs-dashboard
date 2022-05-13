@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import { FiImage } from 'react-icons/fi';
+import axios from 'axios';
 
 interface Props {
   imageUrl: string;
@@ -15,16 +16,13 @@ const PostImage = ({
   useEffect(() => {
     if (setIsImageValid) {
       const checkImg = async () => {
-        const res = await fetch(imageUrl).catch(() => {
-          setIsImageValid(false);
-          return;
+        const res = await axios.get(imageUrl, {
+          responseType: 'blob',
         });
 
-        if (res?.status === 200) {
-          setIsImageValid((await res.blob()).type.startsWith('image/'));
-        } else {
-          setIsImageValid(false);
-        }
+        setIsImageValid(
+          res.status === 200 ? res.data.type.startsWith('image/') : false
+        );
       };
 
       if (imageUrl.includes('https://images.unsplash.com/photo')) {

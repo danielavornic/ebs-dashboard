@@ -66,7 +66,7 @@
     },
     {
       "title": "sds",
-      "content": "<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deser<strong>unt mollit anim id est laborum.</strong></span></p>\n<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\"><strong>kj</strong></span></p>\n<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\"><strong>so heavy i fell throught the earth</strong></span></p>",
+      "content": "<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deser<strong>unt mollit anim id est laborum.</strong></span></p>\n<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\"><strong>kj</strong></span></p>\n<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\"><strong>so heavy i fell throught the earth</strong></span></p>\n<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\"><strong>memee</strong></span></p>",
       "author": "admin admin",
       "authorId": 5,
       "date": "2022-05-12",
@@ -138,21 +138,30 @@
     },
     {
       "title": "post by jessica",
-      "content": "<p><span style=\"font-size: 14pt;\">some text there and theree&nbsp;</span></p>\n<p><em><span style=\"font-size: 14pt;\">edited by admin</span></em></p>",
+      "content": "<p><span style=\"font-size: 14pt;\">some text there and theree&nbsp;</span></p>\n<p><em><span style=\"font-size: 14pt;\">edited by admin</span></em></p>\n<p><em><span style=\"font-size: 14pt;\">fscds</span></em></p>",
       "author": "jessica gd",
       "date": "2022-05-17",
-      "image": "https://images.unsplash.com/photo-1486520299386-6d106b22014b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469&q=80",
+      "image": "https://images.unsplash.com/photo-1607499457689-3fd1ac3ffcdd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       "id": 22,
       "authorId": 9
     },
     {
-      "title": "sfsd",
-      "content": "<p>xdx</p>",
+      "title": "kjsd",
+      "content": "<p><span style=\"font-size: 14pt;\">djfjdfjcdjjd&nbsp;</span></p>\n<h3 dir=\"auto\"><span style=\"font-size: 14pt;\">rarii care vor fi folosite</span></h3>\n<ul dir=\"auto\">\n<li><span style=\"font-size: 14pt;\">typescript - pentru tipizarea codului</span></li>\n<li><span style=\"font-size: 14pt;\">axios - pentru a face request-uri catre API-ul de pe server</span></li>\n<li><span style=\"font-size: 14pt;\">json-server - pentru a crea un server local cu baza de date</span></li>\n<li><span style=\"font-size: 14pt;\">react-router-dom - pentru a folosi rutarea</span></li>\n<li><span style=\"font-size: 14pt;\">rechart - pentru a folosi grafice</span></li>\n</ul>",
       "author": "admin admin",
       "authorId": 5,
-      "date": "2022-05-18",
-      "image": "https://images.unsplash.com/photo-1570284613060-766c33850e00?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "id": 25
+      "date": "2022-05-16",
+      "image": "https://images.unsplash.com/photo-1616001089004-04948fc0e6c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "id": 23
+    },
+    {
+      "title": "youll miss me when im not around",
+      "content": "<p>dvdvs</p>",
+      "author": "admin admin",
+      "authorId": 5,
+      "date": "2022-05-13",
+      "image": "https://images.unsplash.com/photo-1558481795-7f0a7c906f5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1496&q=80",
+      "id": 24
     }
   ]
 }
