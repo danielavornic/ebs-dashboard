@@ -9,7 +9,7 @@ interface Props {
   }[];
 }
 
-export const Table = ({ columns, data }: Props) => {
+const UsersTable = ({ columns, data }: Props) => {
   return (
     <div className='table-container custom-scrollbar'>
       <table className='table'>
@@ -43,3 +43,5 @@ export const Table = ({ columns, data }: Props) => {
     </div>
   );
 };
+
+export default UsersTable;

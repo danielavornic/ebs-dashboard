@@ -17,9 +17,9 @@ import {
   Modal,
   PageTitleBar,
   Spinner,
-  Table,
 } from 'components/index';
 import UserModalForm from '../components/UserModalForm';
+import UsersTable from '../components/UsersTable';
 
 interface Columns {
   title: string;
@@ -202,7 +202,7 @@ const Users = () => {
           </Button>
         )}
       </PageTitleBar>
-      {isLoading ? <Spinner /> : <Table columns={columns} data={users} />}
+      {isLoading ? <Spinner /> : <UsersTable columns={columns} data={users} />}
     </>
   );
 };
