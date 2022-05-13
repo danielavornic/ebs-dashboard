@@ -12,7 +12,7 @@ export interface RegisterCredentials extends LoginCredentials {
 
 export interface UserInterface extends RegisterCredentials {
   id: number;
-  role: Role;
+  role: UserRole;
   actions?: string;
 }
 
@@ -21,9 +21,18 @@ export interface UserModalData {
   lastName: string;
   email: string;
   gender: string;
-  role: Role;
+  role: UserRole;
 }
 
-export type Role = 'moderator' | 'administrator';
+export enum UserRole {
+  Moderator = 'moderator',
+  Admin = 'administrator',
+}
+
+export enum UserModalType {
+  Add = 'add',
+  Edit = 'update',
+  Delete = 'delete',
+}
 
 export type User = UserInterface | null;

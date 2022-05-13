@@ -9,7 +9,7 @@ export const TopBar = () => {
   const navigate = useNavigate();
 
   const { setIsLogged, setUser, user } = useUserContext();
-  const [isUserMenuHidden, setisUserMenuHidden] = useState<boolean>(true);
+  const [isUserMenuHidden, setisUserMenuHidden] = useState(true);
 
   const { name, lastName } = user || { name: '', lastName: '' };
   const fullName = `${name} ${lastName}`;

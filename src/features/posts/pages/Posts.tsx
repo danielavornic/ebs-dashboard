@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FiPlus } from 'react-icons/fi';
 
 import { PostInterface } from 'types/post';
+import { UserRole } from 'types/user';
 import { deletePost, fetchPosts } from 'api/posts';
 import useUserContext from 'hooks/useUserContext';
 
@@ -20,7 +21,7 @@ const Posts = () => {
   const navigate = useNavigate();
   const { user } = useUserContext();
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [posts, setPosts] = useState([]);
   const [modal, setModal] = useState({
     isHidden: true,
@@ -84,7 +85,7 @@ const Posts = () => {
               {posts.map((post: PostInterface) => (
                 <PostCard key={post.id} post={post}>
                   {(user?.id === post.authorId ||
-                    user?.role === 'administrator') && (
+                    user?.role === UserRole.Admin) && (
                     <div className='post-card__buttons mt-24'>
                       <Link to={`/posts/${post.id}/edit`} className='mr-12'>
                         <Button state='primary' type='button' size='small'>

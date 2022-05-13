@@ -4,6 +4,7 @@ import {
   RegisterCredentials,
   LoginCredentials,
   UserModalData,
+  UserInterface,
 } from 'types/user';
 
 const UsersClient = axios.create({
@@ -37,7 +38,7 @@ export const registerUser = (user: RegisterCredentials | UserModalData) => {
   return UsersClient.post('', user);
 };
 
-export const updateUser = (id: number, user: UserModalData) => {
+export const updateUser = (id: number, user: UserInterface) => {
   return UsersClient.put(`/${id}`, user);
 };
 

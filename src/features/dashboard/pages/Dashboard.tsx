@@ -27,7 +27,7 @@ export interface PostCountPerDate {
 }
 
 const Dashboard = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [postsPerUserData, setPostsPerUserData] = useState<PostCountPerUser[]>(
     []
   );

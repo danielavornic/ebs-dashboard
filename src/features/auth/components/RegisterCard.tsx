@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 
-import { RegisterCredentials } from 'types/user';
+import { RegisterCredentials, UserRole } from 'types/user';
 import { registerUser, getUserByEmail } from 'api/users';
 import useUserContext from 'hooks/useUserContext';
 
@@ -13,7 +13,7 @@ const initialUser = {
   gender: '',
   password: '',
   confirmPassword: '',
-  role: 'moderator',
+  role: UserRole.Moderator,
 };
 
 const RegisterCard = () => {
@@ -39,7 +39,7 @@ const RegisterCard = () => {
 
     delete userCredentials.confirmPassword;
     const userPromise = await registerUser(userCredentials);
-    const user = { ...userPromise.data, role: 'moderator' };
+    const user = { ...userPromise.data, role: UserRole.Moderator };
     setUser(user);
     localStorage.setItem('userId', user.id);
   };

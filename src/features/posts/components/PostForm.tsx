@@ -26,7 +26,7 @@ const PostForm = ({ post: data, postAction }: Props) => {
   const { user } = useUserContext();
 
   const [post, setPost] = useState<PostInterface>(blankPost);
-  const [isImageValid, setIsImageValid] = useState<boolean>(false);
+  const [isImageValid, setIsImageValid] = useState(false);
   const { title, content, date, image, author } = post;
 
   const handleChange = (

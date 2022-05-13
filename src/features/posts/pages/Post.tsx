@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { PostInterface } from 'types/post';
+import { UserRole } from 'types/user';
 import { addPost, getPostById, updatePost } from 'api/posts';
 import useUserContext from 'hooks/useUserContext';
 
@@ -29,7 +30,7 @@ const Post = ({ action, title }: Props) => {
     if (
       !post ||
       (action === 'edit' &&
-        user?.role !== 'administrator' &&
+        user?.role !== UserRole.Admin &&
         user?.id !== post.authorId)
     )
       navigate('/posts');

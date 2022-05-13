@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { FiEdit2, FiPlus, FiTrash } from 'react-icons/fi';
 
-import { User, UserInterface } from 'types/user';
-import useUserContext from 'hooks/useUserContext';
+import { User, UserInterface, UserModalType, UserRole } from 'types/user';
 import {
   deleteUser,
   fetchUsers,
@@ -10,6 +9,7 @@ import {
   registerUser,
   updateUser,
 } from 'api/users';
+import useUserContext from 'hooks/useUserContext';
 
 import {
   Button,
@@ -30,19 +30,19 @@ interface Columns {
 interface ModalInterface {
   title: string;
   isHidden: boolean;
-  type: 'add' | 'edit' | 'delete';
+  type: UserModalType;
   user: User;
 }
 
 const Users = () => {
   const { user } = useUserContext();
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [users, setUsers] = useState<User[]>([]);
   const [modal, setModal] = useState<ModalInterface>({
     title: '',
     isHidden: true,
-    type: 'add',
+    type: UserModalType.Add,
     user: null,
   });
 
@@ -61,7 +61,7 @@ const Users = () => {
   };
 
   const handleSubmitUserForm = async (formUser: User) => {
-    if (modal.type === 'add' && formUser) {
+    if (modal.type === UserModalType.Add && formUser) {
       const existingUser = await getUserByEmail(formUser.email);
       if (existingUser) {
         alert('User registered with this email already exists.');
@@ -71,7 +71,7 @@ const Users = () => {
       await registerUser(formUser);
     }
 
-    if (modal.type === 'edit' && formUser) {
+    if (modal.type === UserModalType.Edit && formUser) {
       await updateUser(formUser.id, formUser);
     }
 
@@ -133,7 +133,7 @@ const Users = () => {
               setModal({
                 title: 'Edit User',
                 isHidden: false,
-                type: 'edit',
+                type: UserModalType.Edit,
                 user: userRow,
               })
             }
@@ -147,7 +147,7 @@ const Users = () => {
               setModal({
                 title: 'Delete User',
                 isHidden: false,
-                type: 'delete',
+                type: UserModalType.Delete,
                 user: userRow,
               })
             }
@@ -157,7 +157,7 @@ const Users = () => {
     },
   ];
 
-  if (user?.role !== 'administrator') {
+  if (user?.role !== UserRole.Admin) {
     columns.pop();
   }
 
@@ -168,7 +168,7 @@ const Users = () => {
         hidden={modal.isHidden}
         toggleModal={toggleModal}
       >
-        {modal.type === 'delete' ? (
+        {modal.type === UserModalType.Delete ? (
           <ConfirmationModalContent
             title='Are you sure you want to delete this user?'
             buttonText='Delete'
@@ -177,13 +177,15 @@ const Users = () => {
         ) : (
           <UserModalForm
             data={modal.user as UserInterface}
-            buttonText={modal.type === 'add' ? 'Add user' : 'Save changes'}
+            buttonText={
+              modal.type === UserModalType.Add ? 'Add user' : 'Save changes'
+            }
             userAction={handleSubmitUserForm}
           />
         )}
       </Modal>
       <PageTitleBar title='Users'>
-        {user?.role === 'administrator' && (
+        {user?.role === UserRole.Admin && (
           <Button
             state='primary'
             type='button'
@@ -193,7 +195,7 @@ const Users = () => {
               setModal({
                 title: 'Add User',
                 isHidden: false,
-                type: 'add',
+                type: UserModalType.Add,
                 user: null,
               })
             }

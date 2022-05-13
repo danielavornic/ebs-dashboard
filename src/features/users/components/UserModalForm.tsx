@@ -1,6 +1,6 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
-import { User, UserInterface, UserModalData } from 'types/user';
+import { User, UserInterface, UserModalData, UserRole } from 'types/user';
 
 import { Button, Input } from 'components';
 
@@ -9,7 +9,7 @@ const defaultUser: UserModalData = {
   lastName: '',
   email: '',
   gender: '',
-  role: 'moderator',
+  role: UserRole.Moderator,
 };
 
 interface Props {
@@ -110,8 +110,8 @@ const UserModalForm = ({ data, userAction, buttonText }: Props) => {
           <option value='' disabled hidden>
             Role
           </option>
-          <option value='moderator'>Moderator</option>
-          <option value='administrator'>Administrator</option>
+          <option value={UserRole.Moderator}>Moderator</option>
+          <option value={UserRole.Admin}>Administrator</option>
         </select>
       </div>
 

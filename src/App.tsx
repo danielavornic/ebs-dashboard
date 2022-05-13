@@ -8,7 +8,7 @@ import AppRoutes from 'routes/routes';
 
 const App = () => {
   const [user, setUser] = useState<User>(null);
-  const [isLogged, setIsLogged] = useState<boolean>(true);
+  const [isLogged, setIsLogged] = useState(true);
 
   const value = {
     user,
