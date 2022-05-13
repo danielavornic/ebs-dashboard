@@ -37,7 +37,7 @@ const Post = ({ action, title }: Props) => {
   };
 
   useEffect(() => {
-    if (action !== PostActions.View) {
+    if (action !== PostActions.Create) {
       getPost(Number(id));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
