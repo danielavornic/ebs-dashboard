@@ -1,7 +1,7 @@
 import { InputHTMLAttributes } from 'react';
 
 interface Props extends InputHTMLAttributes<HTMLInputElement> {
-  width?: string;
+  width?: 'full' | 'auto';
 }
 
 export const Input = ({
@@ -11,15 +11,14 @@ export const Input = ({
   placeholder,
   value,
   onChange,
-  className,
-  width = 'width-auto',
+  className = '',
+  width = 'auto',
   required = true,
+  ...props
 }: Props) => {
   return (
     <input
-      className={`${
-        className ? className : ''
-      } input input--${width} input--${type}`}
+      className={`input input--${type} input--w-${width} ${className}`}
       type={type}
       name={name}
       id={id}

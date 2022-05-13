@@ -4,17 +4,18 @@ import { PropsWithChildren } from 'react';
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   state: 'primary' | 'danger' | 'transparent';
   type: 'submit' | 'button';
-  size?: string;
+  size?: 'small' | 'medium' | 'block' | 'auto';
   icon?: ReactNode;
 }
 
 export const Button = ({
   state,
   type,
-  size,
-  children,
+  size = 'auto',
   icon,
+  children,
   onClick,
+  ...props
 }: PropsWithChildren<Props>) => {
   return (
     <button
