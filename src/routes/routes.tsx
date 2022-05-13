@@ -1,5 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import { PostActions } from 'types/post';
+
 import PrivateRoute from './PrivateRoute';
 import PublicRoute from './PublicRoute';
 
@@ -22,9 +24,15 @@ const AppRoutes = () => (
         <Route path='/dashboard' element={<Dashboard />} />
         <Route path='/users' element={<Users />} />
         <Route path='/posts' element={<Posts />} />
-        <Route path='/posts/:id' element={<Post action='view' />} />
-        <Route path='/posts/:id/edit' element={<Post action='edit' />} />
-        <Route path='/posts/create' element={<Post action='create' />} />
+        <Route path='/posts/:id' element={<Post action={PostActions.View} />} />
+        <Route
+          path='/posts/:id/edit'
+          element={<Post action={PostActions.Edit} />}
+        />
+        <Route
+          path='/posts/create'
+          element={<Post action={PostActions.Create} />}
+        />
       </Route>
     </Routes>
   </BrowserRouter>

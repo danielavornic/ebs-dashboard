@@ -7,3 +7,10 @@ export interface PostInterface {
   authorId: number;
   image: string;
 }
+
+export enum PostActions {
+  Create = 'create',
+  View = 'view',
+  Edit = 'edit',
+  Delete = 'delete',
+}
