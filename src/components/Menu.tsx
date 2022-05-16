@@ -26,12 +26,9 @@ export const Menu = () => {
     <div className='sidemenu'>
       <ul className='sidemenu__list'>
         {menuItems.map(({ icon, name, path }) => {
-          const statusClass = path === page ? 'active' : '';
+          const statusClass = path === page ? 'sidemenu__item--active' : '';
           return (
-            <li
-              key={name}
-              className={`sidemenu__item sidemenu__item--${statusClass}`}
-            >
+            <li key={name} className={`sidemenu__item ${statusClass}`}>
               <Link to={path} className='sidemenu__item__link'>
                 {icon} {name}
               </Link>
