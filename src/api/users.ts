@@ -34,8 +34,8 @@ export const registerUser = (user: RegisterCredentials | UserModalData) => {
   return $axios.post('/users/', user);
 };
 
-export const updateUser = (id: number, user: UserInterface) => {
-  return $axios.put(`/users/${id}`, user);
+export const updateUser = (user: UserInterface) => {
+  return $axios.put(`/users/${user.id}`, user);
 };
 
 export const deleteUser = (id: number) => {

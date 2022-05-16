@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { FiPlus } from 'react-icons/fi';
 
 import { PostInterface } from 'types/post';
@@ -17,53 +18,44 @@ import {
 } from 'components';
 import PostCard from '../components/PostCard';
 
+const sortPosts = (posts: PostInterface[]) =>
+  posts.sort(
+    (a: PostInterface, b: PostInterface) =>
+      new Date(b.date).getTime() - new Date(a.date).getTime()
+  );
+
+const initialModal = {
+  isHidden: true,
+  postId: -1,
+};
+
 const Posts = () => {
   const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const { user } = useUserContext();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [posts, setPosts] = useState([]);
-  const [modal, setModal] = useState({
-    isHidden: true,
-    postId: -1,
+  const [modal, setModal] = useState(initialModal);
+
+  const { data: posts, isLoading, isSuccess } = useQuery('posts', fetchPosts);
+
+  const deletePostMutation = useMutation(deletePost, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('posts');
+      setModal(initialModal);
+    },
   });
-
-  const toggleModal = () => setModal({ ...modal, isHidden: !modal.isHidden });
-
-  const getPosts = async () => {
-    const posts = await fetchPosts();
-    const sortedPosts = posts.sort(
-      (a: PostInterface, b: PostInterface) =>
-        new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
-    setPosts(sortedPosts);
-    setIsLoading(false);
-  };
-
-  const handlePostDelete = async () => {
-    await deletePost(modal.postId);
-    await getPosts();
-    setModal({
-      isHidden: true,
-      postId: -1,
-    });
-  };
-
-  useEffect(() => {
-    getPosts();
-  }, []);
 
   return (
     <>
       <Modal
         title='Delete post'
         hidden={modal.isHidden}
-        toggleModal={toggleModal}
+        toggleModal={() => setModal({ ...modal, isHidden: !modal.isHidden })}
       >
         <ConfirmationModalContent
           title='Are you sure you want to delete this post?'
           buttonText='Delete'
-          onConfirm={handlePostDelete}
+          onConfirm={() => deletePostMutation.mutate(modal.postId)}
         />
       </Modal>
       <PageTitleBar title='Posts'>
@@ -78,9 +70,9 @@ const Posts = () => {
         </Button>
       </PageTitleBar>
       {isLoading && <Spinner />}
-      {!isLoading && (
+      {isSuccess && (
         <>
-          {posts.length > 0 ? (
+          {sortPosts(posts).length > 0 ? (
             <Grid spacing={1} cols={4}>
               {posts.map((post: PostInterface) => (
                 <PostCard key={post.id} post={post}>

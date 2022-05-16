@@ -3,7 +3,7 @@ import { Button } from 'components';
 interface Props {
   title: string;
   buttonText: string;
-  onConfirm: () => Promise<void>;
+  onConfirm: () => void;
 }
 
 export const ConfirmationModalContent = ({

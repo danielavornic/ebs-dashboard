@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import {
   ResponsiveContainer,
   BarChart,
@@ -16,49 +16,31 @@ import { getPostCountPerDate, getPostCountPerUser } from 'utils/charts';
 import { Grid, PageTitleBar, Spinner } from 'components';
 import ChartContainer from '../components/ChartContainer';
 
-interface PostCountPerUser {
-  name: string;
-  postsCount: number;
-}
-
 export interface PostCountPerDate {
   date: string;
   count: number;
 }
 
 const Dashboard = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [postsPerUserData, setPostsPerUserData] = useState<PostCountPerUser[]>(
-    []
+  const { data: posts, isLoading: arePostsLoading } = useQuery(
+    'posts',
+    fetchPosts
   );
-  const [postsPerDateData, setPostsPerDateData] = useState<PostCountPerDate[]>(
-    []
+  const { data: users, isLoading: areUsersLoading } = useQuery(
+    'users',
+    fetchUsers
   );
-
-  const getData = async () => {
-    const users = await fetchUsers();
-    const posts = await fetchPosts();
-
-    setPostsPerUserData(getPostCountPerUser(users, posts));
-    setPostsPerDateData(getPostCountPerDate(posts));
-
-    setIsLoading(false);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
 
   return (
     <>
       <PageTitleBar title='Dashboard' />
-      {isLoading ? (
+      {arePostsLoading || areUsersLoading ? (
         <Spinner />
       ) : (
         <Grid spacing={1} cols={2}>
           <ChartContainer title='Posts per user'>
             <ResponsiveContainer width='100%' height={300}>
-              <BarChart data={postsPerUserData}>
+              <BarChart data={getPostCountPerUser(users, posts)}>
                 <XAxis dataKey='name' />
                 <YAxis allowDecimals={false} />
                 <Bar dataKey='postsCount' radius={[10, 10, 0, 0]} />
@@ -67,7 +49,7 @@ const Dashboard = () => {
           </ChartContainer>
           <ChartContainer title='Posts over time'>
             <ResponsiveContainer width='100%' height={300}>
-              <LineChart data={postsPerDateData}>
+              <LineChart data={getPostCountPerDate(posts)}>
                 <XAxis dataKey='date' />
                 <YAxis allowDecimals={false} />
                 <Line dataKey='count' type='monotone' />

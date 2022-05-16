@@ -1,5 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { FiEdit2, FiPlus, FiTrash } from 'react-icons/fi';
+import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { User, UserInterface, UserModalType, UserRole } from 'types/user';
 import {
@@ -36,9 +37,8 @@ interface ModalInterface {
 
 const Users = () => {
   const { user } = useUserContext();
+  const queryClient = useQueryClient();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [users, setUsers] = useState<User[]>([]);
   const [modal, setModal] = useState<ModalInterface>({
     title: '',
     isHidden: true,
@@ -46,37 +46,10 @@ const Users = () => {
     user: null,
   });
 
-  const toggleModal = () => setModal({ ...modal, isHidden: !modal.isHidden });
+  const { data: users, isLoading, isSuccess } = useQuery('users', fetchUsers);
 
-  const handleUserDelete = async () => {
-    if (modal.user) {
-      await deleteUser(modal.user.id);
-      await getUsers();
-      setModal({
-        ...modal,
-        isHidden: true,
-        user: null,
-      });
-    }
-  };
-
-  const handleSubmitUserForm = async (formUser: User) => {
-    if (modal.type === UserModalType.Add && formUser) {
-      const existingUser = await getUserByEmail(formUser.email);
-      if (existingUser) {
-        alert('User registered with this email already exists.');
-        return;
-      }
-
-      await registerUser(formUser);
-    }
-
-    if (modal.type === UserModalType.Edit && formUser) {
-      await updateUser(formUser.id, formUser);
-    }
-
-    await getUsers();
-
+  const onSuccess = () => {
+    queryClient.invalidateQueries('users');
     setModal({
       ...modal,
       isHidden: true,
@@ -84,15 +57,31 @@ const Users = () => {
     });
   };
 
-  const getUsers = async () => {
-    const users = await fetchUsers();
-    setUsers(users);
-    setIsLoading(false);
-  };
+  const addUserMutation = useMutation(registerUser, {
+    onSuccess,
+  });
 
-  useEffect(() => {
-    getUsers();
-  }, []);
+  const updateUserMutation = useMutation(updateUser, {
+    onSuccess,
+  });
+
+  const deleteUserMutation = useMutation(deleteUser, {
+    onSuccess,
+  });
+
+  const handleSubmitUserForm = async (formUser: User) => {
+    if (modal.type === UserModalType.Add && formUser) {
+      if (await getUserByEmail(formUser.email)) {
+        alert('User registered with this email already exists.');
+        return;
+      }
+      addUserMutation.mutate(formUser);
+    }
+
+    if (modal.type === UserModalType.Edit && formUser) {
+      updateUserMutation.mutate(formUser);
+    }
+  };
 
   let columns: Columns[] = [
     {
@@ -166,13 +155,15 @@ const Users = () => {
       <Modal
         title={modal.title}
         hidden={modal.isHidden}
-        toggleModal={toggleModal}
+        toggleModal={() => setModal({ ...modal, isHidden: !modal.isHidden })}
       >
         {modal.type === UserModalType.Delete ? (
           <ConfirmationModalContent
             title='Are you sure you want to delete this user?'
             buttonText='Delete'
-            onConfirm={handleUserDelete}
+            onConfirm={() =>
+              modal.user && deleteUserMutation.mutate(modal.user.id)
+            }
           />
         ) : (
           <UserModalForm
@@ -204,7 +195,8 @@ const Users = () => {
           </Button>
         )}
       </PageTitleBar>
-      {isLoading ? <Spinner /> : <UsersTable columns={columns} data={users} />}
+      {isLoading && <Spinner />}
+      {isSuccess && <UsersTable columns={columns} data={users} />}
     </>
   );
 };

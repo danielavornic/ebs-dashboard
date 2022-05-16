@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 
 import { User } from 'types/user';
 import { getUserById } from 'api/users';
 import { UserContext } from 'context';
 
 import AppRoutes from 'routes/routes';
+
+const queryClient = new QueryClient();
 
 const App = () => {
   const [user, setUser] = useState<User>(null);
@@ -35,9 +39,12 @@ const App = () => {
   }, [userId]);
 
   return (
-    <UserContext.Provider value={value}>
-      <AppRoutes />
-    </UserContext.Provider>
+    <QueryClientProvider client={queryClient}>
+      <UserContext.Provider value={value}>
+        <AppRoutes />
+      </UserContext.Provider>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 };
 
