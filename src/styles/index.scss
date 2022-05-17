@@ -1,25 +1,25 @@
 @charset "UTF-8";
 
-@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+@import '../../node_modules/ebs-design/dist/styles/index.scss';
 
 @import 'utils/variables';
 
-@import 'base/base';
+// @import 'base/base';
 @import 'base/typography';
 @import 'base/spacing';
 
-@import 'components/Form';
+// @import 'components/Form';
 @import 'components/Layout';
-@import 'components/Button';
+// @import 'components/Button';
 @import 'components/Modal';
-@import 'components/Input';
+// @import 'components/Input';
 @import 'components/Textarea';
-@import 'components/Table';
-@import 'components/Post';
-@import 'components/Grid';
+// @import 'components/Table';
+// @import 'components/Post';
+// @import 'components/Grid';
 @import 'components/Chart';
 @import 'components/Editor';
 @import 'components/Spinner';
 
-@import 'pages';
+// @import 'pages';
 @import 'misc';

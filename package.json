@@ -12,6 +12,7 @@
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.0",
     "axios": "^0.27.1",
+    "ebs-design": "^0.0.1-beta.126",
     "json-server": "^0.17.0",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

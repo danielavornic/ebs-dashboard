@@ -2,7 +2,7 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  font-size: $font-size-normal;
+  // font-size: $font-size-normal;
 }
 
 h1,
@@ -10,50 +10,54 @@ h2,
 h3,
 .alt-font {
   font-family: 'Poppins', sans-serif;
-  margin: 0;
-  color: white;
+  // margin: 0;
+  // color: white;
 }
 
-h1 {
-  font-size: $main-heading-font-size;
-
-  @media screen and (max-width: $grid-sm) {
-    font-size: $main-heading-font-size-mobile;
-  }
+.text-center {
+  text-align: center;
 }
 
-h2 {
-  font-size: $secondary-heading-font-size;
+// h1 {
+//   font-size: $main-heading-font-size;
 
-  @media screen and (max-width: $grid-sm) {
-    font-size: $secondary-heading-font-size-mobile;
-  }
-}
+//   @media screen and (max-width: $grid-sm) {
+//     font-size: $main-heading-font-size-mobile;
+//   }
+// }
 
-p {
-  margin-top: 0;
-}
+// h2 {
+//   font-size: $secondary-heading-font-size;
 
-a {
-  color: white;
+//   @media screen and (max-width: $grid-sm) {
+//     font-size: $secondary-heading-font-size-mobile;
+//   }
+// }
 
-  &:hover {
-    text-decoration: underline;
-  }
-}
+// p {
+//   margin-top: 0;
+// }
 
-svg {
-  vertical-align: text-top;
-}
+// a {
+//   color: white;
 
-.capitalized {
-  text-transform: capitalize;
-}
+//   &:hover {
+//     text-decoration: underline;
+//   }
+// }
 
-.pre-line {
-  white-space: pre-line;
-}
+// svg {
+//   vertical-align: text-top;
+// }
 
-.text-lg {
-  font-size: $font-size-lg;
-}
+// .capitalized {
+//   text-transform: capitalize;
+// }
+
+// .pre-line {
+//   white-space: pre-line;
+// }
+
+// .text-lg {
+//   font-size: $font-size-lg;
+// }

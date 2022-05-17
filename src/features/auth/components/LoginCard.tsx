@@ -1,91 +1,103 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
 import { useQuery } from 'react-query';
+import { Button, Card, Form, Input, useForm } from 'ebs-design';
 
-import { LoginCredentials } from 'types/user';
-import { getUserByCredentials } from 'api/users';
+import { LoginCredentials, UserInterface } from 'types/user';
+import { fetchUsers } from 'api/users';
 import useUserContext from 'hooks/useUserContext';
-
-import { Button, Input } from 'components';
+import { getLoginFieldsErrors } from 'utils/authValidation';
 
 const LoginCard = () => {
-  const { setUser } = useUserContext();
+  const [form] = useForm();
 
-  const [userLoginCredentials, setUserLoginCredentials] =
-    useState<LoginCredentials>({
-      email: '',
-      password: '',
-    });
-  const { email, password } = userLoginCredentials;
+  const { setUser, setIsLogged } = useUserContext();
 
-  const { data: userData } = useQuery(
-    ['user', userLoginCredentials],
-    () => getUserByCredentials(userLoginCredentials),
-    {
-      enabled: !!email && !!password,
+  const { data: users } = useQuery('users', fetchUsers);
+
+  const handleSubmit = ({ email, password }: LoginCredentials) => {
+    const { email: emailErrors, password: passwordErrors } =
+      getLoginFieldsErrors(users, { email, password });
+
+    form.setFields([
+      {
+        name: 'email',
+        value: email,
+        errors: emailErrors,
+      },
+      {
+        name: 'password',
+        value: password,
+        errors: passwordErrors,
+      },
+    ]);
+
+    if (emailErrors.length === 0 && passwordErrors.length === 0) {
+      const user = users?.find(
+        (user: UserInterface) =>
+          user.email === email && user.password === password
+      );
+      setUser(user);
+      setIsLogged(true);
+      localStorage.setItem('userId', user.id);
     }
-  );
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (userData.length === 0) {
-      alert('Wrong email or password.');
-      return;
-    }
-
-    setUser(userData[0]);
-    localStorage.setItem('userId', userData[0].id);
-  };
-
-  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
-    setUserLoginCredentials((prevUserData) => ({
-      ...prevUserData,
-      [name]: value,
-    }));
   };
 
   return (
-    <div className='form-card'>
-      <form className='form' onSubmit={handleSubmit}>
-        <div className='form__header'>
-          <h2 className='form__title'>Login</h2>
-          <p>Enter your details to sign into your account.</p>
-        </div>
-
-        <div className='form__group'>
-          <label htmlFor='email' hidden>
-            E-mail
-          </label>
-          <Input
-            type='email'
-            placeholder='E-mail'
+    <Card size='large'>
+      <Card.Header className='text-center'>
+        <h2>Login</h2>
+        <p>Enter your details to sign into your account.</p>
+      </Card.Header>
+      <Card.Body>
+        <Form form={form} onFinish={handleSubmit} id='form'>
+          <Form.Field
+            label='E-mail'
             name='email'
-            id='email'
-            width='full'
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form__group'>
-          <label htmlFor='password' hidden>
-            Password
-          </label>
-          <Input
-            type='password'
-            placeholder='Password'
+            hideLabel
+            initialValue=''
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input
+              type='email'
+              placeholder='E-mail'
+              size='medium'
+              autoComplete='on'
+            />
+          </Form.Field>
+          <Form.Field
+            label='Password'
             name='password'
-            id='password'
-            width='full'
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form__btn'>
-          <Button type='submit' state='primary' size='block'>
+            hideLabel
+            initialValue=''
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input
+              type='password'
+              placeholder='Password'
+              size='medium'
+              autoComplete='current-password'
+              minLength={6}
+            />
+          </Form.Field>
+          <Button
+            form='form'
+            submit
+            size='medium'
+            type='primary'
+            className='w-full'
+          >
             Login
           </Button>
-        </div>
-      </form>
-    </div>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 };
 

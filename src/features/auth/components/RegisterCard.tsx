@@ -1,36 +1,25 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
 import { useMutation, useQuery } from 'react-query';
+import {
+  Card,
+  Checkbox,
+  Form,
+  Input,
+  Select,
+  Button,
+  useForm,
+} from 'ebs-design';
 
 import { RegisterCredentials, UserRole } from 'types/user';
-import { registerUser, getUserByEmail } from 'api/users';
+import { registerUser, fetchUsers } from 'api/users';
 import useUserContext from 'hooks/useUserContext';
-
-import { Button, Input } from 'components';
-
-const initialUser = {
-  name: '',
-  lastName: '',
-  email: '',
-  gender: '',
-  password: '',
-  confirmPassword: '',
-  role: UserRole.Moderator,
-};
+import { getRegisterFieldsErrors } from 'utils/authValidation';
 
 const RegisterCard = () => {
+  const [form] = useForm();
+
   const { setUser, setIsLogged } = useUserContext();
 
-  const [userCredentials, setUserCredentials] =
-    useState<RegisterCredentials>(initialUser);
-  const { email, password, confirmPassword } = userCredentials;
-
-  const { data: existingUser } = useQuery(
-    ['user', userCredentials],
-    () => getUserByEmail(email),
-    {
-      enabled: !!email,
-    }
-  );
+  const { data: users } = useQuery('users', fetchUsers);
 
   const registerUserMutation = useMutation(registerUser, {
     onSuccess: ({ data: user }) => {
@@ -40,139 +29,198 @@ const RegisterCard = () => {
     },
   });
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (userCredentials: RegisterCredentials) => {
+    const {
+      email: emailErrors,
+      password: passwordErrors,
+      confirmPassword: confirmPasswordErrors,
+    } = getRegisterFieldsErrors(users, userCredentials);
 
-    if (password !== confirmPassword) {
-      alert("Passwords don't match.");
-      return;
+    form.setFields([
+      {
+        name: 'email',
+        value: userCredentials.email,
+        errors: emailErrors,
+      },
+      {
+        name: 'password',
+        value: userCredentials.password,
+        errors: passwordErrors,
+      },
+      {
+        name: 'confirmPassword',
+        value: userCredentials.confirmPassword,
+        errors: confirmPasswordErrors,
+      },
+    ]);
+
+    if (
+      emailErrors.length === 0 &&
+      passwordErrors.length === 0 &&
+      confirmPasswordErrors.length === 0
+    ) {
+      delete userCredentials.terms;
+      delete userCredentials.confirmPassword;
+      registerUserMutation.mutate({
+        ...userCredentials,
+        role: UserRole.Moderator,
+      });
     }
-
-    if (existingUser) {
-      alert('User registered with this email already exists.');
-      return;
-    }
-
-    delete userCredentials.confirmPassword;
-    registerUserMutation.mutate(userCredentials);
-  };
-
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-    setUserCredentials((prevUserData) => ({
-      ...prevUserData,
-      [name]: value,
-    }));
   };
 
   return (
-    <div className='form-card'>
-      <form className='form' onSubmit={handleSubmit}>
-        <div className='form__header'>
-          <h2 className='form__title'>Register</h2>
-          <p>Enter your details to create your account.</p>
-        </div>
-
-        <div className='form__group'>
-          <label htmlFor='name' hidden>
-            Name
-          </label>
-          <Input
-            type='text'
-            placeholder='Name'
+    <Card size='large'>
+      <Card.Header className='text-center'>
+        <h2>Register</h2>
+        <p>Enter your details to create your account.</p>
+      </Card.Header>
+      <Card.Body>
+        <Form form={form} onFinish={handleSubmit} id='form'>
+          <Form.Field
+            label='Name'
             name='name'
-            id='name'
-            width='full'
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form__group'>
-          <label htmlFor='lastName' hidden>
-            Last name
-          </label>
-          <Input
-            type='text'
-            placeholder='Last name'
-            name='lastName'
-            id='last-name'
-            width='full'
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form__group'>
-          <label htmlFor='email' hidden>
-            E-mail
-          </label>
-          <Input
-            type='email'
-            placeholder='E-mail'
-            name='email'
-            id='email'
-            width='full'
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form__group'>
-          <label htmlFor='gender' hidden>
-            Gender
-          </label>
-          <select
-            name='gender'
-            id='gender'
-            onChange={handleChange}
-            required
-            defaultValue={''}
+            hideLabel
+            initialValue=''
+            rules={[
+              {
+                required: true,
+              },
+            ]}
           >
-            <option value='' disabled hidden>
-              Gender
-            </option>
-            <option value='Male'>Male</option>
-            <option value='Female'>Female</option>
-            <option value='Prefer not to say'>Prefer not to say</option>
-          </select>
-        </div>
-        <div className='form__group'>
-          <label htmlFor='password' hidden>
-            Password
-          </label>
-          <Input
-            type='password'
-            placeholder='Password'
+            <Input
+              type='name'
+              placeholder='First Name'
+              size='medium'
+              autoComplete='on'
+            />
+          </Form.Field>
+          <Form.Field
+            label='Last Name'
+            name='lastName'
+            hideLabel
+            initialValue=''
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input
+              size='medium'
+              type='name'
+              placeholder='Last Name'
+              autoComplete='on'
+            />
+          </Form.Field>
+          <Form.Field
+            label='E-mail'
+            name='email'
+            hideLabel
+            initialValue=''
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input
+              type='email'
+              placeholder='E-mail'
+              size='medium'
+              autoComplete='on'
+            />
+          </Form.Field>
+          <Form.Field
+            label='Gender'
+            name='gender'
+            hideLabel
+            initialValue=''
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Select
+              options={[
+                {
+                  text: 'Male',
+                  value: 'Male',
+                },
+                {
+                  text: 'Female',
+                  value: 'Female',
+                },
+                {
+                  text: 'Prefer not to say',
+                  value: 'Prefer not to say',
+                },
+              ]}
+              placeholder='Gender'
+            />
+          </Form.Field>
+          <Form.Field
+            label='Password'
             name='password'
-            id='password'
-            width='full'
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form__group'>
-          <label htmlFor='confirmPassword' hidden>
-            Confirm password
-          </label>
-          <Input
-            type='password'
-            placeholder='Confirm password'
+            hideLabel
+            initialValue=''
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input
+              type='password'
+              placeholder='Password'
+              size='medium'
+              autoComplete='current-password'
+              minLength={6}
+            />
+          </Form.Field>
+          <Form.Field
+            label='Confirm Password'
             name='confirmPassword'
-            id='confirm-password'
-            width='full'
-            onChange={handleChange}
-          />
-        </div>
-        <div className='form__group'>
-          <Input type='checkbox' id='terms' name='terms' />
-          <label htmlFor='terms'>
-            I agree to the processing of personal data
-          </label>
-        </div>
-
-        <div className='form__btn'>
-          <Button type='submit' state='primary' size='block'>
+            hideLabel
+            initialValue=''
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Input
+              type='password'
+              placeholder='Confirm password'
+              size='medium'
+              autoComplete='confirm-password'
+              minLength={6}
+            />
+          </Form.Field>
+          <Form.Field
+            label='Processing Data Terms'
+            name='terms'
+            hideLabel
+            rules={[
+              {
+                required: true,
+              },
+            ]}
+          >
+            <Checkbox text='I agree to the processing of personal data' />
+          </Form.Field>
+          <Button
+            form='form'
+            submit
+            size='medium'
+            type='primary'
+            className='w-full'
+          >
             Register
           </Button>
-        </div>
-      </form>
-    </div>
+        </Form>
+      </Card.Body>
+    </Card>
   );
 };
 

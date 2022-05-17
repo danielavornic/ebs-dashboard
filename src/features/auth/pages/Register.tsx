@@ -1,17 +1,17 @@
 import { Link } from 'react-router-dom';
+import { Space } from 'ebs-design';
 
 import RegisterCard from '../components/RegisterCard';
 
 const Register = () => (
-  <div className='fullscreen-page'>
+  <Space align='center' justify='center' className='h-100vh'>
     <div>
-      <h1>Welcome to EBS Dashboard</h1>
       <RegisterCard />
-      <p>
+      <p className='mt-24 text-center'>
         Already a member? <Link to={'/login'}>Login</Link>
       </p>
     </div>
-  </div>
+  </Space>
 );
 
 export default Register;

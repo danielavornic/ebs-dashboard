@@ -1,11 +1,8 @@
 .fullscreen-page {
   height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
 
-  @media screen and (max-width: $grid-md) {
+  @media screen and (max-width: 768px) {
     padding: 24px 16px;
     height: auto;
   }

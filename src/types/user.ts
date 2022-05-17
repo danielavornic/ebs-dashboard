@@ -8,6 +8,7 @@ export interface RegisterCredentials extends LoginCredentials {
   lastName: string;
   gender: string;
   confirmPassword?: string;
+  terms?: any;
 }
 
 export interface UserInterface extends RegisterCredentials {

@@ -51,6 +51,24 @@
       "password": "dddddddd",
       "role": "moderator",
       "id": 11
+    },
+    {
+      "name": "sds",
+      "lastName": "dsds",
+      "email": "d@m.rk",
+      "gender": "Male",
+      "password": "dddddddd",
+      "role": "moderator",
+      "id": 14
+    },
+    {
+      "name": "ff",
+      "lastName": "fff",
+      "email": "email@md.df",
+      "gender": "Female",
+      "password": "dddddddd",
+      "role": "moderator",
+      "id": 16
     }
   ],
   "posts": [

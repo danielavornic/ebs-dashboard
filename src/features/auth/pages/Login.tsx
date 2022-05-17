@@ -1,17 +1,17 @@
+import { Space } from 'ebs-design';
 import { Link } from 'react-router-dom';
 
 import LoginCard from '../components/LoginCard';
 
 const Login = () => (
-  <div className='fullscreen-page'>
+  <Space align='center' justify='center' className='h-100vh'>
     <div>
-      <h1>Welcome back to EBS Dashboard</h1>
       <LoginCard />
-      <p>
+      <p className='mt-24 text-center'>
         Don't have an account yet? <Link to={'/register'}>Register</Link>
       </p>
     </div>
-  </div>
+  </Space>
 );
 
 export default Login;
