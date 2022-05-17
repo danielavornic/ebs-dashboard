@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useMutation, useQuery } from 'react-query';
 
 import { RegisterCredentials, UserRole } from 'types/user';
 import { registerUser, getUserByEmail } from 'api/users';
@@ -17,13 +18,29 @@ const initialUser = {
 };
 
 const RegisterCard = () => {
-  const { setUser } = useUserContext();
+  const { setUser, setIsLogged } = useUserContext();
 
   const [userCredentials, setUserCredentials] =
     useState<RegisterCredentials>(initialUser);
   const { email, password, confirmPassword } = userCredentials;
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const { data: existingUser } = useQuery(
+    ['user', userCredentials],
+    () => getUserByEmail(email),
+    {
+      enabled: !!email,
+    }
+  );
+
+  const registerUserMutation = useMutation(registerUser, {
+    onSuccess: ({ data: user }) => {
+      setUser(user);
+      setIsLogged(true);
+      localStorage.setItem('userId', user.id);
+    },
+  });
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (password !== confirmPassword) {
@@ -31,17 +48,13 @@ const RegisterCard = () => {
       return;
     }
 
-    const existingUser = await getUserByEmail(email);
     if (existingUser) {
       alert('User registered with this email already exists.');
       return;
     }
 
     delete userCredentials.confirmPassword;
-    const userPromise = await registerUser(userCredentials);
-    const user = { ...userPromise.data, role: UserRole.Moderator };
-    setUser(user);
-    localStorage.setItem('userId', user.id);
+    registerUserMutation.mutate(userCredentials);
   };
 
   const handleChange = (

@@ -20,8 +20,8 @@ export const addPost = (post: PostInterface) => {
   return $axios.post('/posts/', post);
 };
 
-export const updatePost = (id: number, post: PostInterface) => {
-  return $axios.put(`/posts/${id}`, post);
+export const updatePost = (post: PostInterface) => {
+  return $axios.put(`/posts/${post.id}`, post);
 };
 
 export const deletePost = (id: number) => {

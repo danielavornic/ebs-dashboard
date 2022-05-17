@@ -36,13 +36,21 @@
       "id": 9
     },
     {
-      "name": "mark",
-      "lastName": "manzo",
-      "email": "montana1979@gmail.com",
+      "name": "claire",
+      "lastName": "b",
+      "email": "claire@m.com",
+      "gender": "Prefer not to say",
+      "role": "moderator",
+      "id": 10
+    },
+    {
+      "name": "dan",
+      "lastName": "jacobs",
+      "email": "dan@m.md",
       "gender": "Male",
       "password": "dddddddd",
       "role": "moderator",
-      "id": 12
+      "id": 11
     }
   ],
   "posts": [
@@ -128,7 +136,7 @@
       "authorId": 6
     },
     {
-      "title": "post by jessica",
+      "title": "post by jessica  uuuuu (edited)",
       "content": "<p><span style=\"font-size: 14pt;\">some text there and theree&nbsp;</span></p>\n<p><em><span style=\"font-size: 14pt;\">edited by admin</span></em></p>\n<p><em><span style=\"font-size: 14pt;\">fscds</span></em></p>",
       "author": "jessica gd",
       "date": "2022-05-17",
@@ -153,6 +161,42 @@
       "date": "2022-05-13",
       "image": "https://images.unsplash.com/photo-1558481795-7f0a7c906f5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1496&q=80",
       "id": 24
+    },
+    {
+      "title": "oh no it came",
+      "content": "<p><span style=\"font-size: 18pt;\">dont know its on sweeter than a sugar cane</span></p>\n<p><span style=\"font-size: 18pt;\">whatever that means</span></p>",
+      "author": "admin admin",
+      "authorId": 5,
+      "date": "2022-05-16",
+      "image": "https://images.unsplash.com/photo-1583339522870-0d9f28cef33f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "id": -1
+    },
+    {
+      "title": "ffgg",
+      "content": "<p>ffff</p>",
+      "author": "jessica dd",
+      "authorId": 10,
+      "date": "2022-05-18",
+      "image": "https://images.unsplash.com/photo-1616001089004-04948fc0e6c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "id": 25
+    },
+    {
+      "title": "ff",
+      "content": "<p>ff</p>",
+      "author": "jessica dd",
+      "authorId": 10,
+      "date": "2022-05-10",
+      "image": "https://images.unsplash.com/photo-1570284613060-766c33850e00?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "id": 26
+    },
+    {
+      "title": "4am",
+      "content": "<p>ddd</p>",
+      "author": "jessica dd",
+      "authorId": 10,
+      "date": "2022-05-09",
+      "image": "https://images.unsplash.com/photo-1616001089004-04948fc0e6c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
+      "id": 27
     }
   ]
 }

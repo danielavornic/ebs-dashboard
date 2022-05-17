@@ -1,8 +1,8 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
+import { useQuery } from 'react-query';
 
 import { LoginCredentials } from 'types/user';
 import { getUserByCredentials } from 'api/users';
-
 import useUserContext from 'hooks/useUserContext';
 
 import { Button, Input } from 'components';
@@ -15,11 +15,18 @@ const LoginCard = () => {
       email: '',
       password: '',
     });
+  const { email, password } = userLoginCredentials;
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  const { data: userData } = useQuery(
+    ['user', userLoginCredentials],
+    () => getUserByCredentials(userLoginCredentials),
+    {
+      enabled: !!email && !!password,
+    }
+  );
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    const userData = await getUserByCredentials(userLoginCredentials);
 
     if (userData.length === 0) {
       alert('Wrong email or password.');

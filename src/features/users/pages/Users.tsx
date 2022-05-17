@@ -3,13 +3,7 @@ import { FiEdit2, FiPlus, FiTrash } from 'react-icons/fi';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 
 import { User, UserInterface, UserModalType, UserRole } from 'types/user';
-import {
-  deleteUser,
-  fetchUsers,
-  getUserByEmail,
-  registerUser,
-  updateUser,
-} from 'api/users';
+import { deleteUser, fetchUsers, registerUser, updateUser } from 'api/users';
 import useUserContext from 'hooks/useUserContext';
 
 import {
@@ -35,26 +29,24 @@ interface ModalInterface {
   user: User;
 }
 
+const initialModal = {
+  title: '',
+  isHidden: true,
+  type: UserModalType.Add,
+  user: null,
+};
+
 const Users = () => {
   const { user } = useUserContext();
   const queryClient = useQueryClient();
 
-  const [modal, setModal] = useState<ModalInterface>({
-    title: '',
-    isHidden: true,
-    type: UserModalType.Add,
-    user: null,
-  });
+  const [modal, setModal] = useState<ModalInterface>(initialModal);
 
   const { data: users, isLoading, isSuccess } = useQuery('users', fetchUsers);
 
   const onSuccess = () => {
     queryClient.invalidateQueries('users');
-    setModal({
-      ...modal,
-      isHidden: true,
-      user: null,
-    });
+    setModal(initialModal);
   };
 
   const addUserMutation = useMutation(registerUser, {
@@ -69,17 +61,13 @@ const Users = () => {
     onSuccess,
   });
 
-  const handleSubmitUserForm = async (formUser: User) => {
-    if (modal.type === UserModalType.Add && formUser) {
-      if (await getUserByEmail(formUser.email)) {
-        alert('User registered with this email already exists.');
-        return;
-      }
-      addUserMutation.mutate(formUser);
+  const handleSubmitUserForm = (formUser: User) => {
+    if (modal.type === UserModalType.Add) {
+      addUserMutation.mutate(formUser as UserInterface);
     }
 
     if (modal.type === UserModalType.Edit && formUser) {
-      updateUserMutation.mutate(formUser);
+      updateUserMutation.mutate(formUser as UserInterface);
     }
   };
 
@@ -171,7 +159,7 @@ const Users = () => {
             buttonText={
               modal.type === UserModalType.Add ? 'Add user' : 'Save changes'
             }
-            userAction={handleSubmitUserForm}
+            onSubmit={handleSubmitUserForm}
           />
         )}
       </Modal>

@@ -1,8 +1,10 @@
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+import { useQuery, useQueryClient } from 'react-query';
 
 import { User, UserInterface, UserModalData, UserRole } from 'types/user';
 
 import { Button, Input } from 'components';
+import { getUserByEmail } from 'api/users';
 
 const defaultUser: UserModalData = {
   name: '',
@@ -15,29 +17,47 @@ const defaultUser: UserModalData = {
 interface Props {
   data: UserInterface;
   buttonText: string;
-  userAction: (user: User) => Promise<void>;
+  onSubmit: (user: User) => void;
 }
 
-const UserModalForm = ({ data, userAction, buttonText }: Props) => {
-  const [user, setNewUser] = useState<UserModalData>(defaultUser);
-  const { name, lastName, email, gender, role } = user;
+const UserModalForm = ({ data, onSubmit, buttonText }: Props) => {
+  const queryClient = useQueryClient();
 
-  useEffect(() => setNewUser(data ? { ...data } : defaultUser), [data]);
+  const [user, setUser] = useState<UserModalData>(defaultUser);
+  const { name, lastName, email, gender, role } = user;
+  const { email: initialEmail } = data || defaultUser;
 
   const handleChange = (
     event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
-    setNewUser((prevUserData) => ({
+    setUser((prevUserData) => ({
       ...prevUserData,
       [name]: value,
     }));
   };
 
-  const handleSubmit = async (event: FormEvent) => {
+  const { data: userWithEmail } = useQuery(
+    ['user', email],
+    () => getUserByEmail(email),
+    {
+      enabled: !!email,
+    }
+  );
+
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    await userAction(user as User);
+
+    if (userWithEmail && email !== initialEmail) {
+      alert('User registered with this email already exists.');
+      queryClient.invalidateQueries(userWithEmail);
+      return;
+    }
+
+    onSubmit(user as User);
   };
+
+  useEffect(() => setUser(data ? { ...data } : defaultUser), [data]);
 
   return (
     <form className='form' onSubmit={handleSubmit}>

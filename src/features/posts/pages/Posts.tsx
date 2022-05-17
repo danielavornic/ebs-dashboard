@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
 import { FiPlus } from 'react-icons/fi';
 
@@ -30,7 +30,6 @@ const initialModal = {
 };
 
 const Posts = () => {
-  const navigate = useNavigate();
   const queryClient = useQueryClient();
   const { user } = useUserContext();
 
@@ -59,15 +58,11 @@ const Posts = () => {
         />
       </Modal>
       <PageTitleBar title='Posts'>
-        <Button
-          state='primary'
-          type='button'
-          size='medium'
-          icon={<FiPlus />}
-          onClick={() => navigate('/posts/create')}
-        >
-          Create post
-        </Button>
+        <Link to='/posts/create'>
+          <Button state='primary' type='button' size='medium' icon={<FiPlus />}>
+            Create post
+          </Button>
+        </Link>
       </PageTitleBar>
       {isLoading && <Spinner />}
       {isSuccess && (

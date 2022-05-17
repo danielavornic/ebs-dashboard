@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
-import { FiImage } from 'react-icons/fi';
 import axios from 'axios';
+import { useQuery } from 'react-query';
+import { FiImage } from 'react-icons/fi';
 
 interface Props {
   imageUrl: string;
@@ -8,31 +9,35 @@ interface Props {
   setIsImageValid?: Dispatch<SetStateAction<boolean>>;
 }
 
+const getImageBlob = async (imageUrl: string) => {
+  const response = await axios.get(imageUrl, { responseType: 'blob' });
+  return response.data;
+};
+
 const PostImage = ({
   imageUrl,
   isImageValid = true,
   setIsImageValid,
 }: Props) => {
+  const { data: imageBlob, isSuccess } = useQuery(
+    ['imageBlob', imageUrl],
+    () => getImageBlob(imageUrl),
+    {
+      enabled: !!imageUrl && !!setIsImageValid,
+    }
+  );
+
   useEffect(() => {
     if (setIsImageValid) {
-      const checkImg = async () => {
-        const res = await axios.get(imageUrl, {
-          responseType: 'blob',
-        });
-
-        setIsImageValid(
-          res.status === 200 ? res.data.type.startsWith('image/') : false
-        );
-      };
-
-      if (imageUrl.includes('https://images.unsplash.com/photo')) {
-        checkImg();
-      } else {
+      if (!imageUrl.includes('https://images.unsplash.com/photo')) {
         setIsImageValid(false);
+        return;
       }
+
+      setIsImageValid(isSuccess ? imageBlob.type.startsWith('image/') : false);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [imageUrl]);
+  }, [imageBlob]);
 
   return (
     <div className='mb-24'>

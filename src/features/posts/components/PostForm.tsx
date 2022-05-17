@@ -1,4 +1,4 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 
 import { PostInterface } from 'types/post';
 import useUserContext from 'hooks/useUserContext';
@@ -9,7 +9,7 @@ import PostEditor from './PostEditor';
 
 interface Props {
   post?: PostInterface;
-  postAction: (post: PostInterface) => Promise<void>;
+  postAction: (post: PostInterface) => void;
 }
 
 const blankPost = {
@@ -30,15 +30,13 @@ const PostForm = ({ post: data, postAction }: Props) => {
   const { title, content, date, image, author } = post;
 
   const handleChange = (
-    event:
-      | React.ChangeEvent<HTMLInputElement>
-      | React.ChangeEvent<HTMLTextAreaElement>
+    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
   ) => {
     const { name, value } = event.target;
     setPost((prevPost) => ({ ...prevPost, [name]: value }));
   };
 
-  const handleSubmit = async (event: FormEvent) => {
+  const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     if (!isImageValid) {
@@ -51,7 +49,7 @@ const PostForm = ({ post: data, postAction }: Props) => {
       return;
     }
 
-    await postAction(post);
+    postAction(post);
   };
 
   useEffect(() => data && setPost({ ...data }), [data]);
