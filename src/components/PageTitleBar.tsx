@@ -2,12 +2,12 @@ import { PropsWithChildren } from 'react';
 
 export const PageTitleBar = ({
   title,
-  children: button,
+  children,
 }: PropsWithChildren<{ title: string }>) => {
   return (
-    <div className='page-title-bar mt-40 mb-36'>
+    <div className='page-title-bar mt-60 mb-24'>
       <h2 className='capitalized'>{title}</h2>
-      {button}
+      {children}
     </div>
   );
 };
