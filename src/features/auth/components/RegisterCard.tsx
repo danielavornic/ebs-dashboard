@@ -32,40 +32,34 @@ const RegisterCard = () => {
   const handleSubmit = (userCredentials: RegisterCredentials) => {
     const {
       email: emailErrors,
-      password: passwordErrors,
-      confirmPassword: confirmPasswordErrors,
+      password: passErrors,
+      confirmPassword: confirmPassErrors,
     } = getRegisterFieldsErrors(users, userCredentials);
 
-    form.setFields([
-      {
-        name: 'email',
-        value: userCredentials.email,
-        errors: emailErrors,
-      },
-      {
-        name: 'password',
-        value: userCredentials.password,
-        errors: passwordErrors,
-      },
-      {
-        name: 'confirmPassword',
-        value: userCredentials.confirmPassword,
-        errors: confirmPasswordErrors,
-      },
-    ]);
-
-    if (
-      emailErrors.length === 0 &&
-      passwordErrors.length === 0 &&
-      confirmPasswordErrors.length === 0
-    ) {
-      delete userCredentials.terms;
-      delete userCredentials.confirmPassword;
-      registerUserMutation.mutate({
-        ...userCredentials,
-        role: UserRole.Moderator,
-      });
+    if (emailErrors.length || passErrors.length || confirmPassErrors.length) {
+      form.setFields([
+        {
+          name: 'email',
+          errors: emailErrors,
+        },
+        {
+          name: 'password',
+          errors: passErrors,
+        },
+        {
+          name: 'confirmPassword',
+          errors: confirmPassErrors,
+        },
+      ]);
+      return;
     }
+
+    delete userCredentials.terms;
+    delete userCredentials.confirmPassword;
+    registerUserMutation.mutate({
+      ...userCredentials,
+      role: UserRole.Moderator,
+    });
   };
 
   return (

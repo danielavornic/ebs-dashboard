@@ -14,31 +14,32 @@ const LoginCard = () => {
   const { data: users } = useQuery('users', fetchUsers);
 
   const handleSubmit = ({ email, password }: LoginCredentials) => {
-    const { email: emailErrors, password: passwordErrors } =
-      getLoginFieldsErrors(users, { email, password });
+    const { email: emailErrors, password: passErrors } = getLoginFieldsErrors(
+      users,
+      { email, password }
+    );
 
-    form.setFields([
-      {
-        name: 'email',
-        value: email,
-        errors: emailErrors,
-      },
-      {
-        name: 'password',
-        value: password,
-        errors: passwordErrors,
-      },
-    ]);
-
-    if (emailErrors.length === 0 && passwordErrors.length === 0) {
-      const user = users?.find(
-        (user: UserInterface) =>
-          user.email === email && user.password === password
-      );
-      setUser(user);
-      setIsLogged(true);
-      localStorage.setItem('userId', user.id);
+    if (emailErrors.length || passErrors.length) {
+      form.setFields([
+        {
+          name: 'email',
+          errors: emailErrors,
+        },
+        {
+          name: 'password',
+          errors: passErrors,
+        },
+      ]);
+      return;
     }
+
+    const user = users?.find(
+      (user: UserInterface) =>
+        user.email === email && user.password === password
+    );
+    setUser(user);
+    setIsLogged(true);
+    localStorage.setItem('userId', user.id);
   };
 
   return (
