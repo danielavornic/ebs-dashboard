@@ -1,10 +1,8 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
-import { useQuery, useQueryClient } from 'react-query';
+import { useQuery } from 'react-query';
+import { Button, Form, Input, Modal, Select, Space, useForm } from 'ebs-design';
 
 import { User, UserInterface, UserModalData, UserRole } from 'types/user';
-
-import { Button, Input } from 'components';
-import { getUserByEmail } from 'api/users';
+import { fetchUsers } from 'api/users';
 
 const defaultUser: UserModalData = {
   name: '',
@@ -18,129 +16,145 @@ interface Props {
   data: UserInterface;
   buttonText: string;
   onSubmit: (user: User) => void;
+  onCancel: () => void;
 }
 
-const UserModalForm = ({ data, onSubmit, buttonText }: Props) => {
-  const queryClient = useQueryClient();
+const UserModalForm = ({ data, onSubmit, buttonText, onCancel }: Props) => {
+  const [form] = useForm();
 
-  const [user, setUser] = useState<UserModalData>(defaultUser);
-  const { name, lastName, email, gender, role } = user;
+  const { data: users } = useQuery('users', fetchUsers);
+
   const { email: initialEmail } = data || defaultUser;
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>
-  ) => {
-    const { name, value } = event.target;
-    setUser((prevUserData) => ({
-      ...prevUserData,
-      [name]: value,
-    }));
-  };
+  const handleSubmit = (values: UserModalData) => {
+    const userWithEmail = users?.find(
+      (user: UserInterface) => user.email === values.email
+    );
 
-  const { data: userWithEmail } = useQuery(
-    ['user', email],
-    () => getUserByEmail(email),
-    {
-      enabled: !!email,
-    }
-  );
-
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-
-    if (userWithEmail && email !== initialEmail) {
-      alert('User registered with this email already exists.');
-      queryClient.invalidateQueries(userWithEmail);
+    if (userWithEmail && userWithEmail.email !== initialEmail) {
+      form.setFields([
+        {
+          name: 'email',
+          errors: ['Another user with this email already exists'],
+        },
+      ]);
       return;
     }
 
-    onSubmit(user as User);
+    onSubmit({ ...values, id: data?.id } as User);
   };
 
-  useEffect(() => setUser(data ? { ...data } : defaultUser), [data]);
-
   return (
-    <form className='form' onSubmit={handleSubmit}>
-      <div className='form__group'>
-        <label htmlFor='name' hidden>
-          Name
-        </label>
-        <Input
-          type='text'
-          placeholder='Name'
-          name='name'
-          id='name'
-          width='full'
-          value={name}
-          onChange={handleChange}
-        />
-      </div>
-      <div className='form__group'>
-        <label htmlFor='lastName' hidden>
-          Last name
-        </label>
-        <Input
-          type='text'
-          placeholder='Last name'
-          name='lastName'
-          id='last-name'
-          width='full'
-          value={lastName}
-          onChange={handleChange}
-        />
-      </div>
-      <div className='form__group'>
-        <label htmlFor='email' hidden>
-          E-mail
-        </label>
-        <Input
-          type='email'
-          placeholder='E-mail'
-          name='email'
-          id='email'
-          width='full'
-          value={email}
-          onChange={handleChange}
-        />
-      </div>
-      <div className='form__group'>
-        <label htmlFor='gender' hidden>
-          Gender
-        </label>
-        <select
-          name='gender'
-          id='gender'
-          onChange={handleChange}
-          required
-          value={gender}
+    <>
+      <Modal.Content>
+        <Form
+          form={form}
+          id='userForm'
+          onFinish={handleSubmit}
+          initialValues={{
+            name: data?.name || '',
+            lastName: data?.lastName || '',
+            email: data?.email || '',
+            gender: data?.gender || '',
+            role: data?.role || '',
+          }}
         >
-          <option value='' disabled hidden>
-            Gender
-          </option>
-          <option value='Male'>Male</option>
-          <option value='Female'>Female</option>
-          <option value='Prefer not to say'>Prefer not to say</option>
-        </select>
-      </div>
-      <div className='form__group'>
-        <label htmlFor='role' hidden>
-          Role
-        </label>
-        <select name='role' id='role' onChange={handleChange} value={role}>
-          <option value='' disabled hidden>
-            Role
-          </option>
-          <option value={UserRole.Moderator}>Moderator</option>
-          <option value={UserRole.Admin}>Administrator</option>
-        </select>
-      </div>
-
-      <div className='form__btn'>
-        <Button type='submit' state='primary' size='block'>
-          {buttonText}
-        </Button>
-      </div>
-    </form>
+          <Form.Field
+            label='Name'
+            name='name'
+            hideLabel
+            rules={[{ required: true }]}
+          >
+            <Input
+              type='text'
+              placeholder='First Name'
+              size='medium'
+              autoComplete='on'
+            />
+          </Form.Field>
+          <Form.Field
+            label='Last Name'
+            name='lastName'
+            hideLabel
+            rules={[{ required: true }]}
+          >
+            <Input
+              size='medium'
+              type='text'
+              placeholder='Last Name'
+              autoComplete='on'
+            />
+          </Form.Field>
+          <Form.Field
+            label='E-mail'
+            name='email'
+            hideLabel
+            rules={[{ required: true }]}
+          >
+            <Input
+              type='email'
+              placeholder='E-mail'
+              size='medium'
+              autoComplete='on'
+            />
+          </Form.Field>
+          <Form.Field
+            label='Gender'
+            name='gender'
+            hideLabel
+            rules={[{ required: true }]}
+          >
+            <Select
+              options={[
+                {
+                  text: 'Male',
+                  value: 'Male',
+                },
+                {
+                  text: 'Female',
+                  value: 'Female',
+                },
+                {
+                  text: 'Prefer not to say',
+                  value: 'Prefer not to say',
+                },
+              ]}
+              placeholder='Gender'
+            />
+          </Form.Field>
+          <Form.Field
+            label='Role'
+            name='role'
+            hideLabel
+            rules={[{ required: true }]}
+          >
+            <Select
+              options={[
+                {
+                  text: 'Moderator',
+                  value: UserRole.Moderator,
+                },
+                {
+                  text: 'Admin',
+                  value: UserRole.Admin,
+                },
+              ]}
+              placeholder='Role'
+            />
+          </Form.Field>
+        </Form>
+      </Modal.Content>
+      <Modal.Footer>
+        <Space justify='space-between'>
+          <Button type='ghost' onClick={onCancel}>
+            Cancel
+          </Button>
+          <Button type='primary' form='userForm' submit>
+            {buttonText}
+          </Button>
+        </Space>
+      </Modal.Footer>
+    </>
   );
 };
 

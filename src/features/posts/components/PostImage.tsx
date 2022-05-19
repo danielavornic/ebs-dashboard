@@ -1,10 +1,10 @@
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import axios from 'axios';
 import { useQuery } from 'react-query';
-import { FiImage } from 'react-icons/fi';
 
 interface Props {
   imageUrl: string;
+  height: number;
   isImageValid?: boolean;
   setIsImageValid?: Dispatch<SetStateAction<boolean>>;
 }
@@ -16,6 +16,7 @@ const getImageBlob = async (imageUrl: string) => {
 
 const PostImage = ({
   imageUrl,
+  height,
   isImageValid = true,
   setIsImageValid,
 }: Props) => {
@@ -29,7 +30,7 @@ const PostImage = ({
 
   useEffect(() => {
     if (setIsImageValid) {
-      if (!imageUrl.includes('https://images.unsplash.com/photo')) {
+      if (!imageUrl.includes('https://images.unsplash.com')) {
         setIsImageValid(false);
         return;
       }
@@ -42,13 +43,9 @@ const PostImage = ({
   return (
     <div className='mb-24'>
       {isImageValid ? (
-        <img className='post-image' src={imageUrl} alt='Post' />
+        <img className={`h-${height}`} src={imageUrl} alt='Post' />
       ) : (
-        <div className='post-image-placeholder'>
-          <div className='post-image-placeholder__icon'>
-            <FiImage fontSize={100} />
-          </div>
-        </div>
+        <div className='h-400 bg-primary-pattern' />
       )}
     </div>
   );

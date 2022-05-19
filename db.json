@@ -14,61 +14,43 @@
       "lastName": "roy",
       "email": "shiv@m.com",
       "gender": "Female",
-      "role": "administrator",
       "password": "dddddddd",
+      "role": "administrator",
       "id": 6
     },
     {
-      "name": "max",
-      "lastName": "ddd",
-      "email": "kendallroy@gmail.com",
-      "gender": "Female",
+      "name": "kendall",
+      "lastName": "roy",
+      "email": "ken@m.com",
+      "password": "dddddddd",
+      "gender": "Male",
       "role": "moderator",
       "id": 7
     },
     {
       "name": "jessica",
       "lastName": "gd",
-      "email": "d@m.com",
-      "gender": "Female",
+      "email": "jess@m.com",
       "password": "dddddddd",
+      "gender": "Prefer not to say",
       "role": "moderator",
       "id": 9
     },
     {
-      "name": "claire",
-      "lastName": "b",
-      "email": "claire@m.com",
-      "gender": "Prefer not to say",
+      "name": "dcscfs",
+      "lastName": "boucher",
+      "email": "claire@mail.com",
+      "gender": "Male",
       "role": "moderator",
       "id": 10
     },
     {
-      "name": "dan",
-      "lastName": "jacobs",
-      "email": "dan@m.md",
-      "gender": "Male",
-      "password": "dddddddd",
+      "name": "mod",
+      "lastName": "test",
+      "email": "mod@m.com",
+      "gender": "Prefer not to say",
       "role": "moderator",
       "id": 11
-    },
-    {
-      "name": "sds",
-      "lastName": "dsds",
-      "email": "d@m.rk",
-      "gender": "Male",
-      "password": "dddddddd",
-      "role": "moderator",
-      "id": 14
-    },
-    {
-      "name": "ff",
-      "lastName": "fff",
-      "email": "email@md.df",
-      "gender": "Female",
-      "password": "dddddddd",
-      "role": "moderator",
-      "id": 16
     }
   ],
   "posts": [
@@ -80,15 +62,6 @@
       "date": "2022-04-26",
       "image": "https://images.unsplash.com/photo-1496765981355-7b4cbdbf7b96?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       "id": 6
-    },
-    {
-      "title": "sds",
-      "content": "<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deser<strong>unt mollit anim id est laborum.</strong></span></p>\n<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\"><strong>kj</strong></span></p>\n<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\"><strong>so heavy i fell throught the earth</strong></span></p>\n<p style=\"text-align: left;\"><span style=\"font-size: 18pt;\"><strong>memee</strong></span></p>",
-      "author": "admin admin",
-      "authorId": 5,
-      "date": "2022-05-12",
-      "image": "https://images.unsplash.com/photo-1582769923195-c6e60dc1d8dc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
-      "id": 7
     },
     {
       "title": "ddfs",
@@ -119,21 +92,21 @@
     },
     {
       "title": "walls are made for climbing",
-      "content": "<p><span style=\"font-size: 14pt;\">&ldquo;Before he dies, all his experiences in these long years gather themselves in his head to one point, a ques-tion he has not yet asked the doorkeeper. He waves him nearer, since he can no longer raise his stiffening body. The doorkeeper has to bend low towards him, for the difference in height between them has altered much to the man's disadvantage. \"What do you want to know now?\" asks the doorkeeper; \"you are insati-able.\" \"Everyone strives to reach the Law,\" says the man, \"so how does it happen that for all these many years no one but myself has ever begged for admit-tance?\" The doorkeeper recognizes that the man has reached his end, and to let his failing senses catch the words roars in his ear: \"No one else could ever be admitted here, since this gate was made only for you. I am now going to shut it.&rdquo;</span></p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>",
-      "author": "daria gh",
+      "image": "https://images.unsplash.com/photo-1538947151057-dfe933d688d1?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470",
       "date": "2022-05-10",
-      "image": "https://images.unsplash.com/photo-1558481795-7f0a7c906f5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2096&q=80",
-      "id": 14,
-      "authorId": 11
+      "content": "<p><span style=\"font-size: 14pt;\">&ldquo;Before he dies, all his experiences in these long years gather themselves in his head to one point, a question he has not yet asked the doorkeeper. He waves him nearer, since he can no longer raise his stiffening body. The doorkeeper has to bend low towards him, for the difference in height between them has altered much to the man's disadvantage. \"What do you want to know now?\" asks the doorkeeper; \"you are insati-able.\" \"Everyone strives to reach the Law,\" says the man, \"so how does it happen that for all these many years no one but myself has ever begged for admit-tance?\" The doorkeeper recognizes that the man has reached his end, and to let his failing senses catch the words roars in his ear: \"No one else could ever be admitted here, since this gate was made only for you. I am now going to shut it.&rdquo;</span></p>\n<p>&nbsp;</p>\n<p>&nbsp;</p>",
+      "author": "daria gh",
+      "authorId": 11,
+      "id": 14
     },
     {
-      "title": "may 10th",
-      "content": "<p>jkdjdkj&nbsp; kfsj</p>",
-      "author": "daria gh",
+      "title": "may 12th",
+      "image": "https://images.unsplash.com/photo-1486520299386-6d106b22014b?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1469",
       "date": "2022-05-10",
-      "image": "https://images.unsplash.com/photo-1615098183516-a32f84b8105f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80",
-      "id": 15,
-      "authorId": 11
+      "content": "<p>burial</p>",
+      "author": "admin admin",
+      "authorId": 5,
+      "id": 15
     },
     {
       "title": "may 10th (2)",
@@ -145,67 +118,13 @@
       "authorId": 11
     },
     {
-      "title": "excerpt form 'the metamorphosis'",
+      "title": "excerpt from 'the metamorphosis'",
+      "image": "https://images.unsplash.com/photo-1508311603478-ce574376c3cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
+      "date": "2022-05-08",
       "content": "<p><em><span style=\"font-size: 18pt;\">When Gregor Samsa woke up one morning from unsettling dreams, he found himself changed in his bed into a monstrous vermin. He was lying on his back as hard as armor plate, and when he lifted his head a little, he saw his vaulted brown belly, sectioned by arch-shaped ribs, to whose dome the cover, about to slide off completely, could barely cling. His many legs, pitifully thin compared with the size of the rest of him, were waving helplessly before his eyes. \"What's happened to me?\" he thought. It was no dream. His room, a regular human room, only a little on the small side, lay quiet between the four familiar walls. Over the table, on which an unpacked line of fabric samples was all spread out--Samsa was a traveling salesman--hung the picture which he had recently cut out of a glossy magazine and lodged in a pretty gilt frame. It showed a lady done up in a fur hat and a fur boa, sitting upright and raising up against the viewer a heavy fur muff in which her whole forearm had disappeared.</span></em></p>",
       "author": "shiv roy",
-      "date": "2022-05-08",
-      "image": "https://images.unsplash.com/photo-1508311603478-ce574376c3cf?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1471&q=80",
-      "id": 18,
-      "authorId": 6
-    },
-    {
-      "title": "post by jessica  uuuuu (edited)",
-      "content": "<p><span style=\"font-size: 14pt;\">some text there and theree&nbsp;</span></p>\n<p><em><span style=\"font-size: 14pt;\">edited by admin</span></em></p>\n<p><em><span style=\"font-size: 14pt;\">fscds</span></em></p>",
-      "author": "jessica gd",
-      "date": "2022-05-17",
-      "image": "https://images.unsplash.com/photo-1607499457689-3fd1ac3ffcdd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "id": 22,
-      "authorId": 9
-    },
-    {
-      "title": "kjsd",
-      "content": "<p><span style=\"font-size: 14pt;\">djfjdfjcdjjd&nbsp;</span></p>\n<h3 dir=\"auto\"><span style=\"font-size: 14pt;\">rarii care vor fi folosite</span></h3>\n<ul dir=\"auto\">\n<li><span style=\"font-size: 14pt;\">typescript - pentru tipizarea codului</span></li>\n<li><span style=\"font-size: 14pt;\">axios - pentru a face request-uri catre API-ul de pe server</span></li>\n<li><span style=\"font-size: 14pt;\">json-server - pentru a crea un server local cu baza de date</span></li>\n<li><span style=\"font-size: 14pt;\">react-router-dom - pentru a folosi rutarea</span></li>\n<li><span style=\"font-size: 14pt;\">rechart - pentru a folosi grafice</span></li>\n</ul>",
-      "author": "admin admin",
-      "authorId": 5,
-      "date": "2022-05-16",
-      "image": "https://images.unsplash.com/photo-1616001089004-04948fc0e6c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "id": 23
-    },
-    {
-      "title": "youll miss me when im not around",
-      "content": "<p>dvdvs</p>",
-      "author": "admin admin",
-      "authorId": 5,
-      "date": "2022-05-13",
-      "image": "https://images.unsplash.com/photo-1558481795-7f0a7c906f5e?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1496&q=80",
-      "id": 24
-    },
-    {
-      "title": "oh no it came",
-      "content": "<p><span style=\"font-size: 18pt;\">dont know its on sweeter than a sugar cane</span></p>\n<p><span style=\"font-size: 18pt;\">whatever that means</span></p>",
-      "author": "admin admin",
-      "authorId": 5,
-      "date": "2022-05-16",
-      "image": "https://images.unsplash.com/photo-1583339522870-0d9f28cef33f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "id": -1
-    },
-    {
-      "title": "ffgg",
-      "content": "<p>ffff</p>",
-      "author": "jessica dd",
-      "authorId": 10,
-      "date": "2022-05-18",
-      "image": "https://images.unsplash.com/photo-1616001089004-04948fc0e6c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "id": 25
-    },
-    {
-      "title": "ff",
-      "content": "<p>ff</p>",
-      "author": "jessica dd",
-      "authorId": 10,
-      "date": "2022-05-10",
-      "image": "https://images.unsplash.com/photo-1570284613060-766c33850e00?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
-      "id": 26
+      "authorId": 6,
+      "id": 18
     },
     {
       "title": "4am",
@@ -215,6 +134,33 @@
       "date": "2022-05-09",
       "image": "https://images.unsplash.com/photo-1616001089004-04948fc0e6c1?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470&q=80",
       "id": 27
+    },
+    {
+      "title": "test new post ",
+      "image": "https://images.unsplash.com/photo-1530533718754-001d2668365a?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470",
+      "date": "2022-05-18",
+      "content": "<p>test hello</p>\n<p>edited</p>",
+      "author": "admin admin",
+      "authorId": 5,
+      "id": 28
+    },
+    {
+      "title": "post by mod (edited by admin)",
+      "image": "https://images.unsplash.com/photo-1523633589114-88eaf4b4f1a8?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1470",
+      "date": "2022-05-18",
+      "content": "<p>scjcfjkckscs</p>",
+      "author": "mod test",
+      "authorId": 11,
+      "id": 29
+    },
+    {
+      "title": "sjfcsf",
+      "image": "https://images.unsplash.com/photo-1484581400079-58a319a15a2a?crop=entropy&cs=tinysrgb&fm=jpg&ixlib=rb-1.2.1&q=80&raw_url=true&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=692",
+      "date": "2022-05-11",
+      "content": "<p>dd</p>",
+      "author": "admin admin",
+      "authorId": 5,
+      "id": 30
     }
   ]
 }

@@ -1,15 +1,15 @@
 import { Navigate, Outlet } from 'react-router-dom';
 
 import useUserContext from '../hooks/useUserContext';
-import { Layout } from 'components';
+import { PanelLayout } from 'components';
 
 const PrivateRoute = () => {
   const { isLogged } = useUserContext();
 
   return isLogged ? (
-    <Layout>
+    <PanelLayout>
       <Outlet />
-    </Layout>
+    </PanelLayout>
   ) : (
     <Navigate to='/login' />
   );

@@ -1,21 +1,14 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useMutation, useQuery, useQueryClient } from 'react-query';
-import { FiPlus } from 'react-icons/fi';
+import { Button, Card, Col, Icon, Loader, Modal, Row, Space } from 'ebs-design';
 
 import { PostInterface } from 'types/post';
 import { UserRole } from 'types/user';
 import { deletePost, fetchPosts } from 'api/posts';
 import useUserContext from 'hooks/useUserContext';
 
-import {
-  Button,
-  ConfirmationModalContent,
-  Grid,
-  Modal,
-  PageTitleBar,
-  Spinner,
-} from 'components';
+import { ConfirmationModalContent, PageTitleBar } from 'components';
 import PostCard from '../components/PostCard';
 
 const sortPosts = (posts: PostInterface[]) =>
@@ -25,7 +18,7 @@ const sortPosts = (posts: PostInterface[]) =>
   );
 
 const initialModal = {
-  isHidden: true,
+  isOpen: false,
   postId: -1,
 };
 
@@ -47,53 +40,60 @@ const Posts = () => {
   return (
     <>
       <Modal
-        title='Delete post'
-        hidden={modal.isHidden}
-        toggleModal={() => setModal({ ...modal, isHidden: !modal.isHidden })}
+        closeOnClickOutside
+        onClose={() => setModal(initialModal)}
+        title={'Delte post'}
+        open={modal.isOpen}
+        size='small'
       >
         <ConfirmationModalContent
           title='Are you sure you want to delete this post?'
           buttonText='Delete'
           onConfirm={() => deletePostMutation.mutate(modal.postId)}
+          onCancel={() => setModal(initialModal)}
         />
       </Modal>
       <PageTitleBar title='Posts'>
         <Link to='/posts/create'>
-          <Button state='primary' type='button' size='medium' icon={<FiPlus />}>
+          <Button type='primary' size='medium' prefix={<Icon type='create' />}>
             Create post
           </Button>
         </Link>
       </PageTitleBar>
-      {isLoading && <Spinner />}
+      {isLoading && <Loader loading />}
       {isSuccess && (
         <>
           {sortPosts(posts).length > 0 ? (
-            <Grid spacing={1} cols={4}>
+            <Row>
               {posts.map((post: PostInterface) => (
-                <PostCard key={post.id} post={post}>
-                  {(user?.id === post.authorId ||
-                    user?.role === UserRole.Admin) && (
-                    <div className='post-card__buttons mt-24'>
-                      <Link to={`/posts/${post.id}/edit`} className='mr-12'>
-                        <Button state='primary' type='button' size='small'>
-                          Edit
-                        </Button>
-                      </Link>
-                      <Button
-                        state='danger'
-                        type='button'
-                        size='small'
-                        onClick={() =>
-                          setModal({ isHidden: false, postId: post.id })
-                        }
-                      >
-                        Delete
-                      </Button>
-                    </div>
-                  )}
-                </PostCard>
+                <Col size={3} key={post.id}>
+                  <PostCard post={post}>
+                    {((user?.id === post.authorId &&
+                      `${user?.name} ${user?.lastName}` === post.author) ||
+                      user?.role === UserRole.Admin) && (
+                      <Card.Footer>
+                        <Space justify='end'>
+                          <Link to={`/posts/${post.id}/edit`}>
+                            <Button type='primary' size='small'>
+                              Edit
+                            </Button>
+                          </Link>
+                          <Button
+                            type='fill'
+                            size='small'
+                            onClick={() =>
+                              setModal({ isOpen: true, postId: post.id })
+                            }
+                          >
+                            Delete
+                          </Button>
+                        </Space>
+                      </Card.Footer>
+                    )}
+                  </PostCard>
+                </Col>
               ))}
-            </Grid>
+            </Row>
           ) : (
             <>
               <h2 className='mb-24'>No posts yet</h2>

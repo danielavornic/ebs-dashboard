@@ -27,11 +27,11 @@ const AppRoutes = () => (
         <Route path='/posts/:id' element={<Post action={PostActions.View} />} />
         <Route
           path='/posts/:id/edit'
-          element={<Post action={PostActions.Edit} />}
+          element={<Post action={PostActions.Edit} title='Edit post' />}
         />
         <Route
           path='/posts/create'
-          element={<Post action={PostActions.Create} />}
+          element={<Post action={PostActions.Create} title='Create post' />}
         />
       </Route>
     </Routes>

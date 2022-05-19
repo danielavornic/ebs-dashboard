@@ -1,14 +1,12 @@
 import { Dispatch, SetStateAction } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 
-import { PostInterface } from 'types/post';
-
 interface Props {
   content: string;
-  setPost: Dispatch<SetStateAction<PostInterface>>;
+  setContent: Dispatch<SetStateAction<string>>;
 }
 
-const PostEditor = ({ content, setPost }: Props) => {
+const PostEditor = ({ content, setContent }: Props) => {
   return (
     <Editor
       id='content'
@@ -26,16 +24,10 @@ const PostEditor = ({ content, setPost }: Props) => {
         'undo redo | fontsize | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link | searchreplace | fullscreen'
       }
       value={content}
-      onEditorChange={(newValue) =>
-        setPost((prevPost) => ({
-          ...prevPost,
-          content: newValue,
-        }))
-      }
+      onEditorChange={(newValue) => setContent(newValue)}
       init={{
         minHeight: 400,
         menubar: false,
-        content_style: 'body { color: #a3aed0; }',
       }}
     />
   );

@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 import { Link } from 'react-router-dom';
-import { FiCalendar, FiUser } from 'react-icons/fi';
+import { Card, Icon } from 'ebs-design';
 
 import { PostInterface } from 'types/post';
 
@@ -18,25 +18,29 @@ const PostCard = ({
   const { id, title, content, date, image, author } = post;
 
   return (
-    <div className='post-card'>
+    <Card className='mb-40'>
       <div
-        className='post-card__image mb-24'
+        className='h-250 bg-cover'
         style={{ backgroundImage: `url(${image})` }}
       />
-      <h3 className='post-card__title mb-24'>{title}</h3>
-      <PostDetail icon={<FiCalendar />} value={date} />
-      <PostDetail icon={<FiUser />} value={author} />
-      <div
-        className='mt-24 '
-        dangerouslySetInnerHTML={{
-          __html: formatContent(content),
-        }}
-      />
-      <p className='post-card__more mt-12'>
-        <Link to={`/posts/${id}`}>Read more</Link>
-      </p>
+      <Card.Header>
+        <h2 className='mb-24'>{title}</h2>
+        <PostDetail icon={<Icon type='calendar' />} value={date} />
+        <PostDetail icon={<Icon type='users' />} value={author} />
+      </Card.Header>
+      <Card.Body>
+        <div
+          className='mt-24'
+          dangerouslySetInnerHTML={{
+            __html: formatContent(content),
+          }}
+        />
+        <p className='mt-12'>
+          <Link to={`/posts/${id}`}>Read more</Link>
+        </p>
+      </Card.Body>
       {buttons}
-    </div>
+    </Card>
   );
 };
 

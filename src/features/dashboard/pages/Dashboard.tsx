@@ -8,12 +8,13 @@ import {
   XAxis,
   YAxis,
 } from 'recharts';
+import { Col, Loader, Row } from 'ebs-design';
 
 import { fetchPosts } from 'api/posts';
 import { fetchUsers } from 'api/users';
 import { getPostCountPerDate, getPostCountPerUser } from 'utils/charts';
 
-import { Grid, PageTitleBar, Spinner } from 'components';
+import { PageTitleBar } from 'components';
 import ChartContainer from '../components/ChartContainer';
 
 export interface PostCountPerDate {
@@ -35,28 +36,32 @@ const Dashboard = () => {
     <>
       <PageTitleBar title='Dashboard' />
       {arePostsLoading || areUsersLoading ? (
-        <Spinner />
+        <Loader loading />
       ) : (
-        <Grid spacing={1} cols={2}>
-          <ChartContainer title='Posts per user'>
-            <ResponsiveContainer width='100%' height={300}>
-              <BarChart data={getPostCountPerUser(users, posts)}>
-                <XAxis dataKey='name' />
-                <YAxis allowDecimals={false} />
-                <Bar dataKey='postsCount' radius={[10, 10, 0, 0]} />
-              </BarChart>
-            </ResponsiveContainer>
-          </ChartContainer>
-          <ChartContainer title='Posts over time'>
-            <ResponsiveContainer width='100%' height={300}>
-              <LineChart data={getPostCountPerDate(posts)}>
-                <XAxis dataKey='date' />
-                <YAxis allowDecimals={false} />
-                <Line dataKey='count' type='monotone' />
-              </LineChart>
-            </ResponsiveContainer>
-          </ChartContainer>
-        </Grid>
+        <Row>
+          <Col size={6}>
+            <ChartContainer title='Posts per user'>
+              <ResponsiveContainer width='100%' height={300}>
+                <BarChart data={getPostCountPerUser(users, posts)}>
+                  <XAxis dataKey='name' />
+                  <YAxis allowDecimals={false} />
+                  <Bar dataKey='postsCount' radius={[10, 10, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </ChartContainer>
+          </Col>
+          <Col size={6}>
+            <ChartContainer title='Posts over time'>
+              <ResponsiveContainer width='100%' height={300}>
+                <LineChart data={getPostCountPerDate(posts)}>
+                  <XAxis dataKey='date' />
+                  <YAxis allowDecimals={false} />
+                  <Line dataKey='count' type='monotone' />
+                </LineChart>
+              </ResponsiveContainer>
+            </ChartContainer>
+          </Col>
+        </Row>
       )}
     </>
   );

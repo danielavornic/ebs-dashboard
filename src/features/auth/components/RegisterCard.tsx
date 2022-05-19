@@ -1,13 +1,5 @@
 import { useMutation, useQuery } from 'react-query';
-import {
-  Card,
-  Checkbox,
-  Form,
-  Input,
-  Select,
-  Button,
-  useForm,
-} from 'ebs-design';
+import { Card, Form, Input, Select, Button, useForm, Radio } from 'ebs-design';
 
 import { RegisterCredentials, UserRole } from 'types/user';
 import { registerUser, fetchUsers } from 'api/users';
@@ -34,6 +26,7 @@ const RegisterCard = () => {
       email: emailErrors,
       password: passErrors,
       confirmPassword: confirmPassErrors,
+      terms: termsErrors,
     } = getRegisterFieldsErrors(users, userCredentials);
 
     if (emailErrors.length || passErrors.length || confirmPassErrors.length) {
@@ -49,6 +42,10 @@ const RegisterCard = () => {
         {
           name: 'confirmPassword',
           errors: confirmPassErrors,
+        },
+        {
+          name: 'terms',
+          errors: termsErrors,
         },
       ]);
       return;
@@ -69,17 +66,25 @@ const RegisterCard = () => {
         <p>Enter your details to create your account.</p>
       </Card.Header>
       <Card.Body>
-        <Form form={form} onFinish={handleSubmit} id='form'>
+        <Form
+          form={form}
+          id='registerForm'
+          onFinish={handleSubmit}
+          initialValues={{
+            name: '',
+            lastName: '',
+            email: '',
+            gender: '',
+            password: '',
+            confirmPassword: '',
+            terms: false,
+          }}
+        >
           <Form.Field
             label='Name'
             name='name'
             hideLabel
-            initialValue=''
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Input
               type='name'
@@ -92,12 +97,7 @@ const RegisterCard = () => {
             label='Last Name'
             name='lastName'
             hideLabel
-            initialValue=''
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Input
               size='medium'
@@ -110,12 +110,7 @@ const RegisterCard = () => {
             label='E-mail'
             name='email'
             hideLabel
-            initialValue=''
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Input
               type='email'
@@ -128,12 +123,7 @@ const RegisterCard = () => {
             label='Gender'
             name='gender'
             hideLabel
-            initialValue=''
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Select
               options={[
@@ -157,12 +147,7 @@ const RegisterCard = () => {
             label='Password'
             name='password'
             hideLabel
-            initialValue=''
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Input
               type='password'
@@ -176,12 +161,7 @@ const RegisterCard = () => {
             label='Confirm Password'
             name='confirmPassword'
             hideLabel
-            initialValue=''
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Input
               type='password'
@@ -195,16 +175,19 @@ const RegisterCard = () => {
             label='Processing Data Terms'
             name='terms'
             hideLabel
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
-            <Checkbox text='I agree to the processing of personal data' />
+            <Radio
+              options={[
+                {
+                  text: 'I agree to the processing of personal data',
+                  value: 0,
+                },
+              ]}
+            />
           </Form.Field>
           <Button
-            form='form'
+            form='registerForm'
             submit
             size='medium'
             type='primary'

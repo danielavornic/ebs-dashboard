@@ -1,15 +1,12 @@
 import { ReactNode } from 'react';
+import { Layout } from 'ebs-design';
 
-import { Menu, TopBar } from 'components';
+import { Menu, Topbar } from 'components';
 
-export const Layout = ({ children }: { children: ReactNode }) => {
-  return (
-    <div className='layout'>
-      <Menu />
-      <main className='custom-scrollbar'>
-        <TopBar />
-        {children}
-      </main>
-    </div>
-  );
-};
+export const PanelLayout = ({ children }: { children: ReactNode }) => (
+  <Layout>
+    <Topbar />
+    <Menu />
+    <Layout.Content>{children}</Layout.Content>
+  </Layout>
+);

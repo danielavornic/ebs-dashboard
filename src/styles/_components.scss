@@ -1,0 +1,15 @@
+.chart {
+  padding: 24px;
+  border-radius: 4px;
+  border: 1px solid $grey-300;
+  display: block;
+  width: 100%;
+}
+
+.recharts-bar-rectangle path {
+  fill: $primary-color;
+}
+
+.recharts-line path {
+  stroke: $primary-color;
+}

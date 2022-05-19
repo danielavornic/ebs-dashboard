@@ -1,3 +1,5 @@
+import { Space } from 'ebs-design';
+
 interface Props {
   icon: JSX.Element;
   value: string;
@@ -5,10 +7,10 @@ interface Props {
 
 const PostDetail = ({ icon, value }: Props) => {
   return (
-    <p className='mb-8'>
-      <span className='mr-8'>{icon}</span>
-      {value}
-    </p>
+    <Space justify='start' align='center' className='mb-8'>
+      <span>{icon}</span>
+      <span>{value}</span>
+    </Space>
   );
 };
 

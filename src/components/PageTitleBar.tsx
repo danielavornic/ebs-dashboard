@@ -1,13 +1,14 @@
 import { PropsWithChildren } from 'react';
+import { Space } from 'ebs-design';
 
 export const PageTitleBar = ({
   title,
   children,
 }: PropsWithChildren<{ title: string }>) => {
   return (
-    <div className='page-title-bar mt-60 mb-24'>
-      <h2 className='capitalized'>{title}</h2>
+    <Space justify='space-between' className='mt-60 mb-24'>
+      <h1 className='capitalized'>{title}</h1>
       {children}
-    </div>
+    </Space>
   );
 };

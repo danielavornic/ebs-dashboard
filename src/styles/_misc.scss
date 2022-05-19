@@ -1,16 +1,29 @@
-.custom-scrollbar {
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
+.bg-cover {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
 
-  &::-webkit-scrollbar-track {
-    background: $secondary-bg-color;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background: $light-grey-blue;
-    border: 1px solid transparent;
-    border-radius: 8px;
-    background-clip: padding-box;
-  }
+.bg-primary-pattern {
+  background-color: $primary-000;
+  opacity: 0.8;
+  background-image: repeating-linear-gradient(
+      45deg,
+      $primary-color 25%,
+      transparent 25%,
+      transparent 75%,
+      $primary-color 75%,
+      $primary-color
+    ),
+    repeating-linear-gradient(
+      45deg,
+      $primary-color 25%,
+      $primary-000 25%,
+      $primary-000 75%,
+      $primary-color 75%,
+      $primary-color
+    );
+  background-position: 0 0, 23px 23px;
+  background-size: 46px 46px;
+  background-repeat: repeat;
 }

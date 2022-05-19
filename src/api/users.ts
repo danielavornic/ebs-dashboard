@@ -9,12 +9,8 @@ import {
 
 export const fetchUsers = async () => {
   const users = await $axios.get('/users/');
-  return users.data;
-};
-
-export const getUserByEmail = async (email: string) => {
-  const users = await $axios.get(`/users?email=${email}`);
-  return users.data[0];
+  const reversed = users.data.reverse();
+  return reversed;
 };
 
 export const getUserById = async (id: number) => {

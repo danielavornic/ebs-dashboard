@@ -1,15 +1,17 @@
+import { useEffect } from 'react';
+import { Button, Loader } from 'ebs-design';
+
 import { useNavigate, useParams } from 'react-router-dom';
 import { useMutation, useQuery } from 'react-query';
+import useUserContext from 'hooks/useUserContext';
 
 import { PostActions, PostInterface } from 'types/post';
+import { UserRole } from 'types/user';
 import { addPost, getPostById, updatePost } from 'api/posts';
 
-import { PageTitleBar, Spinner } from 'components';
+import { PageTitleBar } from 'components';
 import PostForm from '../components/PostForm';
 import PostArticle from '../components/PostArticle';
-import { useEffect } from 'react';
-import { UserRole } from 'types/user';
-import useUserContext from 'hooks/useUserContext';
 
 interface Props {
   action: PostActions;
@@ -67,17 +69,26 @@ const Post = ({ action, title }: Props) => {
 
   return (
     <>
-      {isLoading && <Spinner />}
+      {isLoading && <Loader loading />}
       {isError && (
         <>
           <PageTitleBar title='Error' />
           <p>Something went wrong. Please try again later.</p>
         </>
       )}
-      {isSuccess && action === PostActions.View && <PostArticle post={post} />}
+      {isSuccess && action === PostActions.View && (
+        <>
+          <PageTitleBar title={post.title} />
+          <PostArticle post={post} />
+        </>
+      )}
       {action !== PostActions.View && (
         <>
-          <PageTitleBar title={title || ''} />
+          <PageTitleBar title={title || ''}>
+            <Button type='primary' form='postForm' submit>
+              Save post
+            </Button>
+          </PageTitleBar>
           <PostForm postAction={handleSubmitPost} post={post} />
         </>
       )}

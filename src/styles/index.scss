@@ -2,24 +2,7 @@
 
 @import '../../node_modules/ebs-design/dist/styles/index.scss';
 
-@import 'utils/variables';
-
-// @import 'base/base';
-@import 'base/typography';
-@import 'base/spacing';
-
-// @import 'components/Form';
-@import 'components/Layout';
-// @import 'components/Button';
-@import 'components/Modal';
-// @import 'components/Input';
-@import 'components/Textarea';
-// @import 'components/Table';
-// @import 'components/Post';
-// @import 'components/Grid';
-@import 'components/Chart';
-@import 'components/Editor';
-@import 'components/Spinner';
-
-// @import 'pages';
+@import 'typography';
+@import 'spacing';
+@import 'components';
 @import 'misc';

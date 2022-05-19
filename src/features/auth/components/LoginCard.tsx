@@ -13,11 +13,11 @@ const LoginCard = () => {
 
   const { data: users } = useQuery('users', fetchUsers);
 
-  const handleSubmit = ({ email, password }: LoginCredentials) => {
-    const { email: emailErrors, password: passErrors } = getLoginFieldsErrors(
-      users,
-      { email, password }
-    );
+  const handleSubmit = (values: LoginCredentials) => {
+    const { email, password } = values;
+
+    const errors = getLoginFieldsErrors(users, values);
+    const { email: emailErrors, password: passErrors } = errors;
 
     if (emailErrors.length || passErrors.length) {
       form.setFields([
@@ -33,10 +33,11 @@ const LoginCard = () => {
       return;
     }
 
-    const user = users?.find(
+    const user = users.find(
       (user: UserInterface) =>
         user.email === email && user.password === password
     );
+
     setUser(user);
     setIsLogged(true);
     localStorage.setItem('userId', user.id);
@@ -49,17 +50,20 @@ const LoginCard = () => {
         <p>Enter your details to sign into your account.</p>
       </Card.Header>
       <Card.Body>
-        <Form form={form} onFinish={handleSubmit} id='form'>
+        <Form
+          form={form}
+          id='loginForm'
+          onFinish={handleSubmit}
+          initialValues={{
+            email: '',
+            password: '',
+          }}
+        >
           <Form.Field
             label='E-mail'
             name='email'
             hideLabel
-            initialValue=''
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Input
               type='email'
@@ -72,12 +76,7 @@ const LoginCard = () => {
             label='Password'
             name='password'
             hideLabel
-            initialValue=''
-            rules={[
-              {
-                required: true,
-              },
-            ]}
+            rules={[{ required: true }]}
           >
             <Input
               type='password'
@@ -88,7 +87,7 @@ const LoginCard = () => {
             />
           </Form.Field>
           <Button
-            form='form'
+            form='loginForm'
             submit
             size='medium'
             type='primary'

@@ -1,41 +1,59 @@
-import { Link, useLocation } from 'react-router-dom';
-import { FiBarChart2, FiFileText, FiUsers } from 'react-icons/fi';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { Icon, Sidebar } from 'ebs-design';
+
+import useUserContext from 'hooks/useUserContext';
+
+const topMenuItems = [
+  {
+    title: 'Dashboard',
+    path: '/dashboard',
+    icon: 'chart',
+  },
+  {
+    title: 'Users',
+    path: '/users',
+    icon: 'users',
+  },
+  {
+    title: 'Posts',
+    path: '/posts',
+    icon: 'box',
+  },
+];
 
 export const Menu = () => {
-  const page = useLocation().pathname;
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const menuItems = [
-    {
-      icon: <FiBarChart2 className='sidemenu__item__icon' />,
-      name: 'Dashboard',
-      path: '/dashboard',
-    },
-    {
-      icon: <FiUsers className='sidemenu__item__icon' />,
-      name: 'Users',
-      path: '/users',
-    },
-    {
-      icon: <FiFileText className='sidemenu__item__icon' />,
-      name: 'Posts',
-      path: '/posts',
-    },
-  ];
+  const { setUser, setIsLogged } = useUserContext();
+
+  const logOutUser = () => {
+    localStorage.removeItem('userId');
+    setIsLogged(false);
+    setUser(null);
+    navigate('/login');
+  };
 
   return (
-    <div className='sidemenu'>
-      <ul className='sidemenu__list'>
-        {menuItems.map(({ icon, name, path }) => {
-          const statusClass = path === page ? 'sidemenu__item--active' : '';
-          return (
-            <li key={name} className={`sidemenu__item ${statusClass}`}>
-              <Link to={path} className='sidemenu__item__link'>
-                {icon} {name}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </div>
+    <Sidebar>
+      <Sidebar.TopMenu>
+        {topMenuItems.map(({ title, path, icon }) => (
+          <Sidebar.Item
+            key={title}
+            text={title}
+            prefix={<Icon type={icon} />}
+            onClick={() => navigate(path)}
+            className={
+              location.pathname.includes(path)
+                ? 'ebs-sidebar__item--active'
+                : ''
+            }
+          />
+        ))}
+      </Sidebar.TopMenu>
+      <div className='ebs-sidebar__bottom'>
+        <Sidebar.Item text='Log out' onClick={logOutUser} />
+      </div>
+    </Sidebar>
   );
 };

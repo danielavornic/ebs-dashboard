@@ -10,23 +10,26 @@ export const getUserByEmail = (users: UserInterface[], email: string) =>
 const getUserByPassword = (users: UserInterface[], password: string) =>
   users?.find((user: UserInterface) => user.password === password);
 
+const isEmailValid = (email: string) =>
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
 export const getLoginFieldsErrors = (
   users: UserInterface[],
   values: LoginCredentials
 ) => {
-  let errors: {
-    email: string[];
-    password: string[];
-  } = {
+  const { email, password } = values;
+  let errors: { [key: string]: string[] } = {
     email: [],
     password: [],
   };
 
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  if (!isEmailValid(email)) {
     errors.email.push('Invalid email address');
-  } else if (!!!getUserByEmail(users, values.email)) {
-    errors.email.push('Email not found');
-  } else if (!!!getUserByPassword(users, values.password)) {
+  } else if (!!!getUserByEmail(users, email)) {
+    errors.email.push('User registered with this email was not found');
+  }
+
+  if (!!!getUserByPassword(users, password)) {
     errors.password.push('Wrong password');
   }
 
@@ -37,22 +40,27 @@ export const getRegisterFieldsErrors = (
   users: UserInterface[],
   values: RegisterCredentials
 ) => {
-  let errors: {
-    email: string[];
-    password: string[];
-    confirmPassword: string[];
-  } = {
+  const { email, password, confirmPassword, terms } = values;
+  let errors: { [key: string]: string[] } = {
     email: [],
     password: [],
     confirmPassword: [],
+    terms: [],
   };
 
-  if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
+  if (!isEmailValid(email)) {
     errors.email.push('Invalid email address');
-  } else if (getUserByEmail(users, values.email)) {
-    errors.email.push('Email already exists');
-  } else if (values.password !== values.confirmPassword) {
+  }
+  if (getUserByEmail(users, email)) {
+    errors.email.push('User registered with this email already exists');
+  }
+
+  if (password !== confirmPassword) {
     errors.confirmPassword.push('Passwords do not match');
+  }
+
+  if (!!!terms) {
+    errors.terms.push('You must agree with terms and conditions');
   }
 
   return errors;

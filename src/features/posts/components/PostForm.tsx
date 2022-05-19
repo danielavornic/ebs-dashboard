@@ -1,9 +1,10 @@
-import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { FormEvent, useEffect, useState } from 'react';
+import { Form, Input, useForm } from 'ebs-design';
 
 import { PostInterface } from 'types/post';
 import useUserContext from 'hooks/useUserContext';
 
-import { Button, Input } from 'components';
 import PostImage from './PostImage';
 import PostEditor from './PostEditor';
 
@@ -12,129 +13,161 @@ interface Props {
   postAction: (post: PostInterface) => void;
 }
 
-const blankPost = {
-  title: '',
-  content: '',
-  author: '',
-  authorId: -1,
-  date: '',
-  image: '',
-  id: 0,
-};
+const PostForm = ({ post, postAction }: Props) => {
+  const [form] = useForm();
 
-const PostForm = ({ post: data, postAction }: Props) => {
   const { user } = useUserContext();
 
-  const [post, setPost] = useState<PostInterface>(blankPost);
+  const [content, setContent] = useState(post?.content || '');
+  const [imageUrl, setImageUrl] = useState(post?.image || '');
   const [isImageValid, setIsImageValid] = useState(false);
-  const { title, content, date, image, author } = post;
 
-  const handleChange = (
-    event: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>
-  ) => {
-    const { name, value } = event.target;
-    setPost((prevPost) => ({ ...prevPost, [name]: value }));
+  const handleImageChange = (e: KeyboardEvent | FormEvent) => {
+    const { value } = e.target as HTMLInputElement;
+    setImageUrl(value);
   };
-
-  const handleSubmit = (event: FormEvent) => {
-    event.preventDefault();
-
-    if (!isImageValid) {
-      alert('Please input a valid image URL from Unsplash');
-      return;
-    }
-
-    if (content === '') {
-      alert('Please write the post description');
-      return;
-    }
-
-    postAction(post);
-  };
-
-  useEffect(() => data && setPost({ ...data }), [data]);
 
   useEffect(() => {
-    if (author === '')
-      setPost((prevPost) => ({
-        ...prevPost,
-        author: `${user?.name} ${user?.lastName}`,
-        authorId: user?.id || -1,
-      }));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    if (post) {
+      form.setFields([
+        {
+          name: 'title',
+          value: post.title,
+        },
+        {
+          name: 'image',
+          value: post.image,
+        },
+        {
+          name: 'date',
+          value: post.date,
+        },
+        {
+          name: 'author',
+          value: post.author,
+        },
+        {
+          name: 'authorId',
+          value: post.authorId,
+        },
+      ]);
+
+      setContent(post.content);
+      setImageUrl(post.image);
+    }
+  }, [post]);
+
+  useEffect(() => {
+    if (user)
+      form.setFields([
+        {
+          name: 'author',
+          value: `${user.name} ${user.lastName}`,
+        },
+        {
+          name: 'authorId',
+          value: user.id,
+        },
+      ]);
   }, [user]);
+
+  const handleSubmit = (values: PostInterface) => {
+    if (!isImageValid) {
+      form.setFields([
+        {
+          name: 'image',
+          errors: ['Please input a valid image URL from Unsplash'],
+        },
+      ]);
+      return;
+    }
+
+    let newPost: PostInterface = {
+      ...values,
+      content,
+    };
+    if (post) newPost.id = post.id;
+
+    postAction(newPost);
+  };
 
   return (
     <>
       <PostImage
-        imageUrl={image}
+        imageUrl={imageUrl}
+        height={400}
         isImageValid={isImageValid}
         setIsImageValid={setIsImageValid}
       />
-      <form className='form mb-400' onSubmit={handleSubmit}>
-        <div className='form__group form__group--flex'>
-          <label htmlFor='title' hidden>
-            Title
-          </label>
+      <Form
+        form={form}
+        id='postForm'
+        className='mb-400'
+        onFinish={handleSubmit}
+        initialValues={{
+          title: post?.title || '',
+          image: post?.image || '',
+          date: post?.date || '',
+          author: post?.author || '',
+          authorId: post?.authorId || -1,
+        }}
+      >
+        <Form.Field
+          label='Title'
+          name='title'
+          hideLabel
+          rules={[{ required: true }]}
+        >
           <Input
             type='text'
             placeholder='Title'
-            name='title'
-            id='title'
-            width='full'
-            className='mr-12'
-            value={title}
-            onChange={handleChange}
+            size='large'
+            autoComplete='on'
           />
-          <Button type='submit' state='primary' size='medium'>
-            Save
-          </Button>
-        </div>
-        <div className='form__group form__group--flex'>
-          <label htmlFor='image' hidden>
-            Image from Unsplash
-          </label>
+        </Form.Field>
+        <Form.Field
+          label='Image from Unsplash'
+          name='image'
+          hideLabel
+          rules={[{ required: true }]}
+        >
           <Input
             type='text'
             placeholder='Image from Unsplash'
-            name='image'
-            id='image'
-            width='full'
-            className='mr-12'
-            value={image}
-            onChange={handleChange}
+            size='large'
+            autoComplete='on'
+            onKeyDown={handleImageChange}
+            onInput={handleImageChange}
           />
-          <label htmlFor='date' hidden>
-            Date
-          </label>
+        </Form.Field>
+        <Form.Field
+          label='Date'
+          name='date'
+          hideLabel
+          rules={[{ required: true }]}
+        >
           <Input
             type='date'
             placeholder='Date'
-            name='date'
-            id='date'
-            width='auto'
-            value={date}
-            onChange={handleChange}
+            size='large'
+            autoComplete='on'
           />
-        </div>
-        <div className='form__group'>
-          <label htmlFor='content' hidden>
-            Content
-          </label>
-          <PostEditor content={content} setPost={setPost} />
-        </div>
-        <div className='form__group' hidden>
-          <label htmlFor='author'>Author</label>
-          <Input
-            type='text'
-            name='author'
-            id='author'
-            value={author}
-            onChange={handleChange}
-            required={false}
-          />
-        </div>
-      </form>
+        </Form.Field>
+        <Form.Field label='Content' name='content' hideLabel>
+          <PostEditor content={content} setContent={setContent} />
+        </Form.Field>
+        <Form.Field label='Author' name='author' hideLabel className='d-none'>
+          <Input type='text' value={post?.author} />
+        </Form.Field>
+        <Form.Field
+          label='Author ID'
+          name='authorId'
+          hideLabel
+          className='d-none'
+        >
+          <Input type='text' value={post?.authorId} />
+        </Form.Field>
+      </Form>
     </>
   );
 };
