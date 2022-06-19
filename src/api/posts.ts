@@ -8,12 +8,8 @@ export const fetchPosts = async () => {
 };
 
 export const getPostById = async (id: number) => {
-  try {
-    const post = await $axios.get(`/posts/${id}`);
-    return post.data;
-  } catch (error) {
-    return null;
-  }
+  const post = await $axios.get(`/posts/${id}`);
+  return post.data;
 };
 
 export const addPost = (post: PostInterface) => {
